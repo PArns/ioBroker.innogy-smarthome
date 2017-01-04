@@ -72,16 +72,17 @@
                 return;
             }
 
-            (function sendCreate() {
-                sendTo('innogy-smarthome.' + instance, 'startAuth', function (result) {
-                    try {
-                        var result = JSON.parse(result);
+            socket.emit('sendTo', 'innogy-smarthome.' + instance, 'startAuth', null, function (err, result) {
 
-                    } catch (e) {
-                        alert("error parsing data");
-                    }
-                });
-            })();
+                alert("CALLBACK");
+                try {
+                    var result = JSON.parse(result);
+                    alert(result);
+
+                } catch (e) {
+                    alert("error parsing data");
+                }
+            });
         });
     });
 </script>
@@ -91,7 +92,7 @@
 
 	<table>
 		<tr>
-			<td><img src="template.png"/></td>
+			<td><img src="innogy-smarthome.png"/></td>
 			<td><h3 class="translate">innogy SmartHome settings</h3></td>
 		</tr>
 	</table>

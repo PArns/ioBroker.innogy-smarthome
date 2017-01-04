@@ -5,6 +5,7 @@
 var utils = require(__dirname + '/lib/utils'); // Get common adapter utils
 var adapter = utils.adapter('innogy-smarthome');
 var SmartHome = require('innogy-smarthome-lib');
+
 var smartHome = null;
 
 adapter.on('unload', function (callback) {
@@ -31,13 +32,16 @@ adapter.on('stateChange', function (id, state) {
     }
 });
 
-
 // New message arrived. obj is array with current messages
 adapter.on('message', function (obj) {
+    adapter.log.warn("MESSAGE DATA");
+    adapter.log.warn(JSON.stringify(obj));
+    
     if (obj) {
         switch (obj.command) {
             case 'startAuth':
 
+                smartHome.startAuthorization();
                 var res = {
                     uri: smartHome.getAuthorizationStartUri()
                 };
@@ -56,6 +60,8 @@ adapter.on('message', function (obj) {
 });
 
 adapter.on('ready', function () {
+    adapter.subscribeStates('*');
+
     const config = {
         redirectHost: 'iobroker-connect.patrick-arns.de',
         id: '61768662',
@@ -65,7 +71,7 @@ adapter.on('ready', function () {
     smartHome = new SmartHome(config);
 
     smartHome.on("needsAuthorization", function (auth) {
-        adapter.log.error('Adapter is not configured or needs reauthorization! Please go to the adapter settings and start the authorization');
+        adapter.log.warn('Adapter is not configured or needs reauthorization! Please go to the adapter settings and start the authorization');
     });
 
     smartHome.on("stateChanged", function (aCapability) {
