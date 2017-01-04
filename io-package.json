@@ -1,0 +1,28 @@
+{
+  "common": {
+    "name": "innogy-smarthome",
+    "version": "0.0.1",
+    "title": "innogy Smarthome Adapter",
+    "license": "MIT",
+    "desc": {
+      "en": "ioBroker innogy Smarthome Adapter",
+      "de": "ioBroker innogy Smarthome Adapter",
+      "ru": "ioBroker innogy Smarthome драйвер как образец"
+    },
+    "platform": "Javascript/Node.js",
+    "mode": "daemon",
+    "icon": "innogy-smarthome.png",
+    "enabled": true,
+    "extIcon": "https://raw.githubusercontent.com/PArns/ioBroker.innogy-smarthome/master/admin/innogy-smarthome.png",
+    "keywords": [
+      "innogy-smarthome"
+    ],
+    "readme": "https://github.com/PArns/ioBroker.innogy-smarthome/blob/master/README.md",
+    "loglevel": "info",
+    "type": "hardware"
+  },
+  "native": {
+  },
+  "objects": [
+  ]
+}
