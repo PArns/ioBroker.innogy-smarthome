@@ -2,6 +2,11 @@
 /*jslint node: true */
 "use strict";
 
+String.prototype.replaceAll = function (search, replacement) {
+    var target = this;
+    return target.replace(new RegExp(search, 'g'), replacement);
+};
+
 var utils = require(__dirname + '/lib/utils'); // Get common adapter utils
 var adapter = utils.adapter('innogy-smarthome');
 var SmartHome = require('innogy-smarthome-lib');
@@ -17,33 +22,21 @@ adapter.on('unload', function (callback) {
     }
 });
 
-adapter.on('objectChange', function (id, obj) {
-    // Warning, obj can be null if it was deleted
-    adapter.log.info('objectChange ' + id + ' ' + JSON.stringify(obj));
-});
-
-adapter.on('stateChange', function (id, state) {
-    // Warning, state can be null if it was deleted
-    adapter.log.info('stateChange ' + id + ' ' + JSON.stringify(state));
-
-    // you can use the ack flag to detect if it is status (true) or command (false)
-    if (state && !state.ack) {
-        adapter.log.info('ack is not set!');
-    }
-});
+adapter.on('objectChange', stateChanged);
+adapter.on('stateChange', stateChanged);
 
 // New message arrived. obj is array with current messages
 adapter.on('message', function (obj) {
-    adapter.log.warn("MESSAGE DATA");
-    adapter.log.warn(JSON.stringify(obj));
-    
     if (obj) {
         switch (obj.command) {
             case 'startAuth':
 
-                smartHome.startAuthorization();
+                smartHome.startAuthorization(function () {
+                    smartHome.init();
+                });
+
                 var res = {
-                    uri: smartHome.getAuthorizationStartUri()
+                    uri: smartHome.getAuthorizationUri()
                 };
 
                 if (obj.callback)
@@ -59,7 +52,20 @@ adapter.on('message', function (obj) {
     return true;
 });
 
-adapter.on('ready', function () {
+adapter.on('ready', initSmartHome);
+
+function getDevicePath(aDevice) {
+    var room = null;
+
+    if (aDevice.Location)
+        room = aDevice.Location.getName();
+
+    var deviceName = aDevice.getName();
+
+    return ((room ? room + "." : "") + deviceName).replaceAll(" ", "-").replaceAll("---", "-").replaceAll("--", "-");
+}
+
+function initSmartHome() {
     adapter.subscribeStates('*');
 
     const config = {
@@ -75,12 +81,155 @@ adapter.on('ready', function () {
     });
 
     smartHome.on("stateChanged", function (aCapability) {
+        var aDevice = smartHome.resolveLink(aCapability.Device);
 
+        if (aDevice) {
+            var devicePath = getDevicePath(aDevice);
+
+            aDevice.Capabilities.forEach(function (aCapability) {
+                aCapability.State.forEach(function (aState) {
+                    var capabilityPath = devicePath + "." + aState.name;
+                    adapter.setState(capabilityPath, {val: aState.value, ack: true});
+                });
+            });
+        }
     });
 
     smartHome.on("initializationComplete", function () {
-
+        if (smartHome.device && smartHome.device.length) {
+            smartHome.device.forEach(function (aDevice) {
+                updateDevice(aDevice);
+            });
+        }
     });
 
     smartHome.init();
-});
+};
+
+function updateDevice(aDevice) {
+    if (aDevice && aDevice.Location) {
+        var devicePath = getDevicePath(aDevice);
+
+        if (aDevice.Capabilities && aDevice.Capabilities.length > 0) {
+
+            adapter.setObjectNotExists(devicePath, {
+                type: "device",
+                common: {
+                    name: aDevice.getName()
+                },
+                native: {
+                    id: aDevice.Id,
+                    type: aDevice.type
+                }
+            });
+
+            aDevice.Capabilities.forEach(function (aCapability) {
+                aCapability.State.forEach(function (aState) {
+
+                    var capabilityPath = devicePath + "." + aState.name;
+
+                    adapter.setObjectNotExists(capabilityPath, {
+                        type: "state",
+                        common: merge_options({name: aState.name}, getCommonForState(aState)),
+                        native: {
+                            id: aCapability.Id,
+                            type: aState.type
+                        }
+                    });
+
+                    adapter.setState(capabilityPath, {val: aState.value, ack: true});
+                });
+            });
+        }
+    }
+};
+
+function stateChanged(id, state) {
+    adapter.getForeignObject(id, function (err, obj) {
+        if (err) {
+            adapter.log.error(err);
+        } else {
+            if (state && !state.ack) {
+                var capability = smartHome.getCapabilityById(obj.native.id);
+
+                if (capability && obj.common.write) {
+                    capability.setState(state.val, obj.common.name).then(function (state) {
+                        adapter.log.info("OK" + state);
+                    }, function (state) {
+                        adapter.log.info("ERR" + state);
+                    })
+                } else {
+                    updateDevice(smartHome.resolveLink(capability.Device));
+                }
+            }
+        }
+    });
+};
+
+function getCommonForState(aState) {
+    var res = {};
+
+    switch (aState.type) {
+        case "/types/boolean":
+            res.type = "boolean";
+            res.role = "sensor.state";
+            res.read = true;
+            res.write = false;
+            break;
+        case "/types/OnOff":
+            res.type = "boolean";
+            res.role = "switch";
+            res.read = true;
+            res.write = true;
+            break;
+        case "/types/HumidityLevel":
+            res.type = "number";
+            res.role = "sensor.humidity";
+            res.read = true;
+            res.write = false;
+            res.unit = "%";
+            res.min = 0;
+            res.max = 100;
+            break;
+        case "/types/TargetTemperature":
+            res.type = "number";
+            res.role = "value.temperature";
+            res.read = true;
+            res.write = true;
+            res.unit = "°C";
+            break;
+        case "/types/ActualTemperature":
+            res.type = "number";
+            res.role = "sensor.temperature";
+            res.read = true;
+            res.write = false;
+            res.unit = "°C";
+            break;
+        case "/types/device/RST.RWE/1.1/OperationMode":
+            res.type = "string";
+            res.role = "operationmode";
+            res.read = true;
+            res.write = true;
+            res.states = {
+                "Auto": "Automatic",
+                "Manu": "Manual"
+            };
+            break;
+        default:
+            res.type = "string";
+            res.role = "unknown";
+    }
+
+    return res;
+};
+
+function merge_options(obj1, obj2) {
+    var obj3 = {};
+    for (var attrname in obj1) {
+        obj3[attrname] = obj1[attrname];
+    }
+    for (var attrname in obj2) {
+        obj3[attrname] = obj2[attrname];
+    }
+    return obj3;
+}

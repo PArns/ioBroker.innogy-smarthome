@@ -72,13 +72,12 @@
                 return;
             }
 
-            socket.emit('sendTo', 'innogy-smarthome.' + instance, 'startAuth', null, function (err, result) {
+            var myWindow = window.open('', 'AuthWindow', 'directories=no,titlebar=no,toolbar=no,location=no,status=no,menubar=no,scrollbars=no,resizable=no,width=400,height=400');
 
-                alert("CALLBACK");
+            sendTo('innogy-smarthome.' + instance, 'startAuth', {}, function (result) {
                 try {
                     var result = JSON.parse(result);
-                    alert(result);
-
+                    myWindow.location = result.uri;
                 } catch (e) {
                     alert("error parsing data");
                 }
@@ -89,19 +88,20 @@
 
 <!-- you have to put your config page in a div with id adapter-container -->
 <div id="adapter-container">
-
 	<table>
 		<tr>
 			<td><img src="innogy-smarthome.png"/></td>
 			<td><h3 class="translate">innogy SmartHome settings</h3></td>
 		</tr>
 	</table>
-	<p>
+
+	<div id="auth" style="text-align: center">
+		<p>
+			Please click on the following button and enter your Innogy Login credentials into the new Window<br>
+			Once the authorization has been completed and the Window closes, you can leave the settings dialog
+		</p>
 		<button id="login" class="translate">Start authorization</button>
-	</p>
-
-	<p class="translate">on save adapter restarts with new config immediately</p>
-
+	</div>
 </div>
 
 </html>

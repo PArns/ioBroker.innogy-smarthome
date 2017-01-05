@@ -11,6 +11,8 @@
     },
     "platform": "Javascript/Node.js",
     "mode": "daemon",
+    "messagebox": true,
+    "subscribe": "messagebox",
     "icon": "innogy-smarthome.png",
     "enabled": true,
     "extIcon": "https://raw.githubusercontent.com/PArns/ioBroker.innogy-smarthome/master/admin/innogy-smarthome.png",
