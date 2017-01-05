@@ -2,7 +2,9 @@
 # ioBroker.innogy-smarthome
 =================
 
-This adapter can be used to add the innogy Smarthome central to ioBroker
+This adapter can be used to add the Innogy Smarthome central to ioBroker
+
+Requires Node > 4.x
 
 ## Changelog
 

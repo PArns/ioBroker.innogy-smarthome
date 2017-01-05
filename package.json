@@ -1,7 +1,7 @@
 {
   "name": "iobroker.innogy-smarthome",
   "version": "0.0.1",
-  "description": "ioBroker innogy SmartHome Adapter",
+  "description": "ioBroker Innogy SmartHome Adapter",
   "author": {
     "name": "Patrick Arns",
     "email": "iobroker@patrick-arns.de"
