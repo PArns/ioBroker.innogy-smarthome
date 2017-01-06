@@ -27,6 +27,14 @@
   "dependencies": {
     "innogy-smarthome-lib": "^0.1.2"
   },
+  "devDependencies": {
+    "mocha": "^2.3.4",
+    "chai": "^3.4.1"
+  },
+  "main": "main.js",
+  "scripts": {
+    "test": "node node_modules/mocha/bin/mocha"
+  },
   "bugs": {
     "url": "https://github.com/PArns/ioBroker.innogy-smarthome/issues"
   },
