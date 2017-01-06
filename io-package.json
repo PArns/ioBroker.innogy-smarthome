@@ -1,7 +1,7 @@
 {
   "common": {
     "name": "innogy-smarthome",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "title": "Innogy Smarthome Adapter",
     "license": "MIT",
     "desc": {
