@@ -59,6 +59,8 @@ function getDevicePath(aDevice) {
 
     if (aDevice.Location)
         room = aDevice.Location.getName();
+    else
+        room = "Virtual";
 
     var deviceName = aDevice.getName();
 
@@ -76,7 +78,7 @@ function initSmartHome() {
 
     smartHome = new SmartHome(config);
 
-    smartHome.on("needsAuthorization", function (auth) {
+    smartHome.on("needsAuthorization", function () {
         adapter.log.warn('Adapter is not configured or needs reauthorization! Please go to the adapter settings and start the authorization');
     });
 
@@ -107,7 +109,7 @@ function initSmartHome() {
 };
 
 function updateDevice(aDevice) {
-    if (aDevice && aDevice.Location) {
+    if (aDevice) {
         var devicePath = getDevicePath(aDevice);
 
         if (aDevice.Capabilities && aDevice.Capabilities.length > 0) {

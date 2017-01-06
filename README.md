@@ -8,6 +8,9 @@ Requires Node > 4.x
 
 ## Changelog
 
+### 0.0.2
+    Added "Virtual" as default location for devices which doesn't have a location
+
 ### 0.0.1
     Initial commit
 
