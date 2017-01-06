@@ -112,7 +112,19 @@ function updateDevice(aDevice) {
     if (aDevice) {
         var devicePath = getDevicePath(aDevice);
 
-        if (aDevice.Capabilities && aDevice.Capabilities.length > 0) {
+        var hasCapStates = function (aDevice) {
+            var hasStates = false;
+            if (aDevice.Capabilities) {
+                aDevice.Capabilities.forEach(function (aCapability) {
+                    if (aCapability.State && aCapability.State.length)
+                        hasStates = true;
+                });
+            }
+
+            return hasStates;
+        };
+
+        if (hasCapStates(aDevice)) {
 
             adapter.setObjectNotExists(devicePath, {
                 type: "device",
@@ -121,7 +133,7 @@ function updateDevice(aDevice) {
                 },
                 native: {
                     id: aDevice.Id,
-                    type: aDevice.type
+                    type: aDevice.type,
                 }
             });
 
@@ -216,6 +228,12 @@ function getCommonForState(aState) {
                 "Auto": "Automatic",
                 "Manu": "Manual"
             };
+            break;
+        case "/types/DateTime":
+            res.type = "string";
+            res.role = "datetime";
+            res.read = true;
+            res.write = false;
             break;
         default:
             res.type = "string";
