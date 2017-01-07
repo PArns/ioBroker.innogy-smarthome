@@ -1,12 +1,11 @@
 ![Logo](admin/innogy-smarthome.png)
 # ioBroker.innogy-smarthome
-=================
 
 [![Build](https://travis-ci.org/PArns/ioBroker.innogy-smarthome.svg?branch=master)](https://travis-ci.org/PArns/ioBroker.innogy-smarthome)
 
-This adapter can be used to add the Innogy Smarthome central to ioBroker
+This adapter can be used to add the Innogy Smarthome client to ioBroker
 
-Requires Node > 4.x
+###Requires Node > 4.x
 
 ## Changelog
 
