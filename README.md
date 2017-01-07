@@ -10,6 +10,9 @@ Requires Node > 4.x
 
 ## Changelog
 
+### 0.0.5
+    Fixed parsing errors
+
 ### 0.0.4
     Added Netatmo Weatherstation
 

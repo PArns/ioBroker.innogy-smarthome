@@ -274,7 +274,7 @@ function getCommonForState(aState) {
             res.role = "sensor.rain";
             res.read = true;
             res.write = false;
-            res.unit = "mm";
+            res.unit = "mm/h";
             break;
         case "/types/device/RST.RWE/1.1/OperationMode":
             res.type = "string";
