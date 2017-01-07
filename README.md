@@ -1,9 +1,9 @@
 ![Logo](admin/innogy-smarthome.png)
-# ioBroker.innogy-smarthome
+# ioBroker.Innogy-SmartHome
 
 [![Build](https://travis-ci.org/PArns/ioBroker.innogy-smarthome.svg?branch=master)](https://travis-ci.org/PArns/ioBroker.innogy-smarthome)
 
-This adapter can be used to add the Innogy Smarthome client to ioBroker
+This adapter is used to connect the Innogy smarthome devices to ioBroker. You can read more about Innogy [here](https://www.innogy.com).
 
 ###Requires Node > 4.x
 
