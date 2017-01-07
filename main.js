@@ -105,6 +105,10 @@ function initSmartHome() {
         }
     });
 
+    smartHome.on("error", function (e) {
+        adapter.log.error("GOT AN ERROR:" + JSON.stringify(e));
+    });
+
     smartHome.init();
 };
 
@@ -196,6 +200,32 @@ function getCommonForState(aState) {
             res.read = true;
             res.write = true;
             break;
+        case "/types/OpenClose":
+            res.type = "boolean";
+            res.role = "sensor.window";
+            res.read = true;
+            res.write = true;
+            res.states = {
+                true: "Open",
+                false: "Closed"
+            };
+            break;
+        case "/types/IsAlarm":
+            res.type = "boolean";
+            res.role = "sensor.alarm";
+            res.read = true;
+            res.write = false;
+            res.states = {
+                true: "Alarm",
+                false: "No Alarm"
+            };
+            break;
+        case "/types/integer":
+            res.type = "number";
+            res.role = "sensor.state";
+            res.read = true;
+            res.write = false;
+            break;
         case "/types/HumidityLevel":
             res.type = "number";
             res.role = "sensor.humidity";
@@ -234,6 +264,15 @@ function getCommonForState(aState) {
             res.role = "datetime";
             res.read = true;
             res.write = false;
+            break;
+        case "/types/LuminanceLevel":
+            res.type = "number";
+            res.role = "sensor.luminance";
+            res.read = true;
+            res.write = false;
+            res.unit = "%";
+            res.min = 0;
+            res.max = 100;
             break;
         default:
             res.type = "string";
