@@ -1,29 +1,33 @@
 /* jshint -W097 */// jshint strict:false
 /*jslint node: true */
 "use strict";
+var utils = require(__dirname + '/lib/utils'); // Get common adapter utils
+var helpers = require(__dirname + '/lib/helpers');
+var adapter = utils.adapter('innogy-smarthome');
+var SmartHome = require('innogy-smarthome-lib');
+
+var smartHome = null;
 
 String.prototype.replaceAll = function (search, replacement) {
     var target = this;
     return target.replace(new RegExp(search, 'g'), replacement);
 };
 
-var utils = require(__dirname + '/lib/utils'); // Get common adapter utils
-var adapter = utils.adapter('innogy-smarthome');
-var SmartHome = require('innogy-smarthome-lib');
-
-var smartHome = null;
+// ---------------------------------------------------------------------------------------------------------------------
+// ---------------------------------------------------------------------------------------------------------------------
+// ---------------------------------------------------------------------------------------------------------------------
 
 adapter.on('unload', function (callback) {
     try {
+        if (smartHome)
+            smartHome.finalize();
+
         adapter.log.info('cleaned everything up...');
         callback();
     } catch (e) {
         callback();
     }
 });
-
-adapter.on('objectChange', stateChanged);
-adapter.on('stateChange', stateChanged);
 
 // New message arrived. obj is array with current messages
 adapter.on('message', function (obj) {
@@ -52,24 +56,11 @@ adapter.on('message', function (obj) {
     return true;
 });
 
+adapter.on('objectChange', stateChanged);
+adapter.on('stateChange', stateChanged);
 adapter.on('ready', initSmartHome);
 
-function getDevicePath(aDevice) {
-    var room = null;
-
-    if (aDevice.Location)
-        room = aDevice.Location.getName();
-    else
-        room = "Virtual";
-
-    var deviceName = aDevice.getName();
-
-    return cleanDeviceName((room ? room + "." : "") + deviceName);
-}
-
-function cleanDeviceName(aString) {
-    return aString.replaceAll(" ", "-").replaceAll("---", "-").replaceAll("--", "-")
-}
+// ---------------------------------------------------------------------------------------------------------------------
 
 function initSmartHome() {
     adapter.subscribeStates('*');
@@ -90,11 +81,11 @@ function initSmartHome() {
         var aDevice = smartHome.resolveLink(aCapability.Device);
 
         if (aDevice) {
-            var devicePath = getDevicePath(aDevice);
+            var devicePath = helpers.getDevicePath(aDevice);
 
             aDevice.Capabilities.forEach(function (aCapability) {
                 aCapability.State.forEach(function (aState) {
-                    var capabilityPath = devicePath + "." + cleanDeviceName(aState.name);
+                    var capabilityPath = devicePath + "." + helpers.cleanDeviceName(aState.name);
                     adapter.setState(capabilityPath, {val: aState.value, ack: true});
                 });
             });
@@ -114,11 +105,11 @@ function initSmartHome() {
     });
 
     smartHome.init();
-};
+}
 
 function updateDevice(aDevice) {
     if (aDevice) {
-        var devicePath = getDevicePath(aDevice);
+        var devicePath = helpers.getDevicePath(aDevice);
 
         var hasCapStates = function (aDevice) {
             var hasStates = false;
@@ -141,18 +132,18 @@ function updateDevice(aDevice) {
                 },
                 native: {
                     id: aDevice.Id,
-                    type: aDevice.type,
+                    type: aDevice.type
                 }
             });
 
             aDevice.Capabilities.forEach(function (aCapability) {
                 aCapability.State.forEach(function (aState) {
 
-                    var capabilityPath = devicePath + "." + cleanDeviceName(aState.name);
+                    var capabilityPath = devicePath + "." + helpers.cleanDeviceName(aState.name);
 
                     adapter.setObjectNotExists(capabilityPath, {
                         type: "state",
-                        common: merge_options({name: aState.name}, getCommonForState(aState)),
+                        common: helpers.merge_options({name: aState.name}, getCommonForState(aState)),
                         native: {
                             id: aCapability.Id,
                             type: aState.type
@@ -164,7 +155,7 @@ function updateDevice(aDevice) {
             });
         }
     }
-};
+}
 
 function stateChanged(id, state) {
     adapter.getForeignObject(id, function (err, obj) {
@@ -175,18 +166,18 @@ function stateChanged(id, state) {
                 var capability = smartHome.getCapabilityById(obj.native.id);
 
                 if (capability && obj.common.write) {
-                    capability.setState(state.val, obj.common.name).then(function (state) {
-                        adapter.log.info("OK" + state);
-                    }, function (state) {
-                        adapter.log.info("ERR" + state);
-                    })
+                    capability.setState(state.val, obj.common.name);
                 } else {
                     updateDevice(smartHome.resolveLink(capability.Device));
                 }
             }
         }
     });
-};
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+// ---------------------------------------------------------------------------------------------------------------------
+// ---------------------------------------------------------------------------------------------------------------------
 
 function getCommonForState(aState) {
     var res = {};
@@ -304,18 +295,10 @@ function getCommonForState(aState) {
         default:
             res.type = "string";
             res.role = "unknown";
+            res.read = true;
+            res.write = true;
+            break;
     }
 
     return res;
-};
-
-function merge_options(obj1, obj2) {
-    var obj3 = {};
-    for (var attrname in obj1) {
-        obj3[attrname] = obj1[attrname];
-    }
-    for (var attrname in obj2) {
-        obj3[attrname] = obj2[attrname];
-    }
-    return obj3;
 }
