@@ -10,6 +10,9 @@ Requires Node > 4.x
 
 ## Changelog
 
+### 0.0.4
+    Added Netatmo Weatherstation
+
 ### 0.0.3
     Added a lot of devices
     Updated lib to reestablish Websocket connection

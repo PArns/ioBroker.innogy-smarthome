@@ -64,7 +64,11 @@ function getDevicePath(aDevice) {
 
     var deviceName = aDevice.getName();
 
-    return ((room ? room + "." : "") + deviceName).replaceAll(" ", "-").replaceAll("---", "-").replaceAll("--", "-");
+    return cleanDeviceName((room ? room + "." : "") + deviceName);
+}
+
+function cleanDeviceName(aString) {
+    return aString.replaceAll(" ", "-").replaceAll("---", "-").replaceAll("--", "-")
 }
 
 function initSmartHome() {
@@ -90,7 +94,7 @@ function initSmartHome() {
 
             aDevice.Capabilities.forEach(function (aCapability) {
                 aCapability.State.forEach(function (aState) {
-                    var capabilityPath = devicePath + "." + aState.name;
+                    var capabilityPath = devicePath + "." + cleanDeviceName(aState.name);
                     adapter.setState(capabilityPath, {val: aState.value, ack: true});
                 });
             });
@@ -144,7 +148,7 @@ function updateDevice(aDevice) {
             aDevice.Capabilities.forEach(function (aCapability) {
                 aCapability.State.forEach(function (aState) {
 
-                    var capabilityPath = devicePath + "." + aState.name;
+                    var capabilityPath = devicePath + "." + cleanDeviceName(aState.name);
 
                     adapter.setObjectNotExists(capabilityPath, {
                         type: "state",
@@ -227,6 +231,7 @@ function getCommonForState(aState) {
             res.write = false;
             break;
         case "/types/HumidityLevel":
+        case "/types/product/WeatherStation.Netatmo/2.0/HumidityLevel":
             res.type = "number";
             res.role = "sensor.humidity";
             res.read = true;
@@ -243,11 +248,33 @@ function getCommonForState(aState) {
             res.unit = "°C";
             break;
         case "/types/ActualTemperature":
+        case "/types/product/WeatherStation.Netatmo/2.0/ActualTemperature":
             res.type = "number";
             res.role = "sensor.temperature";
             res.read = true;
             res.write = false;
             res.unit = "°C";
+            break;
+        case "/types/product/WeatherStation.Netatmo/2.0/CarbonDioxideLevel":
+            res.type = "number";
+            res.role = "sensor.co2";
+            res.read = true;
+            res.write = false;
+            res.unit = "ppm";
+            break;
+        case "/types/product/WeatherStation.Netatmo/2.0/NoiseLevel":
+            res.type = "number";
+            res.role = "sensor.noise";
+            res.read = true;
+            res.write = false;
+            res.unit = "dB";
+            break;
+        case "/types/product/WeatherStation.Netatmo/2.0/RainfallAmount":
+            res.type = "number";
+            res.role = "sensor.rain";
+            res.read = true;
+            res.write = false;
+            res.unit = "mm";
             break;
         case "/types/device/RST.RWE/1.1/OperationMode":
             res.type = "string";
