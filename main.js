@@ -104,6 +104,10 @@ function initSmartHome() {
         adapter.log.error("GOT AN ERROR:" + JSON.stringify(e));
     });
 
+    smartHome.on("close", function (e) {
+        adapter.log.error("CLOSE:" + JSON.stringify(e));
+    });
+
     smartHome.init();
 }
 
@@ -166,7 +170,11 @@ function stateChanged(id, state) {
                 var capability = smartHome.getCapabilityById(obj.native.id);
 
                 if (capability && obj.common.write) {
-                    capability.setState(state.val, obj.common.name);
+                    capability.setState(state.val, obj.common.name).then(function (data) {
+                        adapter.log.info("STATE OK " + JSON.stringify(data));
+                    }, function (data) {
+                        adapter.log.error("STATE ERR " + JSON.stringify(data));
+                    });
                 } else {
                     updateDevice(smartHome.resolveLink(capability.Device));
                 }
