@@ -68,7 +68,8 @@ function initSmartHome() {
     const config = {
         redirectHost: 'iobroker-connect.patrick-arns.de',
         id: '61768662',
-        secret: 'no secret'
+        secret: 'no secret',
+        debug: true
     };
 
     smartHome = new SmartHome(config);
@@ -103,8 +104,13 @@ function initSmartHome() {
     smartHome.on("error", function (e) {
         if (typeof e === "string")
             adapter.log.error("GOT AN ERROR:" + e);
-        else
+        else {
             adapter.log.error("GOT AN ERROR:" + JSON.stringify(e));
+
+            if (e.stack) {
+                adapter.log.error("STACK:" + e.stack);
+            }
+        }
     });
 
     smartHome.on("close", function (e) {
