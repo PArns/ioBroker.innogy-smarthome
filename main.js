@@ -101,10 +101,16 @@ function initSmartHome() {
     });
 
     smartHome.on("error", function (e) {
-        adapter.log.error("GOT AN ERROR:" + JSON.stringify(e));
+        if (typeof e === "string")
+            adapter.log.error("GOT AN ERROR:" + e);
+        else
+            adapter.log.error("GOT AN ERROR:" + JSON.stringify(e));
     });
 
     smartHome.on("close", function (e) {
+        if (typeof e === "string")
+            adapter.log.error("CLOSE:" + e);
+        else
         adapter.log.error("CLOSE:" + JSON.stringify(e));
     });
 
