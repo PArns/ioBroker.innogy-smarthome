@@ -115,9 +115,9 @@ function initSmartHome() {
 
     smartHome.on("close", function (e) {
         if (typeof e === "string")
-            adapter.log.error("CLOSE:" + e);
+            adapter.log.debug("CLOSE:" + e);
         else
-        adapter.log.error("CLOSE:" + JSON.stringify(e));
+            adapter.log.debug("CLOSE:" + JSON.stringify(e));
     });
 
     smartHome.init();
