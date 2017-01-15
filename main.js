@@ -217,7 +217,7 @@ function getCommonForState(aState) {
             break;
         case "/types/OpenClose":
             res.type = "boolean";
-            res.role = "value.window";
+            res.role = "sensor.window";
             res.read = true;
             res.write = true;
             res.states = {
@@ -227,7 +227,7 @@ function getCommonForState(aState) {
             break;
         case "/types/IsAlarm":
             res.type = "boolean";
-            res.role = "value.alarm";
+            res.role = "state.alarm";
             res.read = true;
             res.write = false;
             res.states = {
@@ -244,7 +244,7 @@ function getCommonForState(aState) {
         case "/types/HumidityLevel":
         case "/types/product/WeatherStation.Netatmo/2.0/HumidityLevel":
             res.type = "number";
-            res.role = "value.humidity";
+            res.role = "sensor.humidity";
             res.read = true;
             res.write = false;
             res.unit = "%";
@@ -261,28 +261,28 @@ function getCommonForState(aState) {
         case "/types/ActualTemperature":
         case "/types/product/WeatherStation.Netatmo/2.0/ActualTemperature":
             res.type = "number";
-            res.role = "value.temperature";
+            res.role = "sensor.temperature";
             res.read = true;
             res.write = false;
             res.unit = "°C";
             break;
         case "/types/product/WeatherStation.Netatmo/2.0/CarbonDioxideLevel":
             res.type = "number";
-            res.role = "value.co2";
+            res.role = "sensor.co2";
             res.read = true;
             res.write = false;
             res.unit = "ppm";
             break;
         case "/types/product/WeatherStation.Netatmo/2.0/NoiseLevel":
             res.type = "number";
-            res.role = "value.noise";
+            res.role = "sensor.noise";
             res.read = true;
             res.write = false;
             res.unit = "dB";
             break;
         case "/types/product/WeatherStation.Netatmo/2.0/RainfallAmount":
             res.type = "number";
-            res.role = "value.rain";
+            res.role = "sensor.rain";
             res.read = true;
             res.write = false;
             res.unit = "mm/h";
@@ -305,7 +305,7 @@ function getCommonForState(aState) {
             break;
         case "/types/LuminanceLevel":
             res.type = "number";
-            res.role = "value.luminance";
+            res.role = "sensor.luminance";
             res.read = true;
             res.write = false;
             res.unit = "%";
