@@ -9,6 +9,10 @@ This adapter is used to connect the Innogy smarthome devices to ioBroker. You ca
 
 ## Changelog
 
+### 0.0.10
+    Corrected roles for a lot of devices
+    Corrected rw states for a lot of devices
+
 ### 0.0.9
     Fixed initialization sequence in underlying lib
     Fixed bootstrap sequence in underlying lib
