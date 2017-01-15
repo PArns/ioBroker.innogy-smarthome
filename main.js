@@ -202,25 +202,9 @@ function stateChanged(id, state) {
 function getCommonForState(aState) {
     var res = {};
 
-    var type = aState.type;
-
-    // Fix metadata bug for
-    // https://api.services-smarthome.de/API/1.0/desc/device/ISS2.RWE/1.0/capability/SwitchActuator
-    // <State>
-    //      <Property name="OnState" type="/types/boolean" access="R"/>
-    // </State>
-    // Should be type="/types/OnOff"
-    if (aState.name === "OnState")
-        type = "/types/OnOff";
-
-    switch (type) {
-        case "/types/boolean":
-            res.type = "boolean";
-            res.role = "value.state";
-            res.read = true;
-            res.write = false;
-            break;
+    switch (aState.type) {
         case "/types/OnOff":
+        case "/types/boolean":
             res.type = "boolean";
             res.role = "switch";
             res.read = true;
