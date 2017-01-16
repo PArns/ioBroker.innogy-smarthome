@@ -2,8 +2,8 @@
 /*jslint node: true */
 "use strict";
 var utils = require(__dirname + '/lib/utils'); // Get common adapter utils
-var helpers = require(__dirname + '/lib/helpers');
 var adapter = utils.adapter('innogy-smarthome');
+var helpers = require(__dirname + '/lib/helpers')(adapter);
 var SmartHome = require('innogy-smarthome-lib');
 
 var smartHome = null;
@@ -17,20 +17,15 @@ String.prototype.replaceAll = function (search, replacement) {
 // ---------------------------------------------------------------------------------------------------------------------
 // ---------------------------------------------------------------------------------------------------------------------
 
-adapter.on('unload', function (callback) {
-    try {
-        if (smartHome)
-            smartHome.finalize();
+adapter.on('unload', finalizeSmartHome);
+adapter.on('message', onMessage);
+adapter.on('objectChange', stateChanged);
+adapter.on('stateChange', stateChanged);
+adapter.on('ready', initSmartHome);
 
-        adapter.log.info('cleaned everything up...');
-        callback();
-    } catch (e) {
-        callback();
-    }
-});
+// ---------------------------------------------------------------------------------------------------------------------
 
-// New message arrived. obj is array with current messages
-adapter.on('message', function (obj) {
+function onMessage(obj) {
     if (obj) {
         switch (obj.command) {
             case 'startAuth':
@@ -54,13 +49,7 @@ adapter.on('message', function (obj) {
     }
 
     return true;
-});
-
-adapter.on('objectChange', stateChanged);
-adapter.on('stateChange', stateChanged);
-adapter.on('ready', initSmartHome);
-
-// ---------------------------------------------------------------------------------------------------------------------
+}
 
 function initSmartHome() {
     adapter.subscribeStates('*');
@@ -98,6 +87,8 @@ function initSmartHome() {
             smartHome.device.forEach(function (aDevice) {
                 updateDevice(aDevice);
             });
+
+            helpers.applyRooms();
         }
     });
 
@@ -123,9 +114,22 @@ function initSmartHome() {
     smartHome.init();
 }
 
+function finalizeSmartHome(callback) {
+    try {
+        if (smartHome)
+            smartHome.finalize();
+
+        adapter.log.info('cleaned everything up...');
+        callback();
+    } catch (e) {
+        callback();
+    }
+}
+
 function updateDevice(aDevice) {
     if (aDevice) {
         var devicePath = helpers.getDevicePath(aDevice);
+        var room = helpers.getRoomNameForDevice(aDevice);
 
         var hasCapStates = function (aDevice) {
             var hasStates = false;
@@ -167,6 +171,7 @@ function updateDevice(aDevice) {
                     });
 
                     adapter.setState(capabilityPath, {val: aState.value, ack: true});
+                    helpers.addCapabilityToRoom(room, capabilityPath);
                 });
             });
         }
@@ -182,8 +187,7 @@ function stateChanged(id, state) {
                 var capability = smartHome.getCapabilityById(obj.native.id);
 
                 if (capability && obj.common.write) {
-                    capability.setState(state.val, obj.common.name).then(function (data) {
-                        adapter.log.info("STATE OK " + JSON.stringify(data));
+                    capability.setState(state.val, obj.common.name).then(function () {
                     }, function (data) {
                         adapter.log.error("STATE ERR " + JSON.stringify(data));
                     });
