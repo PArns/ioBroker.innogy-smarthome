@@ -67,8 +67,12 @@ function initSmartHome() {
         adapter.log.warn('Adapter is not configured or needs reauthorization! Please go to the adapter settings and start the authorization');
     });
 
-    smartHome.on("stateChanged", function (aCapability) {
+    smartHome.on("stateChanged", function (aCapability, debugData) {
         var aDevice = smartHome.resolveLink(aCapability.Device);
+
+        if (debugData) {
+            //adapter.log.info("GOT AN STATE UPDATE " + JSON.stringify(debugData));
+        }
 
         if (aDevice) {
             var devicePath = helpers.getDevicePath(aDevice);
