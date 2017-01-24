@@ -71,7 +71,7 @@ function initSmartHome() {
         var aDevice = smartHome.resolveLink(aCapability.Device);
 
         if (debugData) {
-            //adapter.log.info("GOT AN STATE UPDATE " + JSON.stringify(debugData));
+            adapter.log.info("GOT AN STATE UPDATE " + JSON.stringify(debugData));
         }
 
         if (aDevice) {
@@ -110,9 +110,21 @@ function initSmartHome() {
 
     smartHome.on("close", function (e) {
         if (typeof e === "string")
-            adapter.log.debug("CLOSE:" + e);
+            adapter.log.info("CLOSE:" + e);
         else
-            adapter.log.debug("CLOSE:" + JSON.stringify(e));
+            adapter.log.info("CLOSE:" + JSON.stringify(e));
+    });
+
+    smartHome.on("open", function () {
+        adapter.log.info("OPEN");
+    });
+
+    smartHome.on("reconnect", function () {
+        adapter.log.info("RECONNECT");
+    });
+
+    smartHome.on("debug", function (debugData) {
+        adapter.log.info("DEBUG EVENT " + JSON.stringify(debugData));
     });
 
     smartHome.init();
