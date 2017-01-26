@@ -327,6 +327,15 @@ function getCommonForState(aState) {
             res.min = 0;
             res.max = 100;
             break;
+        case "/types/ShutterLevel":
+            res.type = "number";
+            res.role = "level.blind";
+            res.read = true;
+            res.write = true;
+            res.unit = "%";
+            res.min = 0;
+            res.max = 100;
+            break;
         default:
             res.type = "string";
             res.role = "unknown";
