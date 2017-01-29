@@ -9,6 +9,12 @@ This adapter is used to connect the Innogy smarthome devices to ioBroker. You ca
 
 ## Changelog
 
+### 0.1.5
+    Added new device discovery
+    Added auto connect retry for "remote access not allowed"
+    Fixed exception if device was not found
+    Fixed setState for RST OperationMode
+
 ### 0.1.4
     Fixed Shutter in underlying lib
     Fixed WebSocket reconnect error in underlying lib

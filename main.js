@@ -202,13 +202,15 @@ function stateChanged(id, state) {
             if (state && !state.ack) {
                 var capability = smartHome.getCapabilityById(obj.native.id);
 
-                if (capability && obj.common.write) {
-                    capability.setState(state.val, obj.common.name).then(function () {
-                    }, function (data) {
-                        adapter.log.error("STATE ERR " + JSON.stringify(data));
-                    });
-                } else {
-                    updateDevice(smartHome.resolveLink(capability.Device));
+                if (capability) {
+                    if (obj.common.write) {
+                        capability.setState(state.val, obj.common.name).then(function () {
+                        }, function (data) {
+                            adapter.log.error("STATE ERR " + JSON.stringify(data));
+                        });
+                    } else {
+                        updateDevice(smartHome.resolveLink(capability.Device));
+                    }
                 }
             }
         }
