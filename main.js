@@ -52,6 +52,38 @@ function onMessage(obj) {
 }
 
 function initSmartHome() {
+    adapter.setObjectNotExists("info", {
+        "type": "channel",
+        "common": {
+            "name": "Information"
+        }
+    });
+
+    adapter.setObjectNotExists("info.connection", {
+        "type": "state",
+        "common": {
+            "role": "indicator.connected",
+            "name": "API connection ok",
+            "type": "boolean",
+            "read": true,
+            "write": false,
+            "def": false
+        }
+    });
+
+    adapter.setObjectNotExists("info.lastRealTimeEventReceived", {
+        "type": "state",
+        "common": {
+            "role": "indicator.datetime",
+            "name": "Last realtime event received",
+            "type": "string",
+            "read": true,
+            "write": false,
+            "def": false
+        }
+    });
+
+    adapter.setState("info.connection", false, true);
     adapter.subscribeStates('*');
 
     const config = {
@@ -65,6 +97,7 @@ function initSmartHome() {
 
     smartHome.on("needsAuthorization", function () {
         adapter.log.warn('Adapter is not configured or needs reauthorization! Please go to the adapter settings and start the authorization');
+        adapter.setState("info.connection", false, true);
     });
 
     smartHome.on("stateChanged", function (aCapability, debugData) {
@@ -96,6 +129,18 @@ function initSmartHome() {
         }
     });
 
+    smartHome.on("warning", function (e) {
+        if (typeof e === "string")
+            adapter.log.warn("GOT A WARNING:" + e);
+        else {
+            adapter.log.warn("GOT A WARNING:" + JSON.stringify(e));
+
+            if (e.stack) {
+                adapter.log.warn("STACK:" + e.stack);
+            }
+        }
+    });
+
     smartHome.on("error", function (e) {
         if (typeof e === "string")
             adapter.log.error("GOT AN ERROR:" + e);
@@ -110,21 +155,28 @@ function initSmartHome() {
 
     smartHome.on("close", function (e) {
         if (typeof e === "string")
-            adapter.log.info("CLOSE:" + e);
+            adapter.log.debug("CLOSE:" + e);
         else
-            adapter.log.info("CLOSE:" + JSON.stringify(e));
+            adapter.log.debug("CLOSE:" + JSON.stringify(e));
+
+        adapter.setState("info.connection", false, true);
     });
 
     smartHome.on("open", function () {
-        adapter.log.info("OPEN");
+        adapter.log.debug("OPEN");
+
+        adapter.setState("info.connection", true, true);
     });
 
     smartHome.on("reconnect", function () {
-        adapter.log.info("RECONNECT");
+        adapter.log.debug("RECONNECT");
     });
 
     smartHome.on("debug", function (debugData) {
-        adapter.log.info("DEBUG EVENT " + JSON.stringify(debugData));
+        adapter.log.debug("DEBUG EVENT " + JSON.stringify(debugData));
+
+        var now = new Date();
+        adapter.setState("info.lastRealTimeEventReceived", now.toISOString(), true);
     });
 
     smartHome.init();

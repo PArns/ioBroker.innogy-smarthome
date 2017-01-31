@@ -25,7 +25,7 @@
     "url": "https://github.com/PArns/ioBroker.innogy-smarthome"
   },
   "dependencies": {
-    "innogy-smarthome-lib": "^0.2.2"
+    "innogy-smarthome-lib": "^0.2.3"
   },
   "devDependencies": {
     "mocha": "^2.3.4",

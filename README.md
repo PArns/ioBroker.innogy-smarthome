@@ -9,6 +9,10 @@ This adapter is used to connect the Innogy smarthome devices to ioBroker. You ca
 
 ## Changelog
 
+### 0.1.6
+    More Innogy API error handling with general reconnect on API error
+    Added connected state (yellow state)
+
 ### 0.1.5
     Added new device discovery
     Added auto connect retry for "remote access not allowed"
