@@ -7,6 +7,7 @@ var helpers = require(__dirname + '/lib/helpers')(adapter);
 var SmartHome = require('innogy-smarthome-lib');
 
 var smartHome = null;
+var checkConnectionTimer = null;
 
 String.prototype.replaceAll = function (search, replacement) {
     var target = this;
@@ -86,6 +87,25 @@ function initSmartHome() {
     adapter.setState("info.connection", false, true);
     adapter.subscribeStates('*');
 
+    checkConnectionTimer = setInterval(function () {
+        adapter.getState("info.connection", function (err, connInfo) {
+            if (connInfo && !connInfo.val) {
+                adapter.log.warn("Adapter is not connected ... Will recheck in 30 seconds!");
+
+                setTimeout(function () {
+                    adapter.getState("info.connection", function (err, connInfo) {
+                        if (connInfo && !connInfo.val) {
+                            adapter.log.warn("Adapter is still not connected to the Innogy API, restarting!");
+                            smartHome.init();
+                        } else {
+                            adapter.log.warn("Adapter reconnected!");
+                        }
+                    });
+                }, 1000 * 30);
+            }
+        });
+    }, 1000 * 60 * 5);
+
     const config = {
         redirectHost: 'iobroker-connect.patrick-arns.de',
         id: '61768662',
@@ -121,6 +141,8 @@ function initSmartHome() {
 
     smartHome.on("initializationComplete", function () {
         if (smartHome.device && smartHome.device.length) {
+            adapter.log.info("INITIALIZATION COMPLETE ... GOT DEVICES: " + smartHome.device.length);
+            
             smartHome.device.forEach(function (aDevice) {
                 updateDevice(aDevice);
             });
@@ -184,6 +206,11 @@ function initSmartHome() {
 
 function finalizeSmartHome(callback) {
     try {
+        if (checkConnectionTimer) {
+            clearInterval(checkConnectionTimer);
+            checkConnectionTimer = null;
+        }
+
         if (smartHome)
             smartHome.finalize();
 
