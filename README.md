@@ -9,6 +9,9 @@ This adapter is used to connect the Innogy smarthome devices to ioBroker. You ca
 
 ## Changelog
 
+### 0.1.8
+    Added a workaround for corrupted API function which causes a problem during reconnection phase
+
 ### 0.1.7
     Added the ability to detect connection problems with auto reconnect
     Better error handling

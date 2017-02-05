@@ -278,7 +278,7 @@ function stateChanged(id, state) {
         if (err) {
             adapter.log.error(err);
         } else {
-            if (state && !state.ack) {
+            if (state && !state.ack && obj && obj.native) {
                 var capability = smartHome.getCapabilityById(obj.native.id);
 
                 if (capability) {
