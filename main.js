@@ -141,8 +141,6 @@ function initSmartHome() {
 
     smartHome.on("initializationComplete", function () {
         if (smartHome.device && smartHome.device.length) {
-            adapter.log.info("INITIALIZATION COMPLETE ... GOT DEVICES: " + smartHome.device.length);
-            
             smartHome.device.forEach(function (aDevice) {
                 updateDevice(aDevice);
             });
