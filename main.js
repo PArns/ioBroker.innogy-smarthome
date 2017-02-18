@@ -415,6 +415,15 @@ function getCommonForState(aState) {
             res.min = 0;
             res.max = 100;
             break;
+        case "/types/percent":
+            res.type = "number";
+            res.role = "level";
+            res.read = true;
+            res.write = true;
+            res.unit = "%";
+            res.min = 0;
+            res.max = 100;
+            break;
         default:
             res.type = "string";
             res.role = "unknown";
