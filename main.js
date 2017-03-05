@@ -175,25 +175,26 @@ function initSmartHome() {
 
     smartHome.on("close", function (e) {
         if (typeof e === "string")
-            adapter.log.debug("CLOSE:" + e);
+            adapter.log.info("CLOSE:" + e);
         else
-            adapter.log.debug("CLOSE:" + JSON.stringify(e));
+            adapter.log.info("CLOSE:" + JSON.stringify(e));
 
         adapter.setState("info.connection", false, true);
     });
 
     smartHome.on("open", function () {
-        adapter.log.debug("OPEN");
+        adapter.log.info("OPEN");
 
         adapter.setState("info.connection", true, true);
     });
 
     smartHome.on("reconnect", function () {
-        adapter.log.debug("RECONNECT");
+        adapter.log.info("RECONNECT");
     });
 
     smartHome.on("debug", function (debugData) {
-        adapter.log.debug("DEBUG EVENT " + JSON.stringify(debugData));
+        if (debugData && debugData.type !== "realtime_update_received")
+            adapter.log.info("DEBUG EVENT " + JSON.stringify(debugData));
 
         var now = new Date();
         adapter.setState("info.lastRealTimeEventReceived", now.toISOString(), true);
