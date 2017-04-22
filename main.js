@@ -120,12 +120,8 @@ function initSmartHome() {
         adapter.setState("info.connection", false, true);
     });
 
-    smartHome.on("stateChanged", function (aCapability, debugData) {
+    smartHome.on("stateChanged", function (aCapability) {
         var aDevice = smartHome.resolveLink(aCapability.Device);
-
-        if (debugData) {
-            adapter.log.info("GOT AN STATE UPDATE " + JSON.stringify(debugData));
-        }
 
         if (aDevice) {
             var devicePath = helpers.getDevicePath(aDevice);
@@ -175,26 +171,26 @@ function initSmartHome() {
 
     smartHome.on("close", function (e) {
         if (typeof e === "string")
-            adapter.log.info("CLOSE:" + e);
+            adapter.log.debug("CLOSE:" + e);
         else
-            adapter.log.info("CLOSE:" + JSON.stringify(e));
+            adapter.log.debug("CLOSE:" + JSON.stringify(e));
 
         adapter.setState("info.connection", false, true);
     });
 
     smartHome.on("open", function () {
-        adapter.log.info("OPEN");
+        adapter.log.debug("OPEN");
 
         adapter.setState("info.connection", true, true);
     });
 
     smartHome.on("reconnect", function () {
-        adapter.log.info("RECONNECT");
+        adapter.log.debug("RECONNECT");
     });
 
     smartHome.on("debug", function (debugData) {
         if (debugData && debugData.type !== "realtime_update_received")
-            adapter.log.info("DEBUG EVENT " + JSON.stringify(debugData));
+            adapter.log.debug("DEBUG EVENT " + JSON.stringify(debugData));
 
         var now = new Date();
         adapter.setState("info.lastRealTimeEventReceived", now.toISOString(), true);
