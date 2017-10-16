@@ -1,30 +1,34 @@
 {
-  "common": {
-    "name": "innogy-smarthome",
-    "version": "0.1.17",
-    "title": "Innogy Smarthome Adapter",
-    "license": "MIT",
-    "desc": {
-      "en": "ioBroker Innogy Smarthome Adapter",
-      "de": "ioBroker Innogy Smarthome Adapter",
-      "ru": "ioBroker Innogy Smarthome драйвер как образец"
+    "common": {
+        "name": "innogy-smarthome",
+        "version": "0.1.17",
+        "title": "Innogy Smarthome Adapter",
+        "license": "MIT",
+        "desc": {
+            "en": "ioBroker Innogy Smarthome Adapter",
+            "de": "ioBroker Innogy Smarthome Adapter",
+            "ru": "ioBroker Innogy Smarthome драйвер как образец"
+        },
+        "platform": "Javascript/Node.js",
+        "mode": "daemon",
+        "messagebox": true,
+        "subscribe": "messagebox",
+        "icon": "innogy-smarthome.png",
+        "enabled": true,
+        "extIcon": "https://raw.githubusercontent.com/PArns/ioBroker.innogy-smarthome/master/admin/innogy-smarthome.png",
+        "keywords": [
+            "innogy-smarthome"
+        ],
+        "readme": "https://github.com/PArns/ioBroker.innogy-smarthome/blob/master/README.md",
+        "loglevel": "info",
+        "type": "iot-systems",
+        "authors": [
+            {
+                "name": "Patrick Arns",
+                "email": "iobroker@patrick-arns.de"
+            }
+        ]
     },
-    "platform": "Javascript/Node.js",
-    "mode": "daemon",
-    "messagebox": true,
-    "subscribe": "messagebox",
-    "icon": "innogy-smarthome.png",
-    "enabled": true,
-    "extIcon": "https://raw.githubusercontent.com/PArns/ioBroker.innogy-smarthome/master/admin/innogy-smarthome.png",
-    "keywords": [
-      "innogy-smarthome"
-    ],
-    "readme": "https://github.com/PArns/ioBroker.innogy-smarthome/blob/master/README.md",
-    "loglevel": "info",
-    "type": "hardware"
-  },
-  "native": {
-  },
-  "objects": [
-  ]
+    "native": {},
+    "objects": []
 }
