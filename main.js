@@ -2,7 +2,7 @@
 /*jslint node: true */
 "use strict";
 var utils = require(__dirname + '/lib/utils'); // Get common adapter utils
-var adapter = utils.adapter('innogy-smarthome');
+var adapter = utils.Adapter('innogy-smarthome');
 var helpers = require(__dirname + '/lib/helpers')(adapter);
 var SmartHome = require('innogy-smarthome-lib');
 
