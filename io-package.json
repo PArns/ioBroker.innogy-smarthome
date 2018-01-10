@@ -22,12 +22,7 @@
         "readme": "https://github.com/PArns/ioBroker.innogy-smarthome/blob/master/README.md",
         "loglevel": "info",
         "type": "iot-systems",
-        "authors": [
-            {
-                "name": "Patrick Arns",
-                "email": "iobroker@patrick-arns.de"
-            }
-        ]
+        "authors": ["Patrick Arns <iobroker@patrick-arns.de>"]
     },
     "native": {},
     "objects": []
