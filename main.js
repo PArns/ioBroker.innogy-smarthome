@@ -1,6 +1,7 @@
 /* jshint -W097 */// jshint strict:false
 /*jslint node: true */
 "use strict";
+
 var utils = require(__dirname + '/lib/utils'); // Get common adapter utils
 var adapter = utils.Adapter('innogy-smarthome');
 var helpers = require(__dirname + '/lib/helpers')(adapter);
@@ -136,7 +137,11 @@ function initSmartHome() {
     });
 
     smartHome.on("initializationComplete", function () {
+        adapter.setState("info.connection", true, true);
+
         if (smartHome.device && smartHome.device.length) {
+            adapter.log.info('Initialization sequence completed: found ' + smartHome.device.length + ' devices');
+
             smartHome.device.forEach(function (aDevice) {
                 updateDevice(aDevice);
             });
