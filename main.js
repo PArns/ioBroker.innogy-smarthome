@@ -116,8 +116,9 @@ function initSmartHome() {
 
     smartHome = new SmartHome(config);
 
-    smartHome.on("needsAuthorization", function () {
+    smartHome.on("needsAuthorization", function (error) {
         adapter.log.warn('Adapter is not configured or needs reauthorization! Please go to the adapter settings and start the authorization');
+        adapter.log.warn("DEBUG: " + JSON.stringify(error));
         adapter.setState("info.connection", false, true);
     });
 
@@ -383,6 +384,18 @@ function getCommonForState(aState) {
             res.write = false;
             res.unit = "mm/h";
             break;
+        case "/types/product/WeatherStation.Netatmo/2.0/WindDirection":
+            res.type = "number";
+            res.role = "sensor.winddirection";
+            res.read = true;
+            res.write = false;
+            res.unit = "°";
+        case "/types/product/WeatherStation.Netatmo/2.0/WindStrength":
+            res.type = "number";
+            res.role = "sensor.windstrength";
+            res.read = true;
+            res.write = false;
+            res.unit = "km/h";
         case "/types/device/RST.RWE/1.1/OperationMode":
             res.type = "string";
             res.role = "indicator.operationmode";
@@ -411,6 +424,15 @@ function getCommonForState(aState) {
         case "/types/ShutterLevel":
             res.type = "number";
             res.role = "level.blind";
+            res.read = true;
+            res.write = true;
+            res.unit = "%";
+            res.min = 0;
+            res.max = 100;
+            break;
+        case "/types/DimmingLevel":
+            res.type = "number";
+            res.role = "level.dimmer";
             res.read = true;
             res.write = true;
             res.unit = "%";

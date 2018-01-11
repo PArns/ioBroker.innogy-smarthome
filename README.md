@@ -9,6 +9,10 @@ This adapter is used to connect the Innogy smarthome devices to ioBroker. You ca
 
 ## Changelog
 
+### 0.1.21
+    Fixed initial reauth problem next try
+    Added Netatmo Wind Sensor
+
 ### 0.1.20
     Fixed initial reauth problem
 
