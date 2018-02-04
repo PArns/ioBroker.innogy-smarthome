@@ -9,6 +9,10 @@ This adapter is used to connect the Innogy smarthome devices to ioBroker. You ca
 
 ## Changelog
 
+### 0.2.0
+    Removed external OAuth2 lib
+    Authorization optimization
+
 ### 0.1.22
     Fixed initial reauth problem V3
 
