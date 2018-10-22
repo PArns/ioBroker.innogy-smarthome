@@ -448,6 +448,26 @@ function getCommonForState(aState) {
             res.min = 0;
             res.max = 100;
             break;
+        case "/types/device/FSC8.RWE/1.1/ValveType":
+            res.type = "string";
+            res.role = "indicator.valvetype";
+            res.read = true;
+            res.write = true;
+            res.states = {
+                "NormalClose": "Normal Close",
+                "NormalOpen": "Normal Open"
+            };
+            break;
+        case "/types/device/FSC8.RWE/1.1/ControlMode":
+            res.type = "string";
+            res.role = "indicator.controlmode";
+            res.read = true;
+            res.write = true;
+            res.states = {
+                "Heating": "Heating",
+                "Cooling": "Cooling"
+            };
+            break;
         default:
             res.type = "string";
             res.role = "unknown";
