@@ -9,6 +9,10 @@ This adapter is used to connect the Innogy smarthome devices to ioBroker. You ca
 
 ## Changelog
 
+### 0.2.3
+    Updated underlying libs
+    Changed update timer from 5 mins to 30 mins + 0-30 mins
+
 ### 0.2.2
     Fixed reauth problems
     Fixed initial auth problems
