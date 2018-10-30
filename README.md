@@ -9,6 +9,9 @@ This adapter is used to connect the Innogy smarthome devices to ioBroker. You ca
 
 ## Changelog
 
+### 0.2.5
+    Implemented throttling changes required by the Innogy API
+
 ### 0.2.4
     Fixed Travis CI build errors
 
