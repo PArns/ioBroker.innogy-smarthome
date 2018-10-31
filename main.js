@@ -176,11 +176,7 @@ function initSmartHome() {
     });
 
     smartHome.on("close", function (e) {
-        if (typeof e === "string")
-            adapter.log.debug("CLOSE:" + e);
-        else
-            adapter.log.debug("CLOSE:" + JSON.stringify(e));
-
+        adapter.log.debug("SOCKET CONNECTION TO THE INNOGY API WAS CLOSED");
         adapter.setState("info.connection", false, true);
     });
 
