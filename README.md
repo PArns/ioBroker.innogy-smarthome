@@ -5,10 +5,14 @@
 
 This adapter is used to connect the Innogy smarthome devices to ioBroker. You can read more about Innogy [here](https://www.innogy.com).
 
-###Requires Node > 4.x
+###Requires Node > 6.x
 
 ## Changelog
 
+### 0.2.7 
+    Added handler for non local SHC access and 403 responses (outdated mobile access scenarios)
+    Added handler for broken push connection
+    
 ### 0.2.6
     Fixed an exception once the Innogy API closes the status socket connection
 

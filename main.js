@@ -122,6 +122,11 @@ function initSmartHome() {
         adapter.setState("info.connection", false, true);
     });
 
+    smartHome.on("needsMobileAccess", function () {
+        adapter.log.warn('You do not have mobile access for the logged in Innogy account! Please purchase mobile access or move ioBroker to the same subnet as the SHC');
+        adapter.setState("info.connection", false, true);
+    });
+
     smartHome.on("stateChanged", function (aCapability) {
         var aDevice = smartHome.resolveLink(aCapability.Device);
 

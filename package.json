@@ -1,6 +1,6 @@
 {
   "name": "iobroker.innogy-smarthome",
-  "version": "0.2.6",
+  "version": "0.2.7",
   "description": "ioBroker Innogy SmartHome Adapter",
   "author": {
     "name": "Patrick Arns",
@@ -25,7 +25,7 @@
     "url": "https://github.com/PArns/ioBroker.innogy-smarthome"
   },
   "dependencies": {
-    "innogy-smarthome-lib": "^0.4.0"
+    "innogy-smarthome-lib": "^0.4.3"
   },
   "devDependencies": {
     "mocha": "^4.1.0",
