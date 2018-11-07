@@ -7,7 +7,16 @@ This adapter is used to connect the Innogy smarthome devices to ioBroker. You ca
 
 ###Requires Node > 6.x
 
+## HELP WANTED!
+
+As this project is developed during my spare time, I*m actively looking for help to maintain and extend this lib! If you're willing to help, drop me a line!
+
 ## Changelog
+
+### 0.2.8
+    Fixed a config parsing crash
+    Added a lot of new device descriptors to speed up inital boot
+    Increased request limit from 2 to 6 req/sec
 
 ### 0.2.7 
     Added handler for non local SHC access and 403 responses (outdated mobile access scenarios)
