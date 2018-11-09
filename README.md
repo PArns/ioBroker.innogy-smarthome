@@ -13,6 +13,9 @@ As this project is developed during my spare time, I*m actively looking for help
 
 ## Changelog
 
+### 0.2.9
+    Fixed a problem with timer updates updating device states too often. Please update ASAP
+
 ### 0.2.8
     Fixed a config parsing crash
     Added a lot of new device descriptors to speed up inital boot
