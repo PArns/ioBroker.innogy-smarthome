@@ -13,6 +13,9 @@ As this project is developed during my spare time, I*m actively looking for help
 
 ## Changelog
 
+### 0.2.11
+    Reverted changes from yesterday, as RW states are not correctly maintained by innogy
+
 ### 0.2.10
     Respecting RW state of Capabilities. Please don't try to write to read only states!
 
