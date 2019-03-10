@@ -1,6 +1,6 @@
 ![Logo](admin/innogy-smarthome.png)
 # ioBroker.Innogy-SmartHome
-
+![Number of Installations](http://iobroker.live/badges/innogy-smarthome-installed.svg) ![Number of Installations](http://iobroker.live/badges/innogy-smarthome-stable.svg) 
 [![Build](https://travis-ci.org/PArns/ioBroker.innogy-smarthome.svg?branch=master)](https://travis-ci.org/PArns/ioBroker.innogy-smarthome)
 
 This adapter is used to connect the Innogy smarthome devices to ioBroker. You can read more about Innogy [here](https://www.innogy.com).
