@@ -128,9 +128,9 @@ function initSmartHome() {
     });
 
     smartHome.on("stateChanged", function (aCapability) {
-        var aDevice = smartHome.resolveLink(aCapability.Device);
+        var aDevice = smartHome.getDeviceByCapability(aCapability);
 
-        if (aDevice) {
+        if (aDevice && aDevice.Capabilities) {
             var devicePath = helpers.getDevicePath(aDevice);
 
             aDevice.Capabilities.forEach(function (aCapability) {
@@ -248,8 +248,7 @@ function updateDevice(aDevice) {
                     name: aDevice.getName()
                 },
                 native: {
-                    id: aDevice.Id,
-                    type: aDevice.type
+                    id: aDevice.Id
                 }
             });
 
@@ -260,10 +259,9 @@ function updateDevice(aDevice) {
 
                     adapter.setObjectNotExists(capabilityPath, {
                         type: "state",
-                        common: helpers.merge_options({name: aState.name}, getCommonForState(aState)),
+                        common: helpers.merge_options({name: helpers.capitalize(aState.name)}, getCommonForState(aState)),
                         native: {
-                            id: aCapability.Id,
-                            type: aState.type
+                            id: aCapability.Id
                         }
                     });
 
@@ -305,15 +303,128 @@ function stateChanged(id, state) {
 function getCommonForState(aState) {
     var res = {};
 
-    switch (aState.type) {
-        case "/types/OnOff":
-        case "/types/boolean":
+    switch (aState.name) {
+        // -- SHC --
+        case "nextSunrise":
+        case "nextSunset":
+        case "nextTimeEvent":
+            res.type = "string";
+            res.role = "value.datetime";
+            res.read = true;
+            res.write = false;
+            break;
+
+        case "isDay":
+            res.type = "boolean";
+            res.role = "indicator.day";
+            res.read = true;
+            res.write = false;
+            break;
+
+        case "value":
+        case "onState":
             res.type = "boolean";
             res.role = "switch";
             res.read = true;
             res.write = true;
             break;
-        case "/types/OpenClose":
+
+
+        // -- Thermostat --
+        case "pointTemperature":
+            res.type = "number";
+            res.role = "level.temperature";
+            res.read = true;
+            res.write = true;
+            res.unit = "°C";
+            break;
+
+        case "windowReductionActive":
+            res.type = "boolean";
+            res.role = "switch";
+            res.read = true;
+            res.write = true;
+            break;
+
+        case "operationMode":
+            res.type = "string";
+            res.role = "indicator.operationmode";
+            res.read = true;
+            res.write = true;
+            res.states = {
+                "Auto": "Automatic",
+                "Manu": "Manual"
+            };
+
+            break;
+
+        case "temperature":
+            res.type = "number";
+            res.role = "sensor.temperature";
+            res.read = true;
+            res.write = false;
+            res.unit = "°C";
+            break;
+
+        case "frostWarning":
+            res.type = "boolean";
+            res.role = "switch";
+            res.read = true;
+            res.write = true;
+            break;
+
+        case "humidity":
+            res.type = "number";
+            res.role = "sensor.humidity";
+            res.read = true;
+            res.write = false;
+            res.unit = "%";
+            res.min = 0;
+            res.max = 100;
+            break;
+
+        case "moldWarning":
+            res.type = "boolean";
+            res.role = "switch";
+            res.read = true;
+            res.write = true;
+            break;
+
+        // -- BEWEGUNGSMELDER --
+        case "motionDetectedCount":
+            res.type = "number";
+            res.role = "value.state";
+            res.read = true;
+            res.write = false;
+            break;
+
+        case "luminance":
+            res.type = "number";
+            res.role = "sensor.luminance";
+            res.read = true;
+            res.write = false;
+            res.unit = "%";
+            res.min = 0;
+            res.max = 100;
+            break;
+
+        // -- WANDSENDER --
+        case "lastKeyPressCounter":
+            res.type = "number";
+            res.role = "value.state";
+            res.read = true;
+            res.write = false;
+            break;
+
+        case "lastPressedButtonIndex":
+            res.type = "number";
+            res.role = "value.state";
+            res.read = true;
+            res.write = false;
+            break;
+
+        // -- TÜRSENSOR --
+        case "isOpen":
             res.type = "boolean";
             res.role = "sensor.window";
             res.read = true;
@@ -323,153 +434,66 @@ function getCommonForState(aState) {
                 false: "Closed"
             };
             break;
-        case "/types/IsAlarm":
-            res.type = "boolean";
-            res.role = "state.alarm";
-            res.read = true;
-            res.write = false;
-            res.states = {
-                true: "Alarm",
-                false: "No Alarm"
-            };
-            break;
-        case "/types/integer":
-            res.type = "number";
-            res.role = "value.state";
-            res.read = true;
-            res.write = false;
-            break;
-        case "/types/HumidityLevel":
-        case "/types/product/WeatherStation.Netatmo/2.0/HumidityLevel":
-            res.type = "number";
-            res.role = "sensor.humidity";
-            res.read = true;
-            res.write = false;
-            res.unit = "%";
-            res.min = 0;
-            res.max = 100;
-            break;
-        case "/types/TargetTemperature":
-            res.type = "number";
-            res.role = "level.temperature";
-            res.read = true;
-            res.write = true;
-            res.unit = "°C";
-            break;
-        case "/types/ActualTemperature":
-        case "/types/product/WeatherStation.Netatmo/2.0/ActualTemperature":
-            res.type = "number";
-            res.role = "sensor.temperature";
-            res.read = true;
-            res.write = false;
-            res.unit = "°C";
-            break;
-        case "/types/product/WeatherStation.Netatmo/2.0/CarbonDioxideLevel":
+
+        // -- NETATMO --
+        case "carbonDioxideLevel":
             res.type = "number";
             res.role = "sensor.co2";
             res.read = true;
             res.write = false;
             res.unit = "ppm";
             break;
-        case "/types/product/WeatherStation.Netatmo/2.0/NoiseLevel":
+
+        case "noiseLevel":
             res.type = "number";
             res.role = "sensor.noise";
             res.read = true;
             res.write = false;
             res.unit = "dB";
             break;
-        case "/types/product/WeatherStation.Netatmo/2.0/RainfallAmount":
+
+        case "rainfall":
             res.type = "number";
-            res.role = "sensor.rain";
+            res.role = "sensor.rainfall";
             res.read = true;
             res.write = false;
-            res.unit = "mm/h";
+            res.unit = "mm";
             break;
-        case "/types/product/WeatherStation.Netatmo/2.0/WindDirection":
+
+
+        // -- HUE --
+        case "brightness":
             res.type = "number";
-            res.role = "sensor.winddirection";
+            res.role = "indicator.brightness";
             res.read = true;
             res.write = false;
-            res.unit = "°";
-        case "/types/product/WeatherStation.Netatmo/2.0/WindStrength":
-            res.type = "number";
-            res.role = "sensor.windstrength";
+            break;
+
+        case "blink":
+            res.type = "boolean";
+            res.role = "indicator.blink";
             res.read = true;
-            res.write = false;
-            res.unit = "km/h";
-        case "/types/device/RST.RWE/1.1/OperationMode":
+            res.write = true;
+            break;
+
+        case "colorTemperature":
+            res.type = "number";
+            res.role = "indicator.colorTemperature";
+            res.read = true;
+            res.write = true;
+            break;
+
+        case "colorMode":
             res.type = "string";
-            res.role = "indicator.operationmode";
+            res.role = "indicator.colorMode";
             res.read = true;
             res.write = true;
-            res.states = {
-                "Auto": "Automatic",
-                "Manu": "Manual"
-            };
             break;
-        case "/types/DateTime":
-            res.type = "string";
-            res.role = "value.datetime";
-            res.read = true;
-            res.write = false;
-            break;
-        case "/types/LuminanceLevel":
-            res.type = "number";
-            res.role = "sensor.luminance";
-            res.read = true;
-            res.write = false;
-            res.unit = "%";
-            res.min = 0;
-            res.max = 100;
-            break;
-        case "/types/ShutterLevel":
-            res.type = "number";
-            res.role = "level.blind";
-            res.read = true;
-            res.write = true;
-            res.unit = "%";
-            res.min = 0;
-            res.max = 100;
-            break;
-        case "/types/DimmingLevel":
-            res.type = "number";
-            res.role = "level.dimmer";
-            res.read = true;
-            res.write = true;
-            res.unit = "%";
-            res.min = 0;
-            res.max = 100;
-            break;
-        case "/types/percent":
-            res.type = "number";
-            res.role = "level";
-            res.read = true;
-            res.write = true;
-            res.unit = "%";
-            res.min = 0;
-            res.max = 100;
-            break;
-        case "/types/device/FSC8.RWE/1.1/ValveType":
-            res.type = "string";
-            res.role = "indicator.valvetype";
-            res.read = true;
-            res.write = true;
-            res.states = {
-                "NormalClose": "Normal Close",
-                "NormalOpen": "Normal Open"
-            };
-            break;
-        case "/types/device/FSC8.RWE/1.1/ControlMode":
-            res.type = "string";
-            res.role = "indicator.controlmode";
-            res.read = true;
-            res.write = true;
-            res.states = {
-                "Heating": "Heating",
-                "Cooling": "Cooling"
-            };
-            break;
+
+
         default:
+            adapter.log.warn('Unknown state (please report to dev):' + aState.name + " " + JSON.stringify(aState));
+
             res.type = "string";
             res.role = "unknown";
             res.read = true;

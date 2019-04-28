@@ -13,6 +13,9 @@ As this project is developed during my spare time, I*m actively looking for help
 
 ## Changelog
 
+### 0.3.0
+    Added support for SHC 2.0 (and API 1.1)
+
 ### 0.2.11
     Reverted changes from yesterday, as RW states are not correctly maintained by innogy
 
