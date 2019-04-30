@@ -329,9 +329,16 @@ function getCommonForState(aState) {
             res.write = true;
             break;
 
+        case "remainingQuota":
+            res.type = "number";
+            res.role = "indicator.quota";
+            res.read = true;
+            res.write = false;
+            break;
 
         // -- Thermostat --
         case "pointTemperature":
+        case "setpointTemperature":
             res.type = "number";
             res.role = "level.temperature";
             res.read = true;
@@ -460,6 +467,96 @@ function getCommonForState(aState) {
             res.unit = "mm";
             break;
 
+
+        case "atmosphericPressure":
+            res.type = "number";
+            res.role = "sensor.atmosphericPressure";
+            res.read = true;
+            res.write = false;
+            res.unit = "mb";
+            break;
+
+
+        // -- POWERCONTROL --
+        case "maximumGenerationPower":
+            res.type = "number";
+            res.role = "sensor.maximumGenerationPower";
+            res.read = true;
+            res.write = false;
+            res.unit = "W";
+            break;
+
+        case "powerInWatt":
+            res.type = "number";
+            res.role = "sensor.power";
+            res.read = true;
+            res.write = false;
+            res.unit = "W";
+            break;
+
+        case "totalEnergy":
+            res.type = "number";
+            res.role = "sensor.power";
+            res.read = true;
+            res.write = false;
+            res.unit = "kWh";
+            break;
+
+        case "energyPerMonthInKWh":
+            res.type = "number";
+            res.role = "sensor.power";
+            res.read = true;
+            res.write = false;
+            res.unit = "kWh";
+            break;
+
+        case "energyPerMonthInEuro":
+            res.type = "number";
+            res.role = "sensor.power";
+            res.read = true;
+            res.write = false;
+            res.unit = "Eur";
+            break;
+
+        case "energyPerDayInKWh":
+            res.type = "number";
+            res.role = "sensor.power";
+            res.read = true;
+            res.write = false;
+            res.unit = "kWh";
+            break;
+
+        case "energyPerDayInEuro":
+            res.type = "number";
+            res.role = "sensor.power";
+            res.read = true;
+            res.write = false;
+            res.unit = "Eur";
+            break;
+
+        case "twoWayPower":
+            res.type = "number";
+            res.role = "sensor.power";
+            res.read = true;
+            res.write = false;
+            res.unit = "kWh";
+            break;
+
+        case "powerMedian":
+            res.type = "number";
+            res.role = "sensor.power";
+            res.read = true;
+            res.write = false;
+            res.unit = "kWh";
+            break;
+
+        case "totalEnergy":
+            res.type = "number";
+            res.role = "sensor.power";
+            res.read = true;
+            res.write = false;
+            res.unit = "kWh";
+            break;
 
         // -- HUE --
         case "brightness":

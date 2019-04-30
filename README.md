@@ -13,6 +13,10 @@ As this project is developed during my spare time, I*m actively looking for help
 
 ## Changelog
 
+### 0.3.1
+    Added PowerControl
+    Added SHC 2.0 quota states
+
 ### 0.3.0
     Added support for SHC 2.0 (and API 1.1)
 
