@@ -14,7 +14,7 @@ As this project is developed during my spare time, I*m actively looking for help
 ## Changelog
 
 ### 0.3.2
-    Added more Hue propertiesnpm publish
+    Added more Hue properties
 
 ### 0.3.1
     Added PowerControl
