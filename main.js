@@ -580,6 +580,37 @@ function getCommonForState(aState) {
             res.write = true;
             break;
 
+        case "hue":
+            res.type = "number";
+            res.role = "indicator.hue";
+            res.read = true;
+            res.write = true;
+            break;
+
+        case "dimLevel":
+            res.type = "number";
+            res.role = "indicator.dimLevel";
+            res.read = true;
+            res.write = true;
+            res.min = 0;
+            res.max = 100;
+            res.unit = "%";
+            break;
+
+        case "saturation":
+            res.type = "number";
+            res.role = "indicator.saturation";
+            res.read = true;
+            res.write = true;
+            break;
+
+        case "dynamicEffect":
+            res.type = "string";
+            res.role = "indicator.effect";
+            res.read = true;
+            res.write = true;
+            break;
+
         case "colorMode":
             res.type = "string";
             res.role = "indicator.colorMode";
