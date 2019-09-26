@@ -242,13 +242,13 @@ function updateDevice(aDevice) {
 
         if (hasCapStates(aDevice)) {
 
-            adapter.setObjectNotExists(devicePath, {
+            adapter.setObject(devicePath, {
                 type: "device",
                 common: {
                     name: aDevice.getName()
                 },
                 native: {
-                    id: aDevice.Id
+                    id: aDevice.id
                 }
             });
 
@@ -257,11 +257,11 @@ function updateDevice(aDevice) {
 
                     var capabilityPath = devicePath + "." + helpers.cleanDeviceName(aState.name);
 
-                    adapter.setObjectNotExists(capabilityPath, {
+                    adapter.setObject(capabilityPath, {
                         type: "state",
                         common: helpers.merge_options({name: helpers.capitalize(aState.name)}, getCommonForState(aState)),
                         native: {
-                            id: aCapability.Id
+                            id: aCapability.id
                         }
                     });
 
