@@ -618,6 +618,14 @@ function getCommonForState(aState) {
             res.write = true;
             break;
 
+        // -- ROLLER SHUTTER --
+        case "shutterLevel":
+            res.type = "number";
+            res.role = "level";
+            res.read = true;
+            res.write = true;
+            break;
+
 
         default:
             adapter.log.warn('Unknown state (please report to dev):' + aState.name + " " + JSON.stringify(aState));
