@@ -494,14 +494,6 @@ function getCommonForState(aState) {
             res.unit = "W";
             break;
 
-        case "totalEnergy":
-            res.type = "number";
-            res.role = "sensor.power";
-            res.read = true;
-            res.write = false;
-            res.unit = "kWh";
-            break;
-
         case "energyPerMonthInKWh":
             res.type = "number";
             res.role = "sensor.power";
@@ -563,7 +555,10 @@ function getCommonForState(aState) {
             res.type = "number";
             res.role = "indicator.brightness";
             res.read = true;
-            res.write = false;
+            res.write = true;
+            res.min = 0;
+            res.max = 100;
+            res.unit = "%";
             break;
 
         case "blink":
