@@ -1,13 +1,18 @@
 {
     "common": {
         "name": "innogy-smarthome",
-        "version": "0.3.4",
-        "title": "Innogy Smarthome Adapter",
+        "version": "0.3.6",
+        "title": "Innogy Smarthome",
         "license": "MIT",
         "desc": {
-            "en": "ioBroker Innogy Smarthome Adapter",
-            "de": "ioBroker Innogy Smarthome Adapter",
-            "ru": "ioBroker Innogy Smarthome драйвер как образец"
+            "en": "ioBroker Innogy Smarthome",
+            "de": "ioBroker Innogy Smarthome",
+            "ru": "ioBroker Innogy Smarthome"
+        },
+        "news": {
+            "0.3.6": {
+                "en": "Fixed auth issues"
+            }
         },
         "platform": "Javascript/Node.js",
         "mode": "daemon",

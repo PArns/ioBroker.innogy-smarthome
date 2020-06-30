@@ -186,4 +186,4 @@ As this project is developed during my spare time, I*m actively looking for help
 ## License
 MIT
 
-Copyright (c) 2017 Patrick Arns <iobroker@patrick-arns.de>
+Copyright (c) 2020 Patrick Arns iobroker@patrick-arns.de
