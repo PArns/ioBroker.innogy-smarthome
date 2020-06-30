@@ -13,6 +13,9 @@ As this project is developed during my spare time, I*m actively looking for help
 
 ## Changelog
 
+### 0.3.6
+    Fixed authorization issues
+
 ### 0.3.5
     Updated authorization endpoint
     Added shutter
