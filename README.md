@@ -5,7 +5,7 @@
 
 This adapter is used to connect the Innogy smarthome devices to ioBroker. You can read more about Innogy [here](https://www.innogy.com).
 
-###Requires Node > 6.x
+###Requires Node > 8.x
 
 ## HELP WANTED!
 
