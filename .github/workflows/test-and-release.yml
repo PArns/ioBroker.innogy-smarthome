@@ -36,9 +36,6 @@ jobs:
             - name: Install Dependencies
               run: npm install
 
-            - name: Test package files
-              run: npm run test:package
-
     # Runs adapter tests on all supported node versions and OSes
     adapter-tests:
         if: contains(github.event.head_commit.message, '[skip ci]') == false
@@ -63,16 +60,9 @@ jobs:
             - name: Install Dependencies
               run: npm install
 
-            - name: Run unit tests
-              run: npm run test:unit
+            - name: Run tests
+              run: npm run test
 
-            - name: Run integration tests (unix only)
-              if: startsWith(runner.OS, 'windows') == false
-              run: DEBUG=testing:* npm run test:integration
-
-            - name: Run integration tests (windows only)
-              if: startsWith(runner.OS, 'windows')
-              run: set DEBUG=testing:* & npm run test:integration
 
 # TODO: To enable automatic npm releases, create a token on npmjs.org
 # Enter this token as a GitHub secret (with name NPM_TOKEN) in the repository options
