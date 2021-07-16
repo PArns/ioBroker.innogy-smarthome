@@ -3,6 +3,18 @@
         "name": "innogy-smarthome",
         "version": "0.3.6",
         "title": "Innogy Smarthome",
+        "titleLang": {
+            "en": "Innogy Smarthome",
+            "de": "Innogy Smarthome",
+            "ru": "Innogy Smarthome",
+            "pt": "Innogy Smarthome",
+            "nl": "Innogy Smarthome",
+            "fr": "Innogy Smarthome",
+            "it": "Innogy Smarthome",
+            "es": "Innogy Smarthome",
+            "pl": "Innogy Smarthome",
+            "zh-cn": "英诺智能家居"
+        },
         "license": "MIT",
         "desc": {
             "en": "ioBroker Innogy Smarthome",
@@ -27,7 +39,13 @@
         "readme": "https://github.com/PArns/ioBroker.innogy-smarthome/blob/master/README.md",
         "loglevel": "info",
         "type": "iot-systems",
-        "authors": ["Patrick Arns <iobroker@patrick-arns.de>"]
+        "authors": ["Patrick Arns <iobroker@patrick-arns.de>"],
+        "tier": 2,
+        "dependencies": [
+            {
+                "js-controller": ">=2.0.0"
+            }
+        ]
     },
     "native": {},
     "objects": []

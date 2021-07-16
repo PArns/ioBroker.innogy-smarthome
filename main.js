@@ -626,8 +626,7 @@ function getCommonForState(aState) {
         default:
             adapter.log.warn('Unknown state (please report to dev):' + aState.name + " " + JSON.stringify(aState));
 
-            res.type = "string";
-            res.role = "unknown";
+            res.type = typeof aState !== 'object' ? typeof aState !== 'object' : "mixed";
             res.read = true;
             res.write = true;
             break;
