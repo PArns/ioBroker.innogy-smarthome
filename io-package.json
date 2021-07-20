@@ -1,7 +1,7 @@
 {
     "common": {
         "name": "innogy-smarthome",
-        "version": "0.3.6",
+        "version": "0.3.7",
         "title": "Innogy Smarthome",
         "titleLang": {
             "en": "Innogy Smarthome",
@@ -22,6 +22,18 @@
             "ru": "ioBroker Innogy Smarthome"
         },
         "news": {
+            "0.3.7": {
+                "en": "js-controller 3.3 warnings prevented",
+                "de": "js-controller 3.3 Warnungen verhindert",
+                "ru": "js-controller 3.3 предупреждения предотвращены",
+                "pt": "Avisos do js-controller 3.3 evitados",
+                "nl": "js-controller 3.3 waarschuwingen voorkomen",
+                "fr": "js-controller 3.3 avertissements empêchés",
+                "it": "js-controller 3.3 avvisi impediti",
+                "es": "advertencias de js-controller 3.3 prevenidas",
+                "pl": "Ostrzeżenia js-controller 3.3 są zablokowane",
+                "zh-cn": "js-controller 3.3 警告被阻止"
+            },
             "0.3.6": {
                 "en": "Fixed auth issues"
             }
