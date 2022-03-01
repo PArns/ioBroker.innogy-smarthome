@@ -1,6 +1,6 @@
 {
   "name": "iobroker.innogy-smarthome",
-  "version": "0.3.7",
+  "version": "0.4.0",
   "description": "ioBroker Innogy SmartHome",
   "author": {
     "name": "Patrick Arns",
@@ -25,12 +25,12 @@
     "url": "https://github.com/PArns/ioBroker.innogy-smarthome"
   },
   "dependencies": {
-    "innogy-smarthome-lib": "^0.5.3",
+    "innogy-smarthome-lib": "^0.6.0",
     "@iobroker/adapter-core": "^2.6.0"
   },
   "devDependencies": {
-    "chai": "^4.3.6"
-    "mocha": "^9.2.1",
+    "chai": "^4.3.6",
+    "mocha": "^9.2.1"
   },
   "main": "main.js",
   "scripts": {

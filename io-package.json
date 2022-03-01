@@ -1,7 +1,7 @@
 {
     "common": {
         "name": "innogy-smarthome",
-        "version": "0.3.7",
+        "version": "0.4.0",
         "title": "Innogy Smarthome",
         "titleLang": {
             "en": "Innogy Smarthome",
@@ -22,6 +22,9 @@
             "ru": "ioBroker Innogy Smarthome"
         },
         "news": {
+            "0.4.0": {
+                "en": "Added support for local API (currently in BETA)"
+            },
             "0.3.7": {
                 "en": "js-controller 3.3 warnings prevented",
                 "de": "js-controller 3.3 Warnungen verhindert",

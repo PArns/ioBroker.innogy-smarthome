@@ -1,89 +1,94 @@
 <html>
-
-<!-- these 4 files always have to be included -->
-<link rel="stylesheet" type="text/css" href="../../lib/css/themes/jquery-ui/redmond/jquery-ui.min.css"/>
-<script type="text/javascript" src="../../lib/js/jquery-1.11.1.min.js"></script>
-<script type="text/javascript" src="../../socket.io/socket.io.js"></script>
-<script type="text/javascript" src="../../lib/js/jquery-ui-1.10.3.full.min.js"></script>
-
-<!-- these two file always have to be included -->
 <link rel="stylesheet" type="text/css" href="../../css/adapter.css"/>
-<script type="text/javascript" src="../../js/translate.js"></script>
-<script type="text/javascript" src="../../js/adapter-settings.js"></script>
+<link rel="stylesheet" type="text/css" href="../../lib/css/materialize.css"/>
 
+<script type="text/javascript" src="../../lib/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="../../socket.io/socket.io.js"></script>
+
+<script type="text/javascript" src="../../js/translate.js"></script>
+<script type="text/javascript" src="../../lib/js/materialize.js"></script>
+<script type="text/javascript" src="../../js/adapter-settings.js"></script>
 
 <!-- you have to define 2 functions in the global scope: -->
 <script type="text/javascript">
+	// Dictionary (systemDictionary is global variable from adapter-settings.js)
+	systemDictionary = {
+		"innogy SmartHome settings": {de: "innogy SmartHome Einstellungen"},
+		"on save adapter restarts with new config immediately": {
+			de: "Beim Speichern von Einstellungen wird der Adapter sofort neu gestartet.",
+		},
+	};
 
-    // Dictionary (systemDictionary is global variable from adapter-settings.js)
-    systemDictionary = {
-        "innogy SmartHome settings": {"de": "innogy SmartHome Einstellungen"},
-        "on save adapter restarts with new config immediately": {
-            "de": "Beim Speichern von Einstellungen wird der Adapter sofort neu gestartet."
-        }
-    };
+	var active = false;
 
+	// This will be called by the admin adapter when the settings page loads
+	function load(settings, onChange) {
+		// example: select elements with id=key and class=value and insert value
+		if (!settings)
+			return;
 
-    var active = false;
+		$(".value").each(function () {
+			var $key = $(this);
+			var id = $key.attr("id");
+			if ($key.attr("type") === "checkbox") {
+				// do not call onChange direct, because onChange could expect some arguments
+				$key.prop("checked", settings[id]).on("change", () => onChange());
+			} else {
+				// do not call onChange direct, because onChange could expect some arguments
+				$key.val(settings[id])
+						.on("change", () => onChange())
+						.on("keyup", () => onChange());
+			}
+		});
 
-    // the function loadSettings has to exist ...
-    function load(settings, onChange) {
-        // example: select elements with id=key and class=value and insert value
-        for (var key in settings) {
-            // example: select elements with id=key and class=value and insert value
-            if ($('#' + key + '.value').attr('type') == 'checkbox') {
-                $('#' + key + '.value').prop('checked', settings[key]).change(function () {
-                    onChange();
-                });
-            } else {
-                $('#' + key + '.value').val(settings[key]).change(function () {
-                    onChange();
-                }).keyup(function () {
-                    $(this).trigger('change');
-                });
-            }
-        }
+		// read if instance is active or enabled
+		socket.emit('getState', 'system.adapter.' + adapter + '.' + instance + '.alive', function (err, state) {
+			active = common.enabled || (state && state.val);
+		});
 
-        // read if instance is active or enabled
-        socket.emit('getState', 'system.adapter.' + adapter + '.' + instance + '.alive', function (err, state) {
-            active = common.enabled || (state && state.val);
-        });
+		onChange(false);
 
-        // Signal to admin, that no changes yet
-        onChange(false);
-    }
+		// reinitialize all the Materialize labels on the page if you are dynamically adding inputs:
+		if (M)
+			M.updateTextFields();
+	}
 
-    // ... and the function save has to exist.
-    // you have to make sure the callback is called with the settings object as first param!
-    function save(callback) {
-        // example: select elements with class=value and build settings object
-        var obj = {};
-        $('.value').each(function () {
-            var $this = $(this);
-            obj[$this.attr('id')] = $this.val();
-        });
-        callback(obj);
-    }
+	// This will be called by the admin adapter when the user presses the save button
+	function save(callback) {
+		// example: select elements with class=value and build settings object
+		var obj = {};
+		$(".value").each(function () {
+			var $this = $(this);
+			if ($this.attr("type") === "checkbox") {
+				obj[$this.attr("id")] = $this.prop("checked");
+			} else if ($this.attr("type") === "number") {
+				obj[$this.attr("id")] = parseFloat($this.val());
+			} else {
+				obj[$this.attr("id")] = $this.val();
+			}
+		});
+		callback(obj);
+	}
 
-    $(document).ready(function () {
-        $('#login').button().click(function () {
-            if (!active) {
-                showMessage(_('Enable adapter first'), 'Warning', 'info');
-                return;
-            }
+	$(document).ready(function () {
+		$("#login").click(function () {
+			if (!active) {
+				showMessage(_("Enable adapter first"), "Warning", "info");
+				return;
+			}
 
-            var myWindow = window.open('', 'AuthWindow', 'directories=no,titlebar=no,toolbar=no,location=no,status=no,menubar=no,scrollbars=no,resizable=no,width=400,height=400');
+			var myWindow = window.open("", "AuthWindow", "directories=no,titlebar=no,toolbar=no,location=no,status=no,menubar=no,scrollbars=no,resizable=no,width=400,height=400");
 
-            sendTo('innogy-smarthome.' + instance, 'startAuth', {}, function (result) {
-                try {
-                    var result = JSON.parse(result);
-                    myWindow.location = result.uri;
-                } catch (e) {
-                    alert("error parsing data");
-                }
-            });
-        });
-    });
+			sendTo("innogy-smarthome." + instance, "startAuth", {}, function (result) {
+				try {
+					var result = JSON.parse(result);
+					myWindow.location = result.uri;
+				} catch (e) {
+					alert("error parsing data");
+				}
+			});
+		});
+	});
 </script>
 
 <!-- you have to put your config page in a div with id adapter-container -->
@@ -91,17 +96,65 @@
 	<table>
 		<tr>
 			<td><img src="innogy-smarthome.png"/></td>
-			<td><h3 class="translate">innogy SmartHome settings</h3></td>
+			<td><h3 className="translate">innogy SmartHome settings</h3></td>
 		</tr>
 	</table>
 
-	<div id="auth" style="text-align: center">
+	<div id="auth-cloud" style="text-align: center;">
+		<h2>Using Livisi Cloud (<a href="https://home.livisi.de" target="_blank">home.livisi.de</a>)</h2>
 		<p>
-			Please click on the following button and enter your Innogy Login credentials into the new Window<br>
-			Once the authorization has been completed and the Window closes, you can leave the settings dialog
+			Please click on the following button and enter your Innogy Login credentials into the new Window<br/>
+			Once the authorization has been completed and the Window closes, you can close the settings dialog
 		</p>
-		<button id="login" class="translate">Start authorization</button>
+		<button id="login" className="translate">Start authorization</button>
+	</div>
+
+	<hr/>
+
+	<div id="auth-local" style="text-align: center;">
+		<h2>Using Local SmartHome (<a href="https://community.livisi.de/lsh-en/" target="_blank">Requires BETA SHC</a>)
+		</h2>
+
+		<p>
+			With the new Livisi Local SmartHome, there is now a way to connect locally to your Livisi SmartHome
+			Controller!<br/>
+			This requires currently to be part of the Livisi Beta Group. You can find more information about the Local
+			SmartHome and how to set it up <a href="https://community.livisi.de/lsh-howto-en/"
+											  target="_blank">HERE</a><br/>
+			<br/>
+			Once, you've updated your SmartHomeController to <b>at least version 8.17</b>, you can activate the Local
+			SmartHome.<br/>
+			If you've done so, please enter the IP of the SmartHomeController and your password in the fields below
+		</p>
+
+		<table style="margin-left: auto; margin-right: auto;">
+			<tr>
+				<td>
+					Enable Local SmartHome:
+				</td>
+				<td>
+					<input type="checkbox" id="useLocalSHC" class="value" />
+				</td>
+			</tr>
+
+			<tr>
+				<td>
+					SHC IP:
+				</td>
+				<td>
+					<input type="text" id="localSHCIP" class="value"/>
+				</td>
+			</tr>
+
+			<tr>
+				<td>
+					Password:
+				</td>
+				<td>
+					<input type="password" id="localSHCPassword" class="value"/>
+				</td>
+			</tr>
+		</table>
 	</div>
 </div>
-
 </html>

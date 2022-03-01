@@ -111,8 +111,15 @@ function initSmartHome() {
         redirectHost: 'iobroker-connect.patrick-arns.de',
         id: '61768662',
         secret: 'no secret',
-        debug: true
+        debug: true,
+
+        localShc: adapter.config.localSHCIP,
+        localPassword: adapter.config.localSHCPassword,
+        localConnection: adapter.config.useLocalSHC
     };
+
+    if (adapter.config.useLocalSHC)
+        adapter.log.info("Trying to use local smarthome connection!");
 
     smartHome = new SmartHome(config);
 
@@ -124,6 +131,11 @@ function initSmartHome() {
 
     smartHome.on("needsMobileAccess", function () {
         adapter.log.warn('You do not have mobile access for the logged in Innogy account! Please purchase mobile access or move ioBroker to the same subnet as the SHC');
+        adapter.setState("info.connection", false, true);
+    });
+
+    smartHome.on("invalidAuthorization", function() {
+        adapter.log.warn('Unable to connect to local SHC controller! Please ensure your password is correct ...');
         adapter.setState("info.connection", false, true);
     });
 
