@@ -114,7 +114,7 @@ function initSmartHome() {
         redirectHost: 'iobroker-connect.patrick-arns.de',
         id: '61768662',
         secret: 'no secret',
-        debug: true,
+        debug: adapter.config.debug,
 
         localShc: adapter.config.localSHCIP,
         localPassword: adapter.config.localSHCPassword,
@@ -184,13 +184,15 @@ function initSmartHome() {
     });
 
     smartHome.on("error", function (e) {
-        if (typeof e === "string")
-            adapter.log.error("GOT AN ERROR:" + e);
-        else {
-            adapter.log.error("GOT AN ERROR:" + JSON.stringify(e));
+        if (adapter.config.debug) {
+            if (typeof e === "string")
+                adapter.log.error("GOT AN ERROR:" + e);
+            else {
+                adapter.log.error("GOT AN ERROR:" + JSON.stringify(e));
 
-            if (e.stack) {
-                adapter.log.error("STACK:" + e.stack);
+                if (e.stack) {
+                    adapter.log.error("STACK:" + e.stack);
+                }
             }
         }
     });
@@ -675,9 +677,11 @@ function getCommonForState(aState) {
             break;
 
         default:
-            adapter.log.warn('Unknown state (please report to dev):' + aState.name + " " + JSON.stringify(aState));
+            if (adapter.config.debug)
+                adapter.log.warn('Unknown state (please report to dev):' + aState.name + " " + JSON.stringify(aState));
 
             res.type = typeof aState !== 'object' ? typeof aState !== 'object' : "mixed";
+            res.role = "value";
             res.read = true;
             res.write = true;
             break;
