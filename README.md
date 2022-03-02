@@ -16,6 +16,11 @@ As this project is developed during my spare time, I*m actively looking for help
 
 ## Changelog
 
+### 0.4.1
+    Fixed cloud auth, if local auth is activated (blank page)
+    Changed Admin design to be compatible with black & white style
+    Added missing states
+
 ### 0.4.0
     Added support for new Local SmartHome (currently in Beta, requires SHC 2 & Firmware >= 8.17 - you can find more info [here](https://community.livisi.de/lsh-en/))
 

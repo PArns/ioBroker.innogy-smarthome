@@ -32,6 +32,9 @@ function onMessage(obj) {
         switch (obj.command) {
             case 'startAuth':
 
+                adapter.config.useLocalSHC = false;
+                initSmartHome();
+
                 smartHome.startAuthorization(function () {
                     smartHome.init();
                 });
@@ -634,6 +637,42 @@ function getCommonForState(aState) {
             res.write = true;
             break;
 
+        // -- Feuermelder --
+        case "isOn":
+            res.type = "boolean";
+            res.role = "sensor.alarm";
+            res.read = true;
+            res.write = true;
+            break;
+
+        case "isSmokeAlarm":
+            res.type = "boolean";
+            res.role = "sensor.alarm";
+            res.read = true;
+            res.write = false;
+            break;
+
+        case "activeChannel":
+            res.type = "string";
+            res.role = "value.channel";
+            res.read = true;
+            res.write = false;
+            break;
+
+        // HTTP
+        case "isSending":
+            res.type = "boolean";
+            res.role = "value.http";
+            res.read = true;
+            res.write = false;
+            break;
+
+        case "HTTPResponseStatus":
+            res.type = "string";
+            res.role = "value.status";
+            res.read = true;
+            res.write = false;
+            break;
 
         default:
             adapter.log.warn('Unknown state (please report to dev):' + aState.name + " " + JSON.stringify(aState));

@@ -92,69 +92,65 @@
 </script>
 
 <!-- you have to put your config page in a div with id adapter-container -->
-<div id="adapter-container">
-	<table>
-		<tr>
-			<td><img src="innogy-smarthome.png"/></td>
-			<td><h3 className="translate">innogy SmartHome settings</h3></td>
-		</tr>
-	</table>
-
-	<div id="auth-cloud" style="text-align: center;">
-		<h2>Using Livisi Cloud (<a href="https://home.livisi.de" target="_blank">home.livisi.de</a>)</h2>
-		<p>
-			Please click on the following button and enter your Innogy Login credentials into the new Window<br/>
-			Once the authorization has been completed and the Window closes, you can close the settings dialog
-		</p>
-		<button id="login" className="translate">Start authorization</button>
+<div class="m adapter-container" id="settings">
+	<div class="row">
+		<div class="col s12" id="auth-cloud">
+			<p class="title">Using Livisi Cloud</p>
+			<p>
+				Please click on the following button and enter your Innogy Login credentials into the new Window<br/>
+				Once the authorization has been completed and the Window closes, you can close the settings dialog
+			</p>
+			<a class="btn" id="login">Start authorization</a>
+		</div>
 	</div>
 
-	<hr/>
+	<div class="row">
+		<div class="col s12" id="auth-local">
+			<p class="title">Using Local SmartHome</p>
 
-	<div id="auth-local" style="text-align: center;">
-		<h2>Using Local SmartHome (<a href="https://community.livisi.de/lsh-en/" target="_blank">Requires BETA SHC</a>)
-		</h2>
+			<p>
+				With the new Livisi Local SmartHome, there is now a way to connect locally to your Livisi SmartHome
+				Controller!<br/>
+				This requires currently to be part of the Livisi Beta Group. You can find more information about the Local
+				SmartHome and how to set it up <a href="https://community.livisi.de/lsh-howto-en/"
+												  target="_blank">HERE</a><br/>
+				<br/>
+				Once, you've updated your SmartHomeController to <b>at least version 8.17</b>, you can activate the Local
+				SmartHome.<br/>
+				If you've done so, please enter the IP of the SmartHomeController and your password in the fields below
+			</p>
 
-		<p>
-			With the new Livisi Local SmartHome, there is now a way to connect locally to your Livisi SmartHome
-			Controller!<br/>
-			This requires currently to be part of the Livisi Beta Group. You can find more information about the Local
-			SmartHome and how to set it up <a href="https://community.livisi.de/lsh-howto-en/"
-											  target="_blank">HERE</a><br/>
-			<br/>
-			Once, you've updated your SmartHomeController to <b>at least version 8.17</b>, you can activate the Local
-			SmartHome.<br/>
-			If you've done so, please enter the IP of the SmartHomeController and your password in the fields below
-		</p>
+		</div>
 
-		<table style="margin-left: auto; margin-right: auto;">
-			<tr>
-				<td>
-					Enable Local SmartHome:
-				</td>
-				<td>
-					<input type="checkbox" id="useLocalSHC" class="value" />
-				</td>
-			</tr>
+		<div class="row">
+			<div class="col s12">
+				<div class="input-field col s12 m6">
+					<label>
+						<input id="useLocalSHC" type="checkbox" class="value filled-in" />
+						<span>Enable local SmartHome</span>
+					</label>
+				</div>
+			</div>
+		</div>
 
-			<tr>
-				<td>
-					SHC IP:
-				</td>
-				<td>
-					<input type="text" id="localSHCIP" class="value"/>
-				</td>
-			</tr>
+		<div class="row">
+			<div class="col s12">
+				<div class="input-field col s12 m6">
+					<input id="localSHCIP" type="text" class="value" />
+					<label for="localSHCIP">SHC IP</label>
+				</div>
+			</div>
+		</div>
 
-			<tr>
-				<td>
-					Password:
-				</td>
-				<td>
-					<input type="password" id="localSHCPassword" class="value"/>
-				</td>
-			</tr>
-		</table>
+		<div class="row">
+			<div class="col s12">
+				<div class="input-field col s12 m6">
+					<input id="localSHCPassword" type="password" class="value" />
+					<label for="localSHCPassword">SHC Password</label>
+				</div>
+			</div>
+		</div>
 	</div>
 </div>
+
 </html>
