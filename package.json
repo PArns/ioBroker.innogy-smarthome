@@ -1,6 +1,6 @@
 {
   "name": "iobroker.innogy-smarthome",
-  "version": "0.4.2",
+  "version": "0.4.3",
   "description": "ioBroker Innogy SmartHome",
   "author": {
     "name": "Patrick Arns",

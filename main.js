@@ -362,6 +362,8 @@ function getCommonForState(aState) {
             res.read = true;
             res.write = true;
             res.unit = "°C";
+            res.min = 6;
+            res.max = 30;
             break;
 
         case "windowReductionActive":
