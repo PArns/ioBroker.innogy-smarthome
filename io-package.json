@@ -1,7 +1,7 @@
 {
     "common": {
         "name": "innogy-smarthome",
-        "version": "0.4.1",
+        "version": "0.4.2",
         "title": "Innogy Smarthome",
         "titleLang": {
             "en": "Innogy Smarthome",
@@ -22,6 +22,9 @@
             "ru": "ioBroker Innogy Smarthome"
         },
         "news": {
+            "0.4.2": {
+                "en": "Fixed setState crashes, caused by invalid point temperatures + added debug info for more possible crashes"
+            },
             "0.4.1": {
                 "en": "Fixed ioBroker Admin dark mode and some missing states"
             },

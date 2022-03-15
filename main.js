@@ -300,8 +300,9 @@ function stateChanged(id, state) {
 
                 if (capability) {
                     if (obj.common.write) {
-                        capability.setState(state.val, obj.common.name).then(function () {
-                        }, function (data) {
+                        capability.setState(state.val, obj.common.name).then(
+                            function () {},
+                            function (data) {
                             adapter.log.error("STATE ERR " + JSON.stringify(data));
                         });
                     } else {
