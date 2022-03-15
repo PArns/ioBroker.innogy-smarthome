@@ -16,6 +16,9 @@ As this project is developed during my spare time, I*m actively looking for help
 
 ## Changelog
 
+### 0.4.4
+    Fixed a naming problem with newly created devices
+
 ### 0.4.3
     Added min & max for pointTemperature
 
