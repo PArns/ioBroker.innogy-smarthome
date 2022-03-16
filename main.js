@@ -679,6 +679,22 @@ function getCommonForState(aState) {
             res.write = false;
             break;
 
+        // Kamera
+        case "isCapturing":
+            res.type = "boolean";
+            res.role = "value.status";
+            res.read = true;
+            res.write = false;
+            break;
+
+        // WakeOnLan
+        case "executionCount":
+            res.type = "number";
+            res.role = "value.status";
+            res.read = true;
+            res.write = false;
+            break;
+
         default:
             if (adapter.config.debug)
                 adapter.log.warn('Unknown state (please report to dev):' + aState.name + " " + JSON.stringify(aState));
