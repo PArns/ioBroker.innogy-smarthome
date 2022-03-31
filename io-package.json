@@ -1,7 +1,7 @@
 {
     "common": {
         "name": "innogy-smarthome",
-        "version": "0.4.6",
+        "version": "0.4.7",
         "title": "Innogy Smarthome",
         "titleLang": {
             "en": "Innogy Smarthome",
@@ -22,6 +22,9 @@
             "ru": "ioBroker Innogy Smarthome"
         },
         "news": {
+            "0.4.7": {
+                "en": "Changed OAuth local auth"
+            },
             "0.4.6": {
                 "en": "Added missing states"
             },
