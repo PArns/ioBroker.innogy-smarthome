@@ -26,7 +26,7 @@
   },
   "dependencies": {
     "innogy-smarthome-lib": "^0.6.5",
-    "@iobroker/adapter-core": "^2.6.0"
+    "@iobroker/adapter-core": "^2.6.6"
   },
   "devDependencies": {
     "chai": "^4.3.6",
