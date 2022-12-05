@@ -259,7 +259,7 @@ function updateDevice(aDevice) {
 
         if (hasCapStates(aDevice)) {
 
-            adapter.setObject(devicePath, {
+            adapter.extendObject(devicePath, {
                 type: "device",
                 common: {
                     name: aDevice.getName()
@@ -274,7 +274,7 @@ function updateDevice(aDevice) {
 
                     var capabilityPath = devicePath + "." + helpers.cleanDeviceName(aState.name);
 
-                    adapter.setObject(capabilityPath, {
+                    adapter.extendObject(capabilityPath, {
                         type: "state",
                         common: helpers.merge_options({name: helpers.capitalize(aState.name)}, getCommonForState(aState)),
                         native: {
@@ -327,20 +327,21 @@ function getCommonForState(aState) {
         case "nextSunset":
         case "nextTimeEvent":
             res.type = "string";
-            res.role = "value.datetime";
+            res.role = "date";
             res.read = true;
             res.write = false;
             break;
 
         case "isDay":
             res.type = "boolean";
-            res.role = "indicator.day";
+            res.role = "indicator";
             res.read = true;
             res.write = false;
             break;
 
         case "value":
         case "onState":
+        case "onOff":
             res.type = "boolean";
             res.role = "switch";
             res.read = true;
@@ -349,7 +350,7 @@ function getCommonForState(aState) {
 
         case "remainingQuota":
             res.type = "number";
-            res.role = "indicator.quota";
+            res.role = "value";
             res.read = true;
             res.write = false;
             break;
@@ -375,19 +376,18 @@ function getCommonForState(aState) {
 
         case "operationMode":
             res.type = "string";
-            res.role = "indicator.operationmode";
+            res.role = "state";
             res.read = true;
             res.write = true;
             res.states = {
                 "Auto": "Automatic",
                 "Manu": "Manual"
             };
-
             break;
 
         case "temperature":
             res.type = "number";
-            res.role = "sensor.temperature";
+            res.role = "value.temperature";
             res.read = true;
             res.write = false;
             res.unit = "°C";
@@ -402,7 +402,7 @@ function getCommonForState(aState) {
 
         case "humidity":
             res.type = "number";
-            res.role = "sensor.humidity";
+            res.role = "value.humidity";
             res.read = true;
             res.write = false;
             res.unit = "%";
@@ -420,14 +420,14 @@ function getCommonForState(aState) {
         // -- BEWEGUNGSMELDER --
         case "motionDetectedCount":
             res.type = "number";
-            res.role = "value.state";
+            res.role = "value";
             res.read = true;
             res.write = false;
             break;
 
         case "luminance":
             res.type = "number";
-            res.role = "sensor.luminance";
+            res.role = "value.brightness";
             res.read = true;
             res.write = false;
             res.unit = "%";
@@ -438,14 +438,14 @@ function getCommonForState(aState) {
         // -- WANDSENDER --
         case "lastKeyPressCounter":
             res.type = "number";
-            res.role = "value.state";
+            res.role = "value";
             res.read = true;
             res.write = false;
             break;
 
         case "lastPressedButtonIndex":
             res.type = "number";
-            res.role = "value.state";
+            res.role = "value";
             res.read = true;
             res.write = false;
             break;
@@ -465,7 +465,7 @@ function getCommonForState(aState) {
         // -- NETATMO --
         case "carbonDioxideLevel":
             res.type = "number";
-            res.role = "sensor.co2";
+            res.role = "level.co2";
             res.read = true;
             res.write = false;
             res.unit = "ppm";
@@ -473,7 +473,7 @@ function getCommonForState(aState) {
 
         case "noiseLevel":
             res.type = "number";
-            res.role = "sensor.noise";
+            res.role = "value";
             res.read = true;
             res.write = false;
             res.unit = "dB";
@@ -481,26 +481,24 @@ function getCommonForState(aState) {
 
         case "rainfall":
             res.type = "number";
-            res.role = "sensor.rainfall";
+            res.role = "value.precipitation";
             res.read = true;
             res.write = false;
             res.unit = "mm";
             break;
 
-
         case "atmosphericPressure":
             res.type = "number";
-            res.role = "sensor.atmosphericPressure";
+            res.role = "value.pressure";
             res.read = true;
             res.write = false;
             res.unit = "mb";
             break;
 
-
         // -- POWERCONTROL --
         case "maximumGenerationPower":
             res.type = "number";
-            res.role = "sensor.maximumGenerationPower";
+            res.role = "value.power.generation";
             res.read = true;
             res.write = false;
             res.unit = "W";
@@ -508,7 +506,7 @@ function getCommonForState(aState) {
 
         case "powerInWatt":
             res.type = "number";
-            res.role = "sensor.power";
+            res.role = "value.power.consumption";
             res.read = true;
             res.write = false;
             res.unit = "W";
@@ -516,7 +514,7 @@ function getCommonForState(aState) {
 
         case "energyPerMonthInKWh":
             res.type = "number";
-            res.role = "sensor.power";
+            res.role = "value";
             res.read = true;
             res.write = false;
             res.unit = "kWh";
@@ -524,7 +522,7 @@ function getCommonForState(aState) {
 
         case "energyPerMonthInEuro":
             res.type = "number";
-            res.role = "sensor.power";
+            res.role = "value";
             res.read = true;
             res.write = false;
             res.unit = "Eur";
@@ -532,7 +530,7 @@ function getCommonForState(aState) {
 
         case "energyPerDayInKWh":
             res.type = "number";
-            res.role = "sensor.power";
+            res.role = "value";
             res.read = true;
             res.write = false;
             res.unit = "kWh";
@@ -540,7 +538,7 @@ function getCommonForState(aState) {
 
         case "energyPerDayInEuro":
             res.type = "number";
-            res.role = "sensor.power";
+            res.role = "value";
             res.read = true;
             res.write = false;
             res.unit = "Eur";
@@ -548,7 +546,7 @@ function getCommonForState(aState) {
 
         case "twoWayPower":
             res.type = "number";
-            res.role = "sensor.power";
+            res.role = "value";
             res.read = true;
             res.write = false;
             res.unit = "kWh";
@@ -556,7 +554,7 @@ function getCommonForState(aState) {
 
         case "powerMedian":
             res.type = "number";
-            res.role = "sensor.power";
+            res.role = "value";
             res.read = true;
             res.write = false;
             res.unit = "kWh";
@@ -564,7 +562,55 @@ function getCommonForState(aState) {
 
         case "totalEnergy":
             res.type = "number";
-            res.role = "sensor.power";
+            res.role = "value";
+            res.read = true;
+            res.write = false;
+            res.unit = "kWh";
+            break;
+
+        case "powerConsumptionWatt":
+            res.type = "number";
+            res.role = "value.power.consumption";
+            res.read = true;
+            res.write = false;
+            res.unit = "W";
+            break;
+
+        case "energyConsumptionDayKWh":
+            res.type = "number";
+            res.role = "value";
+            res.read = true;
+            res.write = false;
+            res.unit = "W";
+            break;
+
+        case "energyConsumptionDayEuro":
+            res.type = "number";
+            res.role = "value";
+            res.read = true;
+            res.write = false;
+            res.unit = "Eur";
+            break;
+
+        case "energyConsumptionMonthEuro":
+            res.type = "number";
+            res.role = "value";
+            res.read = true;
+            res.write = false;
+            res.unit = "Eur";
+            break;
+
+        case "absoluteEnergyConsumption":
+            res.type = "number";
+            res.role = "value";
+            res.read = true;
+            res.write = false;
+            res.unit = "kWh";
+            break;
+
+        case "energyConsumptionMonthKWh":
+            res.type = "number";
+            res.role = "value";
             res.read = true;
             res.write = false;
             res.unit = "kWh";
@@ -573,7 +619,7 @@ function getCommonForState(aState) {
         // -- HUE --
         case "brightness":
             res.type = "number";
-            res.role = "indicator.brightness";
+            res.role = "level.dimmer";
             res.read = true;
             res.write = true;
             res.min = 0;
@@ -583,28 +629,28 @@ function getCommonForState(aState) {
 
         case "blink":
             res.type = "boolean";
-            res.role = "indicator.blink";
+            res.role = "switch";
             res.read = true;
             res.write = true;
             break;
 
         case "colorTemperature":
             res.type = "number";
-            res.role = "indicator.colorTemperature";
+            res.role = "level.color.temperature";
             res.read = true;
             res.write = true;
             break;
 
         case "hue":
             res.type = "number";
-            res.role = "indicator.hue";
+            res.role = "level.color.hue";
             res.read = true;
             res.write = true;
             break;
 
         case "dimLevel":
             res.type = "number";
-            res.role = "indicator.dimLevel";
+            res.role = "level.dimmer";
             res.read = true;
             res.write = true;
             res.min = 0;
@@ -614,21 +660,21 @@ function getCommonForState(aState) {
 
         case "saturation":
             res.type = "number";
-            res.role = "indicator.saturation";
+            res.role = "level.color.saturation";
             res.read = true;
             res.write = true;
             break;
 
         case "dynamicEffect":
             res.type = "string";
-            res.role = "indicator.effect";
+            res.role = "state";
             res.read = true;
             res.write = true;
             break;
 
         case "colorMode":
             res.type = "string";
-            res.role = "indicator.colorMode";
+            res.role = "state";
             res.read = true;
             res.write = true;
             break;
@@ -637,7 +683,7 @@ function getCommonForState(aState) {
         case "ShutterLevel":
         case "shutterLevel":
             res.type = "number";
-            res.role = "value.level";
+            res.role = "level";
             res.read = true;
             res.write = true;
             break;
@@ -659,7 +705,7 @@ function getCommonForState(aState) {
 
         case "activeChannel":
             res.type = "string";
-            res.role = "value.channel";
+            res.role = "state";
             res.read = true;
             res.write = false;
             break;
@@ -667,14 +713,14 @@ function getCommonForState(aState) {
         // HTTP
         case "isSending":
             res.type = "boolean";
-            res.role = "value.http";
+            res.role = "indicator";
             res.read = true;
             res.write = false;
             break;
 
         case "HTTPResponseStatus":
             res.type = "string";
-            res.role = "value.status";
+            res.role = "state";
             res.read = true;
             res.write = false;
             break;
@@ -682,7 +728,7 @@ function getCommonForState(aState) {
         // Kamera
         case "isCapturing":
             res.type = "boolean";
-            res.role = "value.status";
+            res.role = "indicator";
             res.read = true;
             res.write = false;
             break;
@@ -690,9 +736,166 @@ function getCommonForState(aState) {
         // WakeOnLan
         case "executionCount":
             res.type = "number";
-            res.role = "value.status";
+            res.role = "state";
             res.read = true;
             res.write = false;
+            break;
+
+        // Mähroboter
+        case "errorDescription":
+            res.type = "string";
+            res.role = "state";
+            res.read = true;
+            res.write = false;
+            break;
+
+        case "chargingCurrent":
+            res.type = "number";
+            res.role = "value";
+            res.read = true;
+            res.write = false;
+            res.unit = 'W';
+            break;
+
+        case "chargingCycles":
+            res.type = "number";
+            res.role = "value";
+            res.read = true;
+            res.write = false;
+            break;
+
+        case "batteryLevel":
+            res.type = "number";
+            res.role = "value.battery ";
+            res.read = true;
+            res.write = false;
+            res.unit = '%';
+            break;
+
+        case "situationFlags":
+            res.type = "string";
+            res.role = "state";
+            res.read = true;
+            res.write = false;
+            break;
+
+        case "operationTimeBlade":
+            res.type = "number";
+            res.role = "value";
+            res.read = true;
+            res.write = false;
+            break;
+
+        case "operationTimeWR":
+            res.type = "number";
+            res.role = "value";
+            res.read = true;
+            res.write = false;
+            break;
+
+        case "operationTimeWL":
+            res.type = "number";
+            res.role = "value";
+            res.read = true;
+            res.write = false;
+            break;
+
+        case "bladeServiceTime":
+            res.type = "number";
+            res.role = "value";
+            res.read = true;
+            res.write = false;
+            break;
+
+        case "totalMowingTime":
+            res.type = "number";
+            res.role = "value";
+            res.read = true;
+            res.write = false;
+            break;
+
+        case "mowingCycles":
+            res.type = "number";
+            res.role = "value";
+            res.read = true;
+            res.write = false;
+            break;
+
+        case "operatingTime":
+            res.type = "number";
+            res.role = "value";
+            res.read = true;
+            res.write = false;
+            break;
+
+        case "subStatus":
+            res.type = "string";
+            res.role = "state";
+            res.read = true;
+            res.write = false;
+            break;
+
+        case "mowerStatus":
+            res.type = "string";
+            res.role = "state";
+            res.read = true;
+            res.write = false;
+            break;
+
+        case "tiltSlope":
+            res.type = "number";
+            res.role = "value";
+            res.read = true;
+            res.write = false;
+            break;
+
+        case "remainingOperationTime":
+            res.type = "number";
+            res.role = "value";
+            res.read = true;
+            res.write = false;
+            break;
+
+        case "nextOperationStartTime":
+            res.type = "number";
+            res.role = "value";
+            res.read = true;
+            res.write = false;
+            break;
+
+        case "rainDelay":
+            res.type = "number";
+            res.role = "value";
+            res.read = true;
+            res.write = false;
+            break;
+
+        case "rainSensor":
+            res.type = "boolean";
+            res.role = "indicator";
+            res.read = true;
+            res.write = false;
+            break;
+
+        case "ecoMode":
+            res.type = "number";
+            res.role = "value";
+            res.read = true;
+            res.write = false;
+            break;
+
+        case "cuttingHeight":
+            res.type = "number";
+            res.role = "value";
+            res.read = true;
+            res.write = false;
+            break;
+
+        case "action":
+            res.type = "string";
+            res.role = "state";
+            res.read = true;
+            res.write = true;
             break;
 
         default:
