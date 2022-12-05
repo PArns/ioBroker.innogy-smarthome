@@ -9,6 +9,7 @@ var SmartHome = require('innogy-smarthome-lib');
 
 var smartHome = null;
 var checkConnectionTimer = null;
+var failbackTimer = null;
 
 String.prototype.replaceAll = function (search, replacement) {
     var target = this;
@@ -96,7 +97,8 @@ function initSmartHome() {
             if (connInfo && !connInfo.val) {
                 adapter.log.warn("Adapter is not connected ... Will recheck in 30 seconds!");
 
-                setTimeout(function () {
+                failbackTimer = setTimeout(function () {
+                    failbackTimer = null;
                     adapter.getState("info.connection", function (err, connInfo) {
                         if (connInfo && !connInfo.val) {
                             adapter.log.warn("Adapter is still not connected to the Innogy API, restarting!");
@@ -228,6 +230,10 @@ function finalizeSmartHome(callback) {
         if (checkConnectionTimer) {
             clearInterval(checkConnectionTimer);
             checkConnectionTimer = null;
+        }
+        if (failbackTimer) {
+            clearTimeout(failbackTimer);
+            failbackTimer = null;
         }
 
         if (smartHome)
@@ -903,7 +909,7 @@ function getCommonForState(aState) {
                 adapter.log.warn('Unknown state (please report to dev):' + aState.name + " " + JSON.stringify(aState));
 
             res.type = typeof aState !== 'object' ? typeof aState !== 'object' : "mixed";
-            res.role = "value";
+            res.role = "state";
             res.read = true;
             res.write = true;
             break;

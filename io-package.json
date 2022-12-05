@@ -71,6 +71,8 @@
         "type": "iot-systems",
         "authors": ["Patrick Arns <iobroker@patrick-arns.de>"],
         "tier": 2,
+        "connectionType": "cloud",
+        "dataSource": "push",
         "dependencies": [
             {
                 "js-controller": ">=2.0.0"
