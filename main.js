@@ -4,7 +4,7 @@
 
 var utils = require('@iobroker/adapter-core'); // Get common adapter utils
 var adapter = utils.Adapter('innogy-smarthome');
-var helpers = require(__dirname + '/lib/helpers')(adapter);
+var helpers = require(`${__dirname}/lib/helpers`)(adapter);
 var SmartHome = require('innogy-smarthome-lib');
 
 var smartHome = null;
@@ -49,7 +49,7 @@ function onMessage(obj) {
 
                 break;
             default:
-                adapter.log.warn("Unknown command: " + obj.command);
+                adapter.log.warn(`Unknown command: ${obj.command}`);
                 break;
         }
     }
@@ -130,7 +130,7 @@ function initSmartHome() {
 
     smartHome.on("needsAuthorization", function (error) {
         adapter.log.warn('Adapter is not configured or needs reauthorization! Please go to the adapter settings and start the authorization');
-        adapter.log.warn("DEBUG: " + JSON.stringify(error));
+        adapter.log.warn(`DEBUG: ${JSON.stringify(error)}`);
         adapter.setState("info.connection", false, true);
     });
 
@@ -152,7 +152,7 @@ function initSmartHome() {
 
             aDevice.Capabilities.forEach(function (aCapability) {
                 aCapability.State.forEach(function (aState) {
-                    var capabilityPath = devicePath + "." + helpers.cleanDeviceName(aState.name);
+                    var capabilityPath = `${devicePath}.${helpers.cleanDeviceName(aState.name)}`;
                     adapter.setState(capabilityPath, {val: aState.value, ack: true});
                 });
             });
@@ -163,7 +163,7 @@ function initSmartHome() {
         adapter.setState("info.connection", true, true);
 
         if (smartHome.device && smartHome.device.length) {
-            adapter.log.info('Initialization sequence completed: found ' + smartHome.device.length + ' devices');
+            adapter.log.info(`Initialization sequence completed: found ${smartHome.device.length} devices`);
 
             smartHome.device.forEach(function (aDevice) {
                 updateDevice(aDevice);
@@ -175,12 +175,12 @@ function initSmartHome() {
 
     smartHome.on("warning", function (e) {
         if (typeof e === "string")
-            adapter.log.warn("GOT A WARNING:" + e);
+            adapter.log.warn(`GOT A WARNING:${e}`);
         else {
-            adapter.log.warn("GOT A WARNING:" + JSON.stringify(e));
+            adapter.log.warn(`GOT A WARNING:${JSON.stringify(e)}`);
 
             if (e.stack) {
-                adapter.log.warn("STACK:" + e.stack);
+                adapter.log.warn(`STACK:${e.stack}`);
             }
         }
     });
@@ -188,12 +188,12 @@ function initSmartHome() {
     smartHome.on("error", function (e) {
         if (adapter.config.debug) {
             if (typeof e === "string")
-                adapter.log.error("GOT AN ERROR:" + e);
+                adapter.log.error(`GOT AN ERROR:${e}`);
             else {
-                adapter.log.error("GOT AN ERROR:" + JSON.stringify(e));
+                adapter.log.error(`GOT AN ERROR:${JSON.stringify(e)}`);
 
                 if (e.stack) {
-                    adapter.log.error("STACK:" + e.stack);
+                    adapter.log.error(`STACK:${e.stack}`);
                 }
             }
         }
@@ -216,7 +216,7 @@ function initSmartHome() {
 
     smartHome.on("debug", function (debugData) {
         if (debugData && debugData.type !== "realtime_update_received")
-            adapter.log.debug("DEBUG EVENT " + JSON.stringify(debugData));
+            adapter.log.debug(`DEBUG EVENT ${JSON.stringify(debugData)}`);
 
         var now = new Date();
         adapter.setState("info.lastRealTimeEventReceived", now.toISOString(), true);
@@ -248,6 +248,8 @@ function finalizeSmartHome(callback) {
 
 function updateDevice(aDevice) {
     if (aDevice) {
+        adapter.log.debug(`Updating device ${aDevice.name}: ${JSON.stringify(aDevice)}`);
+
         var devicePath = helpers.getDevicePath(aDevice);
         var room = helpers.getRoomNameForDevice(aDevice);
 
@@ -278,7 +280,7 @@ function updateDevice(aDevice) {
             aDevice.Capabilities.forEach(function (aCapability) {
                 aCapability.State.forEach(function (aState) {
 
-                    var capabilityPath = devicePath + "." + helpers.cleanDeviceName(aState.name);
+                    var capabilityPath = `${devicePath}.${helpers.cleanDeviceName(aState.name)}`;
 
                     adapter.extendObject(capabilityPath, {
                         type: "state",
@@ -309,7 +311,7 @@ function stateChanged(id, state) {
                         capability.setState(state.val, obj.common.name).then(
                             function () {},
                             function (data) {
-                            adapter.log.error("STATE ERR " + JSON.stringify(data));
+                            adapter.log.error(`STATE ERR ${JSON.stringify(data)}`);
                         });
                     } else {
                         updateDevice(smartHome.resolveLink(capability.Device));
@@ -906,7 +908,7 @@ function getCommonForState(aState) {
 
         default:
             if (adapter.config.debug)
-                adapter.log.warn('Unknown state (please report to dev):' + aState.name + " " + JSON.stringify(aState));
+                adapter.log.warn(`Unknown state (please report to dev):${aState.name} ${JSON.stringify(aState)}`);
 
             res.type = typeof aState !== 'object' ? typeof aState !== 'object' : "mixed";
             res.role = "state";
