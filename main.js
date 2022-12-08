@@ -274,6 +274,8 @@ async function updateDevice(aDevice) {
 
         if (hasCapStates(aDevice)) {
 
+            adapter.log.debug(`Processing device -> ${devicePath}: "${aDevice.getName()}" ${JSON.stringify(aDevice)}`);
+
             await adapter.extendObjectAsync(devicePath, {
                 type: "device",
                 common: {
