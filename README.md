@@ -16,6 +16,10 @@ As this project is developed during my spare time, I*m actively looking for help
 
 ## Changelog
 
+### __WORK IN PROGRESS__
+* (Apollon77) Add more missing states
+* (Apollon77) General updates
+
 ### 0.4.7
     Changed OAuth local auth
 

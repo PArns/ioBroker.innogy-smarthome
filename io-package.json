@@ -13,32 +13,101 @@
             "it": "Innogy Smarthome",
             "es": "Innogy Smarthome",
             "pl": "Innogy Smarthome",
-            "zh-cn": "英诺智能家居"
+            "zh-cn": "英诺智能家居",
+            "uk": "Innogy Smarthome"
         },
         "license": "MIT",
         "desc": {
             "en": "ioBroker Innogy Smarthome",
             "de": "ioBroker Innogy Smarthome",
-            "ru": "ioBroker Innogy Smarthome"
+            "ru": "ioBroker Innogy Smarthome",
+            "pt": "ioBroker Innogy Smarthome",
+            "nl": "ioBroker Innogy Smarthome",
+            "fr": "ioBroker Innogy Smarthome",
+            "it": "ioBroker Innogy Smarthome",
+            "es": "ioBroker Innogy Hogar inteligente",
+            "pl": "Inteligentny dom ioBroker Innogy",
+            "uk": "ioBroker Innogy Smarthome",
+            "zh-cn": "ioBroker Innogy 智能家居"
         },
         "news": {
             "0.4.7": {
-                "en": "Changed OAuth local auth"
+                "en": "Changed OAuth local auth",
+                "de": "Lokale OAuth-Authentifizierung geändert",
+                "ru": "Изменена локальная аутентификация OAuth",
+                "pt": "Autenticação local OAuth alterada",
+                "nl": "Lokale OAuth-authenticatie gewijzigd",
+                "fr": "Authentification locale OAuth modifiée",
+                "it": "Autenticazione locale OAuth modificata",
+                "es": "Cambió la autenticación local de OAuth",
+                "pl": "Zmieniono lokalną autoryzację OAuth",
+                "uk": "Змінено локальну автентифікацію OAuth",
+                "zh-cn": "更改了 OAuth 本地身份验证"
             },
             "0.4.6": {
-                "en": "Added missing states"
+                "en": "Added missing states",
+                "de": "Fehlende Zustände hinzugefügt",
+                "ru": "Добавлены недостающие состояния",
+                "pt": "Adicionados estados ausentes",
+                "nl": "Ontbrekende staten toegevoegd",
+                "fr": "Ajout d'états manquants",
+                "it": "Aggiunti stati mancanti",
+                "es": "Se agregaron estados faltantes",
+                "pl": "Dodano brakujące stany",
+                "uk": "Додано відсутні стани",
+                "zh-cn": "添加缺失状态"
             },
             "0.4.3": {
-                "en": "Added min, max for pointTemperature"
+                "en": "Added min, max for pointTemperature",
+                "de": "Min, Max für pointTemperature hinzugefügt",
+                "ru": "Добавлены min, max для pointTemperature",
+                "pt": "Adicionado min, max para pointTemperature",
+                "nl": "Min, max toegevoegd voor pointTemperature",
+                "fr": "Ajouté min, max pour pointTemperature",
+                "it": "Aggiunti min, max per pointTemperature",
+                "es": "Se agregaron min, max para pointTemperature",
+                "pl": "Dodano min, max dla temperatury punktu",
+                "uk": "Додано min, max для pointTemperature",
+                "zh-cn": "为 pointTemperature 添加了最小值、最大值"
             },
             "0.4.2": {
-                "en": "Fixed setState crashes, caused by invalid point temperatures + added debug info for more possible crashes"
+                "en": "Fixed setState crashes, caused by invalid point temperatures + added debug info for more possible crashes",
+                "de": "SetState-Abstürze behoben, die durch ungültige Punkttemperaturen verursacht wurden + Debug-Informationen für mehr mögliche Abstürze hinzugefügt",
+                "ru": "Исправлены сбои setState, вызванные неверными температурами точек + добавлена ​​отладочная информация для большего количества возможных сбоев.",
+                "pt": "Corrigidas falhas de setState, causadas por temperaturas de pontos inválidos + informações de depuração adicionadas para mais falhas possíveis",
+                "nl": "Vaste setState-crashes, veroorzaakt door ongeldige punttemperaturen + foutopsporingsinformatie toegevoegd voor meer mogelijke crashes",
+                "fr": "Correction des plantages de setState, causés par des températures de point invalides + ajout d'informations de débogage pour plus de plantages possibles",
+                "it": "Risolti arresti anomali di setState, causati da temperature del punto non valide + aggiunte informazioni di debug per più possibili arresti anomali",
+                "es": "Se corrigieron los bloqueos de setState, causados ​​​​por temperaturas de puntos no válidas + información de depuración agregada para más bloqueos posibles",
+                "pl": "Naprawiono awarie setState spowodowane przez nieprawidłowe temperatury punktów + dodano informacje debugowania dla większej liczby możliwych awarii",
+                "uk": "Виправлено аварійне завершення роботи setState, спричинене неправильними температурами точки + додана інформація про налагодження для більш можливих збоїв",
+                "zh-cn": "修复了由无效点温度引起的 setState 崩溃 + 为更多可能的崩溃添加了调试信息"
             },
             "0.4.1": {
-                "en": "Fixed ioBroker Admin dark mode and some missing states"
+                "en": "Fixed ioBroker Admin dark mode and some missing states",
+                "de": "ioBroker Admin Dunkelmodus und einige fehlende Status behoben",
+                "ru": "Исправлен темный режим администратора ioBroker и некоторые отсутствующие состояния.",
+                "pt": "Corrigido o modo escuro do ioBroker Admin e alguns estados ausentes",
+                "nl": "Oplossing voor de donkere modus van ioBroker Admin en enkele ontbrekende statussen",
+                "fr": "Correction du mode sombre d'ioBroker Admin et de certains états manquants",
+                "it": "Risolto il problema con la modalità oscura di ioBroker Admin e alcuni stati mancanti",
+                "es": "Se corrigió el modo oscuro de administración de ioBroker y algunos estados faltantes",
+                "pl": "Naprawiono tryb ciemny administratora ioBroker i niektóre brakujące stany",
+                "uk": "Виправлено темний режим ioBroker Admin і деякі відсутні стани",
+                "zh-cn": "修复了 ioBroker Admin 暗模式和一些缺失的状态"
             },
             "0.4.0": {
-                "en": "Added support for local API (currently in BETA)"
+                "en": "Added support for local API (currently in BETA)",
+                "de": "Unterstützung für lokale API hinzugefügt (derzeit in BETA)",
+                "ru": "Добавлена ​​поддержка локального API (в настоящее время в БЕТА-версии)",
+                "pt": "Adicionado suporte para API local (atualmente em BETA)",
+                "nl": "Ondersteuning toegevoegd voor lokale API (momenteel in BETA)",
+                "fr": "Ajout de la prise en charge de l'API locale (actuellement en BETA)",
+                "it": "Aggiunto il supporto per l'API locale (attualmente in BETA)",
+                "es": "Se agregó soporte para API local (actualmente en BETA)",
+                "pl": "Dodano obsługę lokalnego interfejsu API (obecnie w wersji BETA)",
+                "uk": "Додано підтримку локального API (наразі в бета-версії)",
+                "zh-cn": "添加了对本地 API 的支持（目前处于测试阶段）"
             },
             "0.3.7": {
                 "en": "js-controller 3.3 warnings prevented",
@@ -50,10 +119,21 @@
                 "it": "js-controller 3.3 avvisi impediti",
                 "es": "advertencias de js-controller 3.3 prevenidas",
                 "pl": "Ostrzeżenia js-controller 3.3 są zablokowane",
-                "zh-cn": "js-controller 3.3 警告被阻止"
+                "zh-cn": "js-controller 3.3 警告被阻止",
+                "uk": "попередження js-controller 3.3 запобігли"
             },
             "0.3.6": {
-                "en": "Fixed auth issues"
+                "en": "Fixed auth issues",
+                "de": "Authentifizierungsprobleme behoben",
+                "ru": "Исправлены проблемы с авторизацией",
+                "pt": "Problemas de autenticação corrigidos",
+                "nl": "Verificatieproblemen opgelost",
+                "fr": "Problèmes d'authentification résolus",
+                "it": "Risolti problemi di autenticazione",
+                "es": "Problemas de autenticación solucionados",
+                "pl": "Naprawiono problemy z autoryzacją",
+                "uk": "Виправлені проблеми авторизації",
+                "zh-cn": "修复了身份验证问题"
             }
         },
         "platform": "Javascript/Node.js",
@@ -69,7 +149,9 @@
         "readme": "https://github.com/PArns/ioBroker.innogy-smarthome/blob/master/README.md",
         "loglevel": "info",
         "type": "iot-systems",
-        "authors": ["Patrick Arns <iobroker@patrick-arns.de>"],
+        "authors": [
+            "Patrick Arns <iobroker@patrick-arns.de>"
+        ],
         "tier": 2,
         "connectionType": "cloud",
         "dataSource": "push",
