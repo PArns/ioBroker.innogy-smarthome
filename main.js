@@ -248,8 +248,6 @@ function finalizeSmartHome(callback) {
 
 function updateDevice(aDevice) {
     if (aDevice) {
-        adapter.log.debug(`Updating device ${aDevice.name}: ${JSON.stringify(aDevice)}`);
-
         var devicePath = helpers.getDevicePath(aDevice);
         var room = helpers.getRoomNameForDevice(aDevice);
 
@@ -281,6 +279,8 @@ function updateDevice(aDevice) {
                 aCapability.State.forEach(function (aState) {
 
                     var capabilityPath = `${devicePath}.${helpers.cleanDeviceName(aState.name)}`;
+
+                    adapter.log.debug(`Updating device capability ${capabilityPath}: ${JSON.stringify(aState)}`);
 
                     adapter.extendObject(capabilityPath, {
                         type: "state",
