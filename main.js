@@ -2,17 +2,17 @@
 /*jslint node: true */
 "use strict";
 
-var utils = require('@iobroker/adapter-core'); // Get common adapter utils
-var adapter = utils.Adapter('innogy-smarthome');
-var helpers = require(`${__dirname}/lib/helpers`)(adapter);
-var SmartHome = require('innogy-smarthome-lib');
+const utils = require('@iobroker/adapter-core'); // Get common adapter utils
+const adapter = utils.Adapter('innogy-smarthome');
+const helpers = require(`${__dirname}/lib/helpers`)(adapter);
+const SmartHome = require('innogy-smarthome-lib');
 
-var smartHome = null;
-var checkConnectionTimer = null;
-var failbackTimer = null;
+let smartHome = null;
+let checkConnectionTimer = null;
+let failbackTimer = null;
 
 String.prototype.replaceAll = function (search, replacement) {
-    var target = this;
+    const target = this;
     return target.replace(new RegExp(search, 'g'), replacement);
 };
 
@@ -28,19 +28,17 @@ adapter.on('ready', initSmartHome);
 
 // ---------------------------------------------------------------------------------------------------------------------
 
-function onMessage(obj) {
+async function onMessage(obj) {
     if (obj) {
         switch (obj.command) {
             case 'startAuth':
 
                 adapter.config.useLocalSHC = false;
-                initSmartHome();
+                await initSmartHome();
 
-                smartHome.startAuthorization(function () {
-                    smartHome.init();
-                });
+                smartHome.startAuthorization(() => smartHome.init());
 
-                var res = {
+                const res = {
                     uri: smartHome.getAuthorizationUri()
                 };
 
@@ -57,15 +55,15 @@ function onMessage(obj) {
     return true;
 }
 
-function initSmartHome() {
-    adapter.setObjectNotExists("info", {
+async function initSmartHome() {
+    await adapter.setObjectNotExistsAsync("info", {
         "type": "channel",
         "common": {
             "name": "Information"
         }
     });
 
-    adapter.setObjectNotExists("info.connection", {
+    await adapter.setObjectNotExistsAsync("info.connection", {
         "type": "state",
         "common": {
             "role": "indicator.connected",
@@ -77,7 +75,7 @@ function initSmartHome() {
         }
     });
 
-    adapter.setObjectNotExists("info.lastRealTimeEventReceived", {
+    await adapter.setObjectNotExistsAsync("info.lastRealTimeEventReceived", {
         "type": "state",
         "common": {
             "role": "indicator.datetime",
@@ -85,21 +83,21 @@ function initSmartHome() {
             "type": "string",
             "read": true,
             "write": false,
-            "def": false
+            "def": ''
         }
     });
 
     adapter.setState("info.connection", false, true);
     adapter.subscribeStates('*');
 
-    checkConnectionTimer = setInterval(function () {
-        adapter.getState("info.connection", function (err, connInfo) {
+    checkConnectionTimer = setInterval(() =>{
+        adapter.getState("info.connection", (err, connInfo) => {
             if (connInfo && !connInfo.val) {
                 adapter.log.warn("Adapter is not connected ... Will recheck in 30 seconds!");
 
-                failbackTimer = setTimeout(function () {
+                failbackTimer = setTimeout(() => {
                     failbackTimer = null;
-                    adapter.getState("info.connection", function (err, connInfo) {
+                    adapter.getState("info.connection", (err, connInfo) => {
                         if (connInfo && !connInfo.val) {
                             adapter.log.warn("Adapter is still not connected to the Innogy API, restarting!");
                             smartHome.init();
@@ -128,97 +126,108 @@ function initSmartHome() {
 
     smartHome = new SmartHome(config);
 
-    smartHome.on("needsAuthorization", function (error) {
+    smartHome.on("needsAuthorization",  (error) => {
         adapter.log.warn('Adapter is not configured or needs reauthorization! Please go to the adapter settings and start the authorization');
         adapter.log.warn(`DEBUG: ${JSON.stringify(error)}`);
         adapter.setState("info.connection", false, true);
     });
 
-    smartHome.on("needsMobileAccess", function () {
+    smartHome.on("needsMobileAccess",  () => {
         adapter.log.warn('You do not have mobile access for the logged in Innogy account! Please purchase mobile access or move ioBroker to the same subnet as the SHC');
         adapter.setState("info.connection", false, true);
     });
 
-    smartHome.on("invalidAuthorization", function() {
+    smartHome.on("invalidAuthorization", () =>{
         adapter.log.warn('Unable to connect to local SHC controller! Please ensure your password is correct ...');
         adapter.setState("info.connection", false, true);
     });
 
-    smartHome.on("stateChanged", function (aCapability) {
-        var aDevice = smartHome.getDeviceByCapability(aCapability);
+    smartHome.on("stateChanged",  (aCapability) => {
+        const aDevice = smartHome.getDeviceByCapability(aCapability);
 
         if (aDevice && aDevice.Capabilities) {
-            var devicePath = helpers.getDevicePath(aDevice);
+            const devicePath = helpers.getDevicePath(aDevice);
+            adapter.log.debug(`Device ${devicePath} changed states!`);
 
-            aDevice.Capabilities.forEach(function (aCapability) {
-                aCapability.State.forEach(function (aState) {
-                    var capabilityPath = `${devicePath}.${helpers.cleanDeviceName(aState.name)}`;
+            aDevice.Capabilities.forEach((aCapability) => {
+                aCapability.State.forEach((aState) => {
+                    const capabilityPath = `${devicePath}.${helpers.cleanDeviceName(aState.name)}`;
                     adapter.setState(capabilityPath, {val: aState.value, ack: true});
                 });
             });
         }
     });
 
-    smartHome.on("initializationComplete", function () {
+    smartHome.on("initializationComplete", async () => {
         adapter.setState("info.connection", true, true);
 
         if (smartHome.device && smartHome.device.length) {
             adapter.log.info(`Initialization sequence completed: found ${smartHome.device.length} devices`);
 
-            smartHome.device.forEach(function (aDevice) {
-                updateDevice(aDevice);
-            });
+            for (const aDevice of smartHome.device) {
+                await updateDevice(aDevice);
+            }
 
             helpers.applyRooms();
         }
     });
 
-    smartHome.on("warning", function (e) {
+    smartHome.on("warning",  (e) => {
         if (typeof e === "string")
-            adapter.log.warn(`GOT A WARNING:${e}`);
+            adapter.log.warn(`GOT A WARNING: ${e}`);
         else {
-            adapter.log.warn(`GOT A WARNING:${JSON.stringify(e)}`);
+            adapter.log.warn(`GOT A WARNING: ${JSON.stringify(e)}`);
 
             if (e.stack) {
-                adapter.log.warn(`STACK:${e.stack}`);
+                adapter.log.warn(`STACK: ${e.stack}`);
             }
         }
     });
 
-    smartHome.on("error", function (e) {
+    smartHome.on("error",  (e) => {
         if (adapter.config.debug) {
             if (typeof e === "string")
-                adapter.log.error(`GOT AN ERROR:${e}`);
+                adapter.log.error(`GOT AN ERROR: ${e}`);
             else {
-                adapter.log.error(`GOT AN ERROR:${JSON.stringify(e)}`);
+                adapter.log.error(`GOT AN ERROR: ${JSON.stringify(e)}`);
 
                 if (e.stack) {
-                    adapter.log.error(`STACK:${e.stack}`);
+                    adapter.log.error(`STACK: ${e.stack}`);
+                }
+            }
+        } else {
+            if (typeof e === "string")
+                adapter.log.warn(`GOT AN ERROR: ${e}`);
+            else {
+                adapter.log.warn(`GOT AN ERROR: ${JSON.stringify(e)}`);
+
+                if (e.stack) {
+                    adapter.log.warn(`STACK: ${e.stack}`);
                 }
             }
         }
     });
 
-    smartHome.on("close", function (e) {
+    smartHome.on("close",  (e) => {
         adapter.log.debug("SOCKET CONNECTION TO THE INNOGY API WAS CLOSED");
         adapter.setState("info.connection", false, true);
     });
 
-    smartHome.on("open", function () {
+    smartHome.on("open",  () => {
         adapter.log.debug("OPEN");
 
         adapter.setState("info.connection", true, true);
     });
 
-    smartHome.on("reconnect", function () {
+    smartHome.on("reconnect",  () => {
         adapter.log.debug("RECONNECT");
     });
 
-    smartHome.on("debug", function (debugData) {
+    smartHome.on("debug",  (debugData) => {
         if (debugData && debugData.type !== "realtime_update_received")
             adapter.log.debug(`DEBUG EVENT ${JSON.stringify(debugData)}`);
 
-        var now = new Date();
+        const now = new Date();
         adapter.setState("info.lastRealTimeEventReceived", now.toISOString(), true);
     });
 
@@ -246,26 +255,26 @@ function finalizeSmartHome(callback) {
     }
 }
 
-function updateDevice(aDevice) {
+async function updateDevice(aDevice) {
     if (aDevice) {
-        var devicePath = helpers.getDevicePath(aDevice);
-        var room = helpers.getRoomNameForDevice(aDevice);
+        const devicePath = helpers.getDevicePath(aDevice);
+        const room = helpers.getRoomNameForDevice(aDevice);
 
-        var hasCapStates = function (aDevice) {
-            var hasStates = false;
+        const hasCapStates = function (aDevice) {
             if (aDevice.Capabilities) {
-                aDevice.Capabilities.forEach(function (aCapability) {
-                    if (aCapability.State && aCapability.State.length)
-                        hasStates = true;
-                });
+                for (const aCapability of aDevice.Capabilities) {
+                    if (aCapability.State && aCapability.State.length) {
+                        return true;
+                    }
+                }
             }
 
-            return hasStates;
+            return false;
         };
 
         if (hasCapStates(aDevice)) {
 
-            adapter.extendObject(devicePath, {
+            await adapter.extendObjectAsync(devicePath, {
                 type: "device",
                 common: {
                     name: aDevice.getName()
@@ -275,14 +284,13 @@ function updateDevice(aDevice) {
                 }
             });
 
-            aDevice.Capabilities.forEach(function (aCapability) {
-                aCapability.State.forEach(function (aState) {
-
-                    var capabilityPath = `${devicePath}.${helpers.cleanDeviceName(aState.name)}`;
+            for (const aCapability of aDevice.Capabilities) {
+                for (const aState of aCapability.State) {
+                    const capabilityPath = `${devicePath}.${helpers.cleanDeviceName(aState.name)}`;
 
                     adapter.log.debug(`Updating device capability ${capabilityPath}: ${JSON.stringify(aState)}`);
 
-                    adapter.extendObject(capabilityPath, {
+                    await adapter.extendObjectAsync(capabilityPath, {
                         type: "state",
                         common: helpers.merge_options({name: helpers.capitalize(aState.name)}, getCommonForState(aState)),
                         native: {
@@ -292,34 +300,35 @@ function updateDevice(aDevice) {
 
                     adapter.setState(capabilityPath, {val: aState.value, ack: true});
                     helpers.addCapabilityToRoom(room, capabilityPath);
-                });
-            });
+                }
+            }
         }
     }
 }
 
 function stateChanged(id, state) {
-    adapter.getForeignObject(id, function (err, obj) {
-        if (err) {
-            adapter.log.error(err);
-        } else {
-            if (state && !state.ack && obj && obj.native) {
-                var capability = smartHome.getCapabilityById(obj.native.id);
+    adapter.log.debug(`state ${id} changed: ${state.val} (ack = ${state.ack})`);
+    if (state && !state.ack) {
+        adapter.getForeignObject(id, async (err, obj) => {
+            if (err) {
+                adapter.log.error(err.message);
+            } else {
+                if (obj && obj.native) {
+                    const capability = smartHome.getCapabilityById(obj.native.id);
 
-                if (capability) {
-                    if (obj.common.write) {
-                        capability.setState(state.val, obj.common.name).then(
-                            function () {},
-                            function (data) {
-                            adapter.log.error(`STATE ERR ${JSON.stringify(data)}`);
-                        });
-                    } else {
-                        updateDevice(smartHome.resolveLink(capability.Device));
+                    if (capability) {
+                        if (obj.common.write) {
+                            capability.setState(state.val, obj.common.name, (err) => {
+                                adapter.log.error(`STATE ${id} ERR ${err.message}`);
+                            });
+                        } else {
+                            await updateDevice(smartHome.resolveLink(capability.Device));
+                        }
                     }
                 }
             }
-        }
-    });
+        });
+    }
 }
 
 // ---------------------------------------------------------------------------------------------------------------------
@@ -327,7 +336,7 @@ function stateChanged(id, state) {
 // ---------------------------------------------------------------------------------------------------------------------
 
 function getCommonForState(aState) {
-    var res = {};
+    const res = {};
 
     switch (aState.name) {
         // -- SHC --
