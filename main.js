@@ -16,6 +16,28 @@ String.prototype.replaceAll = function (search, replacement) {
     return target.replace(new RegExp(search, 'g'), replacement);
 };
 
+function customStringify(v) {
+    const cache = new Set();
+    return JSON.stringify(v, function (key, value) {
+        if (typeof value === 'object' && value !== null) {
+            if (cache.has(value)) {
+                // Circular reference found
+                try {
+                    // If this value does not reference a parent it can be deduped
+                    return JSON.parse(JSON.stringify(value));
+                }
+                catch (err) {
+                    // discard key if value cannot be deduped
+                    return;
+                }
+            }
+            // Store value in our set
+            cache.add(value);
+        }
+        return value;
+    });
+}
+
 // ---------------------------------------------------------------------------------------------------------------------
 // ---------------------------------------------------------------------------------------------------------------------
 // ---------------------------------------------------------------------------------------------------------------------
@@ -274,7 +296,7 @@ async function updateDevice(aDevice) {
 
         if (hasCapStates(aDevice)) {
 
-            adapter.log.debug(`Processing device -> ${devicePath}: "${aDevice.getName()}" ${JSON.stringify(aDevice)}`);
+            adapter.log.debug(`Processing device -> ${devicePath}: "${aDevice.getName()}" ${customStringify(aDevice)}`);
 
             await adapter.extendObjectAsync(devicePath, {
                 type: "device",
