@@ -172,8 +172,12 @@ async function initSmartHome() {
             adapter.log.debug(`Device ${devicePath} changed states!`);
 
             aDevice.Capabilities.forEach((aCapability) => {
+                let capabilityPathPart = ''
+                if (aCapability.config) {
+                    capabilityPathPart = `.${helpers.cleanDeviceName(aCapability.config.name)}`;
+                }
                 aCapability.State.forEach((aState) => {
-                    const capabilityPath = `${devicePath}.${helpers.cleanDeviceName(aState.name)}`;
+                    const capabilityPath = `${devicePath}${capabilityPathPart}.${helpers.cleanDeviceName(aState.name)}`;
                     adapter.setState(capabilityPath, {val: aState.value, ack: true});
                 });
             });
@@ -309,8 +313,21 @@ async function updateDevice(aDevice) {
             });
 
             for (const aCapability of aDevice.Capabilities) {
+                let capabilityPathPart = '';
+                if (aCapability.config) {
+                    capabilityPathPart = `.${helpers.cleanDeviceName(aCapability.config.name)}`;
+                    await adapter.extendObjectAsync(`${devicePath}${capabilityPathPart}`, {
+                        type: "channel",
+                        common: {
+                            name: aCapability.config.name
+                        },
+                        native: {
+                            id: aCapability.id
+                        }
+                    });
+                }
                 for (const aState of aCapability.State) {
-                    const capabilityPath = `${devicePath}.${helpers.cleanDeviceName(aState.name)}`;
+                    const capabilityPath = `${devicePath}${capabilityPathPart}.${helpers.cleanDeviceName(aState.name)}`;
 
                     adapter.log.debug(`Updating device capability ${capabilityPath}: ${JSON.stringify(aState)}`);
 
