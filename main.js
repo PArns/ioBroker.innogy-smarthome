@@ -44,7 +44,6 @@ function customStringify(v) {
 
 adapter.on('unload', finalizeSmartHome);
 adapter.on('message', onMessage);
-adapter.on('objectChange', stateChanged);
 adapter.on('stateChange', stateChanged);
 adapter.on('ready', initSmartHome);
 
@@ -359,6 +358,7 @@ function stateChanged(id, state) {
 
                     if (capability) {
                         if (obj.common.write) {
+                            adapter.log.debug(`Setting capability ${capability.id}/${obj.common.name} to ${state.val}`);
                             capability.setState(state.val, obj.common.name, (err) => {
                                 adapter.log.error(`STATE ${id} ERR ${err.message}`);
                             });
