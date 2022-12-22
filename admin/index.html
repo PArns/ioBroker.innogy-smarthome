@@ -1,4 +1,4 @@
-<html>
+<html xmlns="http://www.w3.org/1999/html">
 <link rel="stylesheet" type="text/css" href="../../css/adapter.css"/>
 <link rel="stylesheet" type="text/css" href="../../lib/css/materialize.css"/>
 
@@ -94,26 +94,14 @@
 <!-- you have to put your config page in a div with id adapter-container -->
 <div class="m adapter-container" id="settings">
 	<div class="row">
-		<div class="col s12" id="auth-cloud">
-			<p class="title">Using Livisi Cloud</p>
-			<p>
-				Please click on the following button and enter your Innogy Login credentials into the new Window<br/>
-				Once the authorization has been completed and the Window closes, you can close the settings dialog
-			</p>
-			<a class="btn" id="login">Start authorization</a>
-		</div>
-	</div>
-
-	<div class="row">
 		<div class="col s12" id="auth-local">
 			<p class="title">Using Local SmartHome</p>
 
 			<p>
 				With the new Livisi Local SmartHome, there is now a way to connect locally to your Livisi SmartHome
-				Controller!<br/>
-				This requires currently to be part of the Livisi Beta Group. You can find more information about the Local
-				SmartHome and how to set it up <a href="https://community.livisi.de/lsh-howto-en/"
-												  target="_blank">HERE</a><br/>
+				Controller! <b>Please switch to this way because the Livisi Cloud will be disabled in Q1/2023!</b><br/>
+				You can find more information about the Local SmartHome and how to set it up
+				<a href="https://community.livisi.de/lsh-howto-en/" target="_blank">HERE</a><br/>
 				<br/>
 				Once, you've updated your SmartHomeController to <b>at least version 8.17</b>, you can activate the Local
 				SmartHome.<br/>
@@ -129,6 +117,18 @@
 						<input id="useLocalSHC" type="checkbox" class="value filled-in" />
 						<span>Enable local SmartHome</span>
 					</label>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col s12">
+				<div class="input-field col s12 m6">
+					<select id="shcGeneration" class="value" />
+						<option value="1">SmartHome Controller 1 (Classic)</option>
+						<option value="2">SmartHome Controller 2</option>
+					</select>
+					<label for="shcGeneration">SHC Generation</label>
 				</div>
 			</div>
 		</div>
@@ -162,6 +162,18 @@
 			</div>
 		</div>
 	</div>
+
+	<div class="row">
+		<div class="col s12" id="auth-cloud">
+			<p class="title">Using Livisi Cloud</p>
+			<p>
+				Please click on the following button and enter your Innogy Login credentials into the new Window<br/>
+				Once the authorization has been completed and the Window closes, you can close the settings dialog
+			</p>
+			<a class="btn" id="login">Start authorization</a>
+		</div>
+	</div>
+
 </div>
 
 </html>

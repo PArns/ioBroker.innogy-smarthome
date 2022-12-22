@@ -139,7 +139,8 @@ async function initSmartHome() {
 
         localShc: adapter.config.localSHCIP,
         localPassword: adapter.config.localSHCPassword,
-        localConnection: adapter.config.useLocalSHC
+        localConnection: adapter.config.useLocalSHC,
+        shcGeneration: parseInt(adapter.config.shcGeneration, 10),
     };
 
     if (adapter.config.useLocalSHC)

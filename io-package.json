@@ -161,6 +161,12 @@
             }
         ]
     },
-    "native": {},
+    "native": {
+        "useLocalSHC": true,
+        "localSHCIP": "",
+        "localSHCPassword": "",
+        "shcGeneration": 1,
+        "debug": false
+    },
     "objects": []
 }
