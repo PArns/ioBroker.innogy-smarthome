@@ -203,7 +203,7 @@ async function initSmartHome() {
             helpers.applyRooms();
         }
         objectsInitialized = true;
-        for (const key of storedValues) {
+        for (const key of Object.keys(storedValues)) {
             adapter.setState(key, storedValues[key], true);
         }
     });
@@ -311,6 +311,7 @@ async function updateDevice(aDevice) {
         if (hasCapStates(aDevice)) {
 
             adapter.log.debug(`Processing device -> ${devicePath}: "${aDevice.getName()}"`); //${customStringify(aDevice)}`);
+            adapter.log.debug(`Device State: ${customStringify(aDevice.State)}`);
 
             await adapter.extendObjectAsync(devicePath, {
                 type: "device",
