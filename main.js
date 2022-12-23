@@ -10,6 +10,8 @@ const SmartHome = require('innogy-smarthome-lib');
 let smartHome = null;
 let checkConnectionTimer = null;
 let failbackTimer = null;
+let objectsInitialized = false;
+let storedValues = {};
 
 String.prototype.replaceAll = function (search, replacement) {
     const target = this;
@@ -178,7 +180,11 @@ async function initSmartHome() {
                 }
                 aCapability.State.forEach((aState) => {
                     const capabilityPath = `${devicePath}${capabilityPathPart}.${helpers.cleanDeviceName(aState.name)}`;
-                    adapter.setState(capabilityPath, {val: aState.value, ack: true});
+                    if (!objectsInitialized) {
+                        adapter.setState(capabilityPath, {val: aState.value, ack: true});
+                    } else {
+                        storedValues[capabilityPath] = aState.value;
+                    }
                 });
             });
         }
@@ -195,6 +201,10 @@ async function initSmartHome() {
             }
 
             helpers.applyRooms();
+        }
+        objectsInitialized = true;
+        for (const key of storedValues) {
+            adapter.setState(key, storedValues[key], true);
         }
     });
 
