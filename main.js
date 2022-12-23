@@ -294,15 +294,19 @@ async function initSmartHome() {
             }
             if (!stateName) return;
 
-            const dev = smartHome.getDeviceById(data.id);
-            if (dev) {
-                const devicePath = helpers.getDevicePath(dev);
-                const statePath = `${devicePath}${helpers.cleanDeviceName(stateName)}`;
-                if (objectsInitialized) {
-                    adapter.setState(statePath, false, true);
-                } else {
-                    storedValues[statePath] = false;
-                }
+            if (data.devices) {
+                data.devices.forEach((link) => {
+                    const dev = smartHome.resolveLink(link);
+                    if (dev) {
+                        const devicePath = helpers.getDevicePath(dev);
+                        const statePath = `${devicePath}${helpers.cleanDeviceName(stateName)}`;
+                        if (objectsInitialized) {
+                            adapter.setState(statePath, false, true);
+                        } else {
+                            storedValues[statePath] = false;
+                        }
+                    }
+                });
             }
         }
     });
@@ -321,15 +325,19 @@ async function initSmartHome() {
             }
             if (!stateName) return;
 
-            const dev = smartHome.getDeviceById(data.id);
-            if (dev) {
-                const devicePath = helpers.getDevicePath(dev);
-                const statePath = `${devicePath}${helpers.cleanDeviceName(stateName)}`;
-                if (objectsInitialized) {
-                    adapter.setState(statePath, true, true);
-                } else {
-                    storedValues[statePath] = true;
-                }
+            if (data.devices) {
+                data.devices.forEach((link) => {
+                    const dev = smartHome.resolveLink(link);
+                    if (dev) {
+                        const devicePath = helpers.getDevicePath(dev);
+                        const statePath = `${devicePath}${helpers.cleanDeviceName(stateName)}`;
+                        if (objectsInitialized) {
+                            adapter.setState(statePath, true, true);
+                        } else {
+                            storedValues[statePath] = true;
+                        }
+                    }
+                });
             }
         }
     });
