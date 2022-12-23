@@ -10,6 +10,7 @@ const SmartHome = require('innogy-smarthome-lib');
 let smartHome = null;
 let checkConnectionTimer = null;
 let failbackTimer = null;
+let initializedObjects = {};
 let objectsInitialized = false;
 let storedValues = {};
 const deviceStateList = [
@@ -193,9 +194,9 @@ async function initSmartHome() {
                 }
                 aCapability.State.forEach((aState) => {
                     const capabilityPath = `${devicePath}${capabilityPathPart}.${helpers.cleanDeviceName(aState.name)}`;
-                    if (objectsInitialized) {
+                    if (initializedObjects[capabilityPath]) {
                         adapter.setState(capabilityPath, {val: aState.value, ack: true});
-                    } else {
+                    } else if (!objectsInitialized) {
                         storedValues[capabilityPath] = aState.value;
                     }
                 });
@@ -215,9 +216,10 @@ async function initSmartHome() {
 
             helpers.applyRooms();
         }
-        objectsInitialized = true;
+        initializedObjects = true;
         for (const key of Object.keys(storedValues)) {
             adapter.setState(key, storedValues[key], true);
+            delete storedValues[key];
         }
     });
 
@@ -300,9 +302,9 @@ async function initSmartHome() {
                     if (dev) {
                         const devicePath = helpers.getDevicePath(dev);
                         const statePath = `${devicePath}${helpers.cleanDeviceName(stateName)}`;
-                        if (objectsInitialized) {
+                        if (initializedObjects[statePath]) {
                             adapter.setState(statePath, false, true);
-                        } else {
+                        } else if (!objectsInitialized) {
                             storedValues[statePath] = false;
                         }
                     }
@@ -331,9 +333,9 @@ async function initSmartHome() {
                     if (dev) {
                         const devicePath = helpers.getDevicePath(dev);
                         const statePath = `${devicePath}${helpers.cleanDeviceName(stateName)}`;
-                        if (objectsInitialized) {
+                        if (initializedObjects[statePath]) {
                             adapter.setState(statePath, true, true);
-                        } else {
+                        } else if (!objectsInitialized) {
                             storedValues[statePath] = true;
                         }
                     }
@@ -418,6 +420,7 @@ async function updateDevice(aDevice) {
                 }
             });
             await adapter.setState(lowBatName, false, true);
+            initializedObjects[lowBatName] = true;
 
             if (aDevice.State && aDevice.State.length) {
 
@@ -431,8 +434,9 @@ async function updateDevice(aDevice) {
                             type: "state",
                             common: helpers.merge_options({name: helpers.capitalize(aState.name)}, getCommonForState(aState))
                         });
+                        initializedObjects[statePath] = true;
 
-                        adapter.setState(statePath, {val: aState.value, ack: true});
+                        await adapter.setStateAsync(statePath, {val: aState.value, ack: true});
                         helpers.addCapabilityToRoom(room, statePath);
                     }
                 }
@@ -465,8 +469,9 @@ async function updateDevice(aDevice) {
                                 id: aCapability.id
                             }
                         });
+                        initializedObjects[capabilityPath] = true;
 
-                        adapter.setState(capabilityPath, {val: aState.value, ack: true});
+                        await adapter.setStateAsync(capabilityPath, {val: aState.value, ack: true});
                         helpers.addCapabilityToRoom(room, capabilityPath);
                     }
                 }
