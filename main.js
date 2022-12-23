@@ -301,7 +301,7 @@ async function initSmartHome() {
                     const dev = smartHome.resolveLink(link);
                     if (dev) {
                         const devicePath = helpers.getDevicePath(dev);
-                        const statePath = `${devicePath}${helpers.cleanDeviceName(stateName)}`;
+                        const statePath = `${devicePath}.${helpers.cleanDeviceName(stateName)}`;
                         if (initializedObjects[statePath]) {
                             adapter.setState(statePath, false, true);
                         } else if (!objectsInitialized) {
@@ -332,7 +332,7 @@ async function initSmartHome() {
                     const dev = smartHome.resolveLink(link);
                     if (dev) {
                         const devicePath = helpers.getDevicePath(dev);
-                        const statePath = `${devicePath}${helpers.cleanDeviceName(stateName)}`;
+                        const statePath = `${devicePath}.${helpers.cleanDeviceName(stateName)}`;
                         if (initializedObjects[statePath]) {
                             adapter.setState(statePath, true, true);
                         } else if (!objectsInitialized) {
