@@ -144,7 +144,7 @@ async function initSmartHome() {
     };
 
     if (adapter.config.useLocalSHC)
-        adapter.log.info("Trying to use local smarthome connection!");
+        adapter.log.info(`Trying to use local smarthome connection! SHC generation: ${config.shcGeneration}`);
 
     smartHome = new SmartHome(config);
 
@@ -185,7 +185,7 @@ async function initSmartHome() {
     });
 
     smartHome.on("initializationComplete", async () => {
-        adapter.setState("info.connection", true, true);
+        await adapter.setStateAsync("info.connection", true, true);
 
         if (smartHome.device && smartHome.device.length) {
             adapter.log.info(`Initialization sequence completed: found ${smartHome.device.length} devices`);

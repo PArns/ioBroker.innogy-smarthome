@@ -165,7 +165,7 @@
         "useLocalSHC": true,
         "localSHCIP": "",
         "localSHCPassword": "",
-        "shcGeneration": 1,
+        "shcGeneration": 2,
         "debug": false
     },
     "objects": []
