@@ -267,6 +267,14 @@ async function initSmartHome() {
         adapter.setState("info.lastRealTimeEventReceived", now.toISOString(), true);
     });
 
+    smartHome.on('messageCreated', (data) => {
+        adapter.log.debug(`MESSAGE CREATED: ${JSON.stringify(data)}`);
+    });
+
+    smartHome.on('messageDeleted', (data) => {
+        adapter.log.debug(`MESSAGE DELETED: ${JSON.stringify(data)}`);
+    });
+
     smartHome.init();
 }
 
