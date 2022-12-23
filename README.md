@@ -19,6 +19,7 @@ As this project is developed during my spare time, I*m actively looking for help
 ### __WORK IN PROGRESS__
 * IMPORTANT: This updates introduces a new state ID level as Channel, so all Object-IDs will change!
 * (Apollon77) Add support for local connections to SHC Classic/Generation 1
+* (Apollon77) Add lowBattery and other Device states and Message support to update isReachable and lowBattery
 * (Apollon77) Add more missing states
 * (Apollon77) General updates
 

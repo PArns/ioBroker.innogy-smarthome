@@ -12,6 +12,11 @@ let checkConnectionTimer = null;
 let failbackTimer = null;
 let objectsInitialized = false;
 let storedValues = {};
+const deviceStateList = [
+    'firmwareVersion',
+    'isReachable',
+    'lowBattery'
+];
 
 String.prototype.replaceAll = function (search, replacement) {
     const target = this;
@@ -59,7 +64,10 @@ async function onMessage(obj) {
                 adapter.config.useLocalSHC = false;
                 await initSmartHome();
 
-                smartHome.startAuthorization(() => smartHome.init());
+                smartHome.startAuthorization(() => {
+                    adapter.log.debug('Authorization complete ... initializing now');
+                    smartHome.init();
+                });
 
                 const res = {
                     uri: smartHome.getAuthorizationUri()
@@ -113,6 +121,10 @@ async function initSmartHome() {
     adapter.setState("info.connection", false, true);
     adapter.subscribeStates('*');
 
+    if (checkConnectionTimer) {
+        clearInterval(checkConnectionTimer);
+        checkConnectionTimer = null;
+    }
     checkConnectionTimer = setInterval(() =>{
         adapter.getState("info.connection", (err, connInfo) => {
             if (connInfo && !connInfo.val) {
@@ -152,6 +164,7 @@ async function initSmartHome() {
 
     smartHome.on("needsAuthorization",  (error) => {
         adapter.log.warn('Adapter is not configured or needs reauthorization! Please go to the adapter settings and start the authorization');
+        smartHome._finalize();
         adapter.log.warn(`DEBUG: ${JSON.stringify(error)}`);
         adapter.setState("info.connection", false, true);
     });
@@ -180,7 +193,7 @@ async function initSmartHome() {
                 }
                 aCapability.State.forEach((aState) => {
                     const capabilityPath = `${devicePath}${capabilityPathPart}.${helpers.cleanDeviceName(aState.name)}`;
-                    if (!objectsInitialized) {
+                    if (objectsInitialized) {
                         adapter.setState(capabilityPath, {val: aState.value, ack: true});
                     } else {
                         storedValues[capabilityPath] = aState.value;
@@ -269,10 +282,56 @@ async function initSmartHome() {
 
     smartHome.on('messageCreated', (data) => {
         adapter.log.debug(`MESSAGE CREATED: ${JSON.stringify(data)}`);
+        if (data && data.id) {
+            let stateName = null;
+            switch (data.type) {
+                case 'DeviceLowBattery':
+                    stateName = 'lowBattery';
+                    break;
+                case 'DeviceUnreachable':
+                    stateName = 'isReachable';
+                    break;
+            }
+            if (!stateName) return;
+
+            const dev = smartHome.getDeviceById(data.id);
+            if (dev) {
+                const devicePath = helpers.getDevicePath(dev);
+                const statePath = `${devicePath}${helpers.cleanDeviceName(stateName)}`;
+                if (objectsInitialized) {
+                    adapter.setState(statePath, false, true);
+                } else {
+                    storedValues[statePath] = false;
+                }
+            }
+        }
     });
 
     smartHome.on('messageDeleted', (data) => {
         adapter.log.debug(`MESSAGE DELETED: ${JSON.stringify(data)}`);
+        if (data && data.id) {
+            let stateName = null;
+            switch (data.type) {
+                case 'DeviceLowBattery':
+                    stateName = 'lowBattery';
+                    break;
+                case 'DeviceUnreachable':
+                    stateName = 'isReachable';
+                    break;
+            }
+            if (!stateName) return;
+
+            const dev = smartHome.getDeviceById(data.id);
+            if (dev) {
+                const devicePath = helpers.getDevicePath(dev);
+                const statePath = `${devicePath}${helpers.cleanDeviceName(stateName)}`;
+                if (objectsInitialized) {
+                    adapter.setState(statePath, true, true);
+                } else {
+                    storedValues[statePath] = true;
+                }
+            }
+        }
     });
 
     smartHome.init();
@@ -305,7 +364,15 @@ async function updateDevice(aDevice) {
         const room = helpers.getRoomNameForDevice(aDevice);
 
         const hasCapStates = function (aDevice) {
-            if (aDevice.Capabilities) {
+            if (aDevice.State && aDevice.State.length) {
+                for (const aState of aDevice.State) {
+                    if (deviceStateList.includes(aState.name)) {
+                        return true;
+                    }
+                }
+            }
+
+            if (aDevice.Capabilities && aDevice.Capabilities) {
                 for (const aCapability of aDevice.Capabilities) {
                     if (aCapability.State && aCapability.State.length) {
                         return true;
@@ -331,35 +398,69 @@ async function updateDevice(aDevice) {
                 }
             });
 
-            for (const aCapability of aDevice.Capabilities) {
-                let capabilityPathPart = '';
-                if (aCapability.config) {
-                    capabilityPathPart = `.${helpers.cleanDeviceName(aCapability.config.name)}`;
-                    await adapter.extendObjectAsync(`${devicePath}${capabilityPathPart}`, {
-                        type: "channel",
-                        common: {
-                            name: aCapability.config.name
-                        },
-                        native: {
-                            id: aCapability.id
-                        }
-                    });
+            const lowBatName = `${devicePath}.${helpers.cleanDeviceName('lowBattery')}`;
+            await adapter.extendObjectAsync(lowBatName, {
+                type: "state",
+                common: {
+                    name: helpers.capitalize('lowBattery'),
+                    type: "boolean",
+                    role: "indicator.lowbat",
+                    read: true,
+                    write: false
                 }
-                for (const aState of aCapability.State) {
-                    const capabilityPath = `${devicePath}${capabilityPathPart}.${helpers.cleanDeviceName(aState.name)}`;
+            });
+            await adapter.setState(lowBatName, false, true);
 
-                    adapter.log.debug(`Updating device capability ${capabilityPath}: ${JSON.stringify(aState)}`);
+            if (aDevice.State && aDevice.State.length) {
 
-                    await adapter.extendObjectAsync(capabilityPath, {
-                        type: "state",
-                        common: helpers.merge_options({name: helpers.capitalize(aState.name)}, getCommonForState(aState)),
-                        native: {
-                            id: aCapability.id
-                        }
-                    });
+                for (const aState of aDevice.State) {
+                    if (deviceStateList.includes(aState.name)) {
+                        const statePath = `${devicePath}.${helpers.cleanDeviceName(aState.name)}`;
 
-                    adapter.setState(capabilityPath, {val: aState.value, ack: true});
-                    helpers.addCapabilityToRoom(room, capabilityPath);
+                        adapter.log.debug(`Updating device state ${statePath}: ${JSON.stringify(aState)}`);
+
+                        await adapter.extendObjectAsync(statePath, {
+                            type: "state",
+                            common: helpers.merge_options({name: helpers.capitalize(aState.name)}, getCommonForState(aState))
+                        });
+
+                        adapter.setState(statePath, {val: aState.value, ack: true});
+                        helpers.addCapabilityToRoom(room, statePath);
+                    }
+                }
+            }
+
+            if (aDevice.Capabilities && aDevice.Capabilities) {
+                for (const aCapability of aDevice.Capabilities) {
+                    let capabilityPathPart = '';
+                    if (aCapability.config) {
+                        capabilityPathPart = `.${helpers.cleanDeviceName(aCapability.config.name)}`;
+                        await adapter.extendObjectAsync(`${devicePath}${capabilityPathPart}`, {
+                            type: "channel",
+                            common: {
+                                name: aCapability.config.name
+                            },
+                            native: {
+                                id: aCapability.id
+                            }
+                        });
+                    }
+                    for (const aState of aCapability.State) {
+                        const capabilityPath = `${devicePath}${capabilityPathPart}.${helpers.cleanDeviceName(aState.name)}`;
+
+                        adapter.log.debug(`Updating device capability ${capabilityPath}: ${JSON.stringify(aState)}`);
+
+                        await adapter.extendObjectAsync(capabilityPath, {
+                            type: "state",
+                            common: helpers.merge_options({name: helpers.capitalize(aState.name)}, getCommonForState(aState)),
+                            native: {
+                                id: aCapability.id
+                            }
+                        });
+
+                        adapter.setState(capabilityPath, {val: aState.value, ack: true});
+                        helpers.addCapabilityToRoom(room, capabilityPath);
+                    }
                 }
             }
         }
@@ -400,6 +501,21 @@ function getCommonForState(aState) {
     const res = {};
 
     switch (aState.name) {
+        // Device States
+        case 'firmwareVersion':
+            res.type = 'string';
+            res.role = 'value';
+            res.read = true;
+            res.write = false;
+            break;
+
+        case 'isReachable':
+            res.type = 'boolean';
+            res.role = 'indicator.reachable';
+            res.read = true;
+            res.write = false;
+            break;
+
         // -- SHC --
         case "nextSunrise":
         case "nextSunset":
