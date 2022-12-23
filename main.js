@@ -216,7 +216,7 @@ async function initSmartHome() {
 
             helpers.applyRooms();
         }
-        initializedObjects = true;
+        objectsInitialized = true;
         for (const key of Object.keys(storedValues)) {
             adapter.setState(key, storedValues[key], true);
             delete storedValues[key];
