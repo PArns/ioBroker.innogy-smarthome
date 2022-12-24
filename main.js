@@ -477,7 +477,7 @@ async function updateDevice(aDevice) {
             if (aDevice.Capabilities && aDevice.Capabilities) {
                 for (const aCapability of aDevice.Capabilities) {
                     let capabilityPathPart = '';
-                    if (aCapability.config) {
+                    if (aCapability.State.length && aCapability.config) {
                         capabilityPathPart = `.${helpers.cleanDeviceName(aCapability.config.name)}`;
                         await adapter.extendObjectAsync(`${devicePath}${capabilityPathPart}`, {
                             type: "channel",
