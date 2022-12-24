@@ -152,7 +152,7 @@ async function initSmartHome() {
         });
     }, 1000 * 60 * 5);
 
-    if (adapter.config.localShc) {
+    if (adapter.config.useLocalSHC) {
         // eslint-disable-next-line no-control-regex
         if (/[\x00-\x08\x0E-\x1F\x80-\xFF]/.test(adapter.config.localSHCPassword)) {
             adapter.log.error('Password error: Please re-enter the local SHC password in Admin. Stopping');
