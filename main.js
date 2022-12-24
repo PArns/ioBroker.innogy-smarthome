@@ -28,6 +28,9 @@ String.prototype.replaceAll = function (search, replacement) {
 function customStringify(v) {
     const cache = new Set();
     return JSON.stringify(v, function (key, value) {
+        if (key === '_requestor' || key === '_smartHome') {
+            return;
+        }
         if (typeof value === 'object' && value !== null) {
             if (cache.has(value)) {
                 // Circular reference found
@@ -148,6 +151,17 @@ async function initSmartHome() {
             }
         });
     }, 1000 * 60 * 5);
+
+    if (adapter.config.localShc) {
+        // eslint-disable-next-line no-control-regex
+        if (/[\x00-\x08\x0E-\x1F\x80-\xFF]/.test(adapter.config.localSHCPassword)) {
+            adapter.log.error('Password error: Please re-enter the local SHC password in Admin. Stopping');
+            if (typeof adapter.disable === 'function') {
+                adapter.disable();
+            }
+            return;
+        }
+    }
 
     const config = {
         redirectHost: 'iobroker-connect.patrick-arns.de',
@@ -283,7 +297,7 @@ async function initSmartHome() {
     });
 
     smartHome.on("debug",  (debugData) => {
-        if (debugData && debugData.type !== "realtime_update_received")
+        if (debugData && debugData.type !== "realtime_update_received" && adapter.config.debug)
             adapter.log.debug(`DEBUG EVENT ${JSON.stringify(debugData)}`);
 
         const now = new Date();
@@ -291,7 +305,7 @@ async function initSmartHome() {
     });
 
     smartHome.on('messageCreated', (data) => {
-        adapter.log.debug(`MESSAGE CREATED: ${JSON.stringify(data)}`);
+        adapter.config.debug && adapter.log.debug(`MESSAGE CREATED: ${JSON.stringify(data)}`);
         if (data && data.id) {
             let stateName = null;
             let val = null;
@@ -325,7 +339,7 @@ async function initSmartHome() {
     });
 
     smartHome.on('messageDeleted', (data) => {
-        adapter.log.debug(`MESSAGE DELETED: ${JSON.stringify(data)}`);
+        adapter.config.debug && adapter.log.debug(`MESSAGE DELETED: ${JSON.stringify(data)}`);
         if (data && data.id) {
             let stateName = null;
             let val = null;

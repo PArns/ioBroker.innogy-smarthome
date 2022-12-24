@@ -163,10 +163,72 @@
         ],
         "globalDependencies": [
             {
-                "admin": ">=3.0.0"
+                "admin": ">=4.0.19"
+            }
+        ],
+        "messages": [
+            {
+                "condition": {
+                    "operand": "and",
+                    "rules": [
+                        "oldVersion<1.0.0",
+                        "newVersion>=1.0.0"
+                    ]
+                },
+                "title": {
+                    "en": "Changes in Object structure and local SHC password!",
+                    "de": "Änderungen in Objektstruktur und lokales SHC-Passwort!",
+                    "ru": "Изменения в структуре объектов и локальный пароль SHC!",
+                    "pt": "Alterações na estrutura de objetos e senha local SHC!",
+                    "nl": "Veranderingen in Object structuur en lokale SHC wachtwoord!",
+                    "fr": "Changements dans la structure des objets et le mot de passe SHC local!",
+                    "it": "Modifiche nella struttura degli oggetti e password SHC locale!",
+                    "es": "Cambios en la estructura de objetos y contraseña local SHC!",
+                    "pl": "Zmiany w strukturze obiektowej i miejscowym hasło SHC!",
+                    "uk": "Зміна структури об'єкта та локального пароля SHC!",
+                    "zh-cn": "目标结构的变化和当地的SHC密码!"
+                },
+                "text": {
+                    "en": "This update adds a missing level in the object structure and because of this all Objects IDs will change! Please delete objects before the upgrade or you need to clean it up later. Additionally the local SHC password is now stored encrypted and needs to be re-set in Admin.",
+                    "de": "Dieses Update fügt eine fehlende Ebene in der Objektstruktur hinzu und dadurch werden alle Objects IDs geändert! Bitte löschen Sie Objekte vor dem Upgrade oder Sie müssen es später reinigen. Zusätzlich wird das lokale SHC-Passwort jetzt verschlüsselt gespeichert und muss in Admin neu eingestellt werden.",
+                    "ru": "Это обновление добавляет недостающий уровень в структуре объекта и из-за этого все ID объектов изменится! Пожалуйста, удалите объекты до обновления или вам нужно очистить его позже. Дополнительно местный пароль SHC теперь хранится зашифрован и должен быть переустановлен в Admin.",
+                    "pt": "Esta atualização adiciona um nível ausente na estrutura do objeto e por causa disso todos os IDs de objetos vão mudar! Por favor, exclua objetos antes da atualização ou você precisa limpá-lo mais tarde. Além disso, a senha local do SHC agora é armazenada criptografada e precisa ser redefinida no Admin.",
+                    "nl": "Deze update voegt een ontbrekend niveau in de objectstructuur en door deze Objects ID's zal alles veranderen! Verwijder objecten voor de upgrade of je moet het later opruimen. De lokale SHC wachtwoord wordt nu gecodeerd en moet opnieuw in Admin worden gezet.",
+                    "fr": "Cette mise à jour ajoute un niveau manquant dans la structure de l'objet et à cause de cela tous les objets ID vont changer! Veuillez supprimer les objets avant la mise à niveau ou vous devez le nettoyer plus tard. En outre, le mot de passe SHC local est maintenant stocké crypté et doit être réinitialisé dans Admin.",
+                    "it": "Questo aggiornamento aggiunge un livello mancante nella struttura dell'oggetto e a causa di questo tutti gli ID oggetti cambieranno! Si prega di eliminare gli oggetti prima dell'aggiornamento o è necessario pulire in seguito. Inoltre la password locale SHC viene ora memorizzata crittografata e deve essere riimpostata in Admin.",
+                    "es": "Esta actualización añade un nivel perdido en la estructura del objeto y debido a esto todos los IDs de Objetos cambiarán! Por favor, eliminar objetos antes de la actualización o necesita limpiarlo más tarde. Además, la contraseña local SHC está ahora almacenada encriptada y necesita ser reiniciada en Admin.",
+                    "pl": "Ta aktualizacja dodaje brakowy poziom w strukturze obiektu, a z tego wszystkie obiekty będą zmieniać. Wykorzystywanie obiektów przed ulepszaniem lub potrzebą czyścić go w późniejszym czasie. Miejscowe hasło SHC jest obecnie przechowywane zaszyfrowane i musi być ponownie w Admin.",
+                    "uk": "Цей оновлення додає відсутній рівень у структурі об'єкта і через це всі ідентифікатори об'єктів зміняться! Будь ласка, видаліть об'єкти перед оновленням або потрібно очистити його пізніше. Додатково локальний пароль SHC тепер зберігається зашифровано і потрібно перезавантажити в Адміністратор.",
+                    "zh-cn": "这一更新增加了目标结构中的缺失水平,因为所有物体的开发会改变! 请删除升级前的物体,或你需要立即予以清理。 此外,当地的SHC密码现在被加密,需要在阿德明重新开始。."
+                },
+                "link": "TODO",
+                "level": "warn",
+                "linkText": {
+                    "en": "More Details see ioBroker Forum (German)",
+                    "de": "Mehr Details siehe ioBroker Forum",
+                    "ru": "Подробнее см. форум ioBroker (Немецкий)",
+                    "pt": "Mais detalhes veja ioBroker Forum (Alemão)",
+                    "nl": "Meer Details zien ioBroker Forum (German)",
+                    "fr": "Plus de détails voir ioBroker Forum (allemand)",
+                    "it": "Maggiori dettagli vedi ioBroker Forum (Tedesco)",
+                    "es": "Más detalles ver ioBroker Forum (Alemania)",
+                    "pl": "Więcej informacji na temat ioBroker Forum (Niemcy)",
+                    "uk": "Детальніше див. ioBroker Forum (Німці)",
+                    "zh-cn": "详情见io Broker论坛(德国)"
+                },
+                "buttons": [
+                    "agree",
+                    "cancel"
+                ]
             }
         ]
     },
+    "encryptedNative": [
+        "localSHCPassword"
+    ],
+    "protectedNative": [
+        "localSHCPassword"
+    ],
     "native": {
         "useLocalSHC": true,
         "localSHCIP": "",

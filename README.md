@@ -18,6 +18,7 @@ As this project is developed during my spare time, I*m actively looking for help
 
 ### __WORK IN PROGRESS__
 * IMPORTANT: This updates introduces a new object ID level as Channel, so all Object-IDs will change!
+* IMPORTANT: The local SHC Password needs to be re-entered in Admin!
 * (Apollon77) Added support for local connections to SHC Classic/Generation 1
 * (Apollon77) Added lowBattery and isReachable states and Message support to update them
 * (Apollon77) Added option to configure the port for the redirect back server for OAuth with cloud connection (default 3000)
