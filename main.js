@@ -258,14 +258,24 @@ async function initSmartHome() {
     });
 
     smartHome.on("error",  (e) => {
-        if (adapter.config.debug) {
+        if (e && e.code === 'WS_ERR_INVALID_CLOSE_CODE') {
             if (typeof e === "string")
-                adapter.log.error(`GOT AN ERROR: ${e}`);
+                adapter.log.debug(`GOT AN IGNORED ERROR: ${e}`);
             else {
-                adapter.log.error(`GOT AN ERROR: ${JSON.stringify(e)}`);
+                adapter.log.debug(`GOT AN IGNORED ERROR: ${JSON.stringify(e)}`);
 
                 if (e.stack) {
-                    adapter.log.error(`STACK: ${e.stack}`);
+                    adapter.log.debug(`STACK: ${e.stack}`);
+                }
+            }
+        } else if (adapter.config.debug) {
+            if (typeof e === "string")
+                adapter.log.warn(`GOT AN ERROR: ${e}`);
+            else {
+                adapter.log.warn(`GOT AN ERROR: ${JSON.stringify(e)}`);
+
+                if (e.stack) {
+                    adapter.log.warn(`STACK: ${e.stack}`);
                 }
             }
         } else {
