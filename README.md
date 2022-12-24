@@ -7,7 +7,7 @@ This adapter is used to connect the Livisi SmartHome devices to ioBroker. You ca
 
 ### Requires Node > 8.x
 
-Please note: For the Authentication process Port 3000 is needed to be available om the host. Please check that nothing else is using it (e.g. Grafana)
+Please note: For the Authentication process Port 3000 (by default, con be changed in configuration) is needed to be available on the host. Please check that nothing else is using it (e.g. Grafana)
 This version supports now also the new Livisi Local SmartHome functionality! Please switch to the local version because the Livisi Cloud will be disabled in Q1/2023!
 
 ## HELP WANTED!
