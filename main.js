@@ -480,7 +480,8 @@ async function updateDevice(aDevice) {
                             type: "state",
                             common: helpers.merge_options({name: helpers.capitalize(aState.name)}, getCommonForState(aState)),
                             native: {
-                                id: aCapability.id
+                                id: aCapability.id,
+                                name: aState.name
                             }
                         });
                         initializedObjects[capabilityPath] = true;
@@ -507,7 +508,7 @@ function stateChanged(id, state) {
                     if (capability) {
                         if (obj.common.write) {
                             adapter.log.debug(`Setting capability ${capability.id}/${obj.common.name} to ${state.val}`);
-                            capability.setState(state.val, obj.common.name, (err) => {
+                            capability.setState(state.val, obj.native.name || obj.common.name, (err) => {
                                 adapter.log.error(`STATE ${id} ERR ${err.message}`);
                             });
                         } else {
