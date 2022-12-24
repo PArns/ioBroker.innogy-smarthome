@@ -409,8 +409,12 @@ async function updateDevice(aDevice) {
 
         if (hasCapStates(aDevice)) {
 
-            adapter.log.debug(`Processing device -> ${devicePath}: "${aDevice.getName()}"`); //${customStringify(aDevice)}`);
-            adapter.log.debug(`Device State: ${customStringify(aDevice.State)}`);
+            adapter.log.debug(`Processing device -> ${devicePath}: "${aDevice.getName()}"`);
+            if (adapter.config.debug) {
+                adapter.log.debug(`Device: ${customStringify(aDevice)}`);
+            } else {
+                adapter.log.debug(`Device State: ${customStringify(aDevice.State)}`);
+            }
 
             await adapter.extendObjectAsync(devicePath, {
                 type: "device",
