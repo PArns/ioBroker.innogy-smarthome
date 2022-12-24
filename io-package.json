@@ -172,7 +172,8 @@
         "localSHCIP": "",
         "localSHCPassword": "",
         "shcGeneration": "2",
-        "debug": false
+        "debug": false,
+        "redirectBackPort": 3000
     },
     "objects": []
 }

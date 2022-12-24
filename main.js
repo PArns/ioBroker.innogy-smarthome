@@ -18,6 +18,7 @@ const deviceStateList = [
     'isReachable',
     'lowBattery'
 ];
+let cloudAuthStarted = false;
 
 String.prototype.replaceAll = function (search, replacement) {
     const target = this;
@@ -61,13 +62,15 @@ async function onMessage(obj) {
     if (obj) {
         switch (obj.command) {
             case 'startAuth':
+                cloudAuthStarted = true;
 
                 adapter.config.useLocalSHC = false;
                 await initSmartHome();
 
-                smartHome.startAuthorization(() => {
+                smartHome.startAuthorization(async () => {
                     adapter.log.debug('Authorization complete ... initializing now');
-                    smartHome.init();
+                    smartHome._finalize();
+                    await initSmartHome();
                 });
 
                 const res = {
@@ -148,6 +151,7 @@ async function initSmartHome() {
 
     const config = {
         redirectHost: 'iobroker-connect.patrick-arns.de',
+        redirectBackPort: parseInt(adapter.config.redirectBackPort, 10) || 3000,
         id: '61768662',
         secret: 'no secret',
         debug: adapter.config.debug,
@@ -215,6 +219,10 @@ async function initSmartHome() {
             }
 
             helpers.applyRooms();
+        } else if (cloudAuthStarted) {
+            adapter.log.warn('Adapter will restart to finish the authorization process!');
+            typeof adapter.restart === 'function' ? adapter.restart() : adapter.stop();
+            return;
         }
         objectsInitialized = true;
         for (const key of Object.keys(storedValues)) {
@@ -286,12 +294,15 @@ async function initSmartHome() {
         adapter.log.debug(`MESSAGE CREATED: ${JSON.stringify(data)}`);
         if (data && data.id) {
             let stateName = null;
+            let val = null;
             switch (data.type) {
                 case 'DeviceLowBattery':
                     stateName = 'lowBattery';
+                    val = true;
                     break;
                 case 'DeviceUnreachable':
                     stateName = 'isReachable';
+                    val = false;
                     break;
             }
             if (!stateName) return;
@@ -303,9 +314,9 @@ async function initSmartHome() {
                         const devicePath = helpers.getDevicePath(dev);
                         const statePath = `${devicePath}.${helpers.cleanDeviceName(stateName)}`;
                         if (initializedObjects[statePath]) {
-                            adapter.setState(statePath, false, true);
+                            adapter.setState(statePath, val, true);
                         } else if (!objectsInitialized) {
-                            storedValues[statePath] = false;
+                            storedValues[statePath] = val;
                         }
                     }
                 });
@@ -317,12 +328,15 @@ async function initSmartHome() {
         adapter.log.debug(`MESSAGE DELETED: ${JSON.stringify(data)}`);
         if (data && data.id) {
             let stateName = null;
+            let val = null;
             switch (data.type) {
                 case 'DeviceLowBattery':
                     stateName = 'lowBattery';
+                    val = false;
                     break;
                 case 'DeviceUnreachable':
                     stateName = 'isReachable';
+                    val = true;
                     break;
             }
             if (!stateName) return;
@@ -334,9 +348,9 @@ async function initSmartHome() {
                         const devicePath = helpers.getDevicePath(dev);
                         const statePath = `${devicePath}.${helpers.cleanDeviceName(stateName)}`;
                         if (initializedObjects[statePath]) {
-                            adapter.setState(statePath, true, true);
+                            adapter.setState(statePath, val, true);
                         } else if (!objectsInitialized) {
-                            storedValues[statePath] = true;
+                            storedValues[statePath] = val;
                         }
                     }
                 });

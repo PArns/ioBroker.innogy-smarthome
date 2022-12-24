@@ -162,8 +162,19 @@
 					Please click on the following button and enter your Innogy Login credentials into the new Window<br/>
 					Once the authorization has been completed and the Window closes, you can close the settings dialog
 				</p>
+				<p>
+					<b>If you want to change the used port (see below) please save the confguration before starting the authorization!</b>
+				</p>
 				<a class="btn" id="login">Start authorization</a>
 			</div>
+
+			<div class="row">
+				<div class="input-field col s12 m6">
+					<input id="redirectBackPort" type="number" class="value" min="1" max="65536" />
+					<label for="redirectBackPort">Port for OAuth Redirect return (needs to be free on this host!)</label>
+				</div>
+			</div>
+
 		</div>
 
 	</div>

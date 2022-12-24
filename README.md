@@ -17,11 +17,12 @@ As this project is developed during my spare time, I*m actively looking for help
 ## Changelog
 
 ### __WORK IN PROGRESS__
-* IMPORTANT: This updates introduces a new state ID level as Channel, so all Object-IDs will change!
-* (Apollon77) Add support for local connections to SHC Classic/Generation 1
-* (Apollon77) Add lowBattery and other Device states and Message support to update isReachable and lowBattery
+* IMPORTANT: This updates introduces a new object ID level as Channel, so all Object-IDs will change!
+* (Apollon77) Added support for local connections to SHC Classic/Generation 1
+* (Apollon77) Added lowBattery and isReachable states and Message support to update them
+* (Apollon77) Added option to configure the port for the redirect back server for OAuth with cloud connection (default 3000)
 * (Apollon77) Add more missing states
-* (Apollon77) General updates
+* (Apollon77) General updates and optimizations
 
 ### 0.4.7
 * Changed OAuth local auth
