@@ -508,8 +508,9 @@ function stateChanged(id, state) {
                     if (capability) {
                         if (obj.common.write) {
                             adapter.log.debug(`Setting capability ${capability.id}/${obj.common.name} to ${state.val}`);
-                            capability.setState(state.val, obj.native.name || obj.common.name, (err) => {
-                                adapter.log.error(`STATE ${id} ERR ${err.message}`);
+                            const capabilityStateName = obj.native.name || obj.common.name;
+                            capability.setState(state.val, capabilityStateName, (err) => {
+                                adapter.log.error(`STATE ${id} for ${capabilityStateName} ERR ${err.message}`);
                             });
                         } else {
                             await updateDevice(smartHome.resolveLink(capability.Device));
