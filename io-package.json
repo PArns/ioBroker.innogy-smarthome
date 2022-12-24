@@ -1,241 +1,228 @@
 {
-    "common": {
-        "name": "innogy-smarthome",
-        "version": "0.4.7",
-        "title": "Innogy Smarthome",
-        "titleLang": {
-            "en": "Innogy Smarthome",
-            "de": "Innogy Smarthome",
-            "ru": "Innogy Smarthome",
-            "pt": "Innogy Smarthome",
-            "nl": "Innogy Smarthome",
-            "fr": "Innogy Smarthome",
-            "it": "Innogy Smarthome",
-            "es": "Innogy Smarthome",
-            "pl": "Innogy Smarthome",
-            "zh-cn": "英诺智能家居",
-            "uk": "Innogy Smarthome"
+  "common": {
+    "name": "innogy-smarthome",
+    "version": "1.0.0",
+    "title": "Innogy Smarthome",
+    "titleLang": {
+      "en": "Innogy Smarthome",
+      "de": "Innogy Smarthome",
+      "ru": "Innogy Smarthome",
+      "pt": "Innogy Smarthome",
+      "nl": "Innogy Smarthome",
+      "fr": "Innogy Smarthome",
+      "it": "Innogy Smarthome",
+      "es": "Innogy Smarthome",
+      "pl": "Innogy Smarthome",
+      "zh-cn": "英诺智能家居",
+      "uk": "Innogy Smarthome"
+    },
+    "license": "MIT",
+    "desc": {
+      "en": "ioBroker Innogy Smarthome",
+      "de": "ioBroker Innogy Smarthome",
+      "ru": "ioBroker Innogy Smarthome",
+      "pt": "ioBroker Innogy Smarthome",
+      "nl": "ioBroker Innogy Smarthome",
+      "fr": "ioBroker Innogy Smarthome",
+      "it": "ioBroker Innogy Smarthome",
+      "es": "ioBroker Innogy Hogar inteligente",
+      "pl": "Inteligentny dom ioBroker Innogy",
+      "uk": "ioBroker Innogy Smarthome",
+      "zh-cn": "ioBroker Innogy 智能家居"
+    },
+    "news": {
+      "1.0.0": {
+        "en": "IMPORTANT: This updates introduces a new object ID level as Channel, so all Object-IDs will change!\nIMPORTANT: The local SHC Password needs to be re-entered in Admin!\nAdded support for local connections to SHC Classic/Generation 1\nAdded lowBattery and isReachable states and Message support to update them\nAdded option to configure the port for the redirect back server for OAuth with cloud connection (default 3000)\nAdd more missing states\nGeneral updates and optimizations",
+        "de": "WICHTIG: Diese Updates stellen eine neue Objekt-ID-Ebene als Channel vor, so dass sich alle Object-IDs ändern!\nWICHTIG: Das lokale SHC-Passwort muss in Admin neu eingelesen werden!\nUnterstützung für lokale Verbindungen zu SHC Classic/Generation 1\nHinzugefügt lowBattery und isReachable Zustände und Nachrichten-Unterstützung, um sie zu aktualisieren\nOption zur Konfiguration des Ports für den Redirect Back Server für OAuth mit Cloud-Verbindung (Standard 3000)\nWeitere fehlende Staaten hinzufügen\nAllgemeine Updates und Optimierungen",
+        "ru": "ВАЖНО: Это обновление вводит новый уровень ID объекта в качестве канала, поэтому все ID объекта изменится!\nВАЖНО: Местный пароль SHC должен быть повторно введен в Admin!\nДобавлена поддержка местных подключений к SHC Classic/Generation 1\nДобавлены lowBattery и доступные государства и поддержка сообщений, чтобы обновить их\nДобавлена возможность настройки порта для перенаправления обратного сервера для OAuth с облачным подключением (по умолчанию 3000)\nДобавить больше пропавших государств\nОбщие обновления и оптимизация",
+        "pt": "IMPORTANTE: Esta atualização introduz um novo nível de ID de objeto como Canal, então todos os Object-IDs vão mudar!\nIMPORTANTE: A senha local do SHC precisa ser reinserida no Admin!\nAdicionado suporte para conexões locais para SHC Classic/Generation 1\nAdicionado lowBattery e isReachable estados e suporte de mensagem para atualizá-los\nOpção adicionada para configurar a porta para o servidor de redirecionamento para OAuth com conexão em nuvem (padrão 3000)\nAdicionar mais estados desaparecidos\nAtualizações e otimizações gerais",
+        "nl": "Deze updates introduceren een nieuw object ID-niveau als Channel, dus alle Object-IDs zullen veranderen!\nHet lokale SHC wachtwoord moet in Admin hergebruikt worden!\nOndersteuning voor lokale connecties met SHC Classic/Generatie 1\nGevoegd met lage boterie en onherstelbare staten en Message steun om ze te updaten\nToegevoegd optie om de haven te configureren voor de terugleidende server voor OAuth met wolkverbinding (default 3000)\nVoeg meer vermiste staten toe\nAlgemene updates en optimatie",
+        "fr": "IMPORTANT: Cette mise à jour introduit un nouveau niveau d'identification d'objet comme Channel, donc tous les objets-IDs changeront!\nIMPORTANT: Le mot de passe SHC local doit être réintégré dans Admin!\nAjout du support pour les connexions locales à SHC Classic/Generation 1\nAjouté basBattery et est états disponibles et soutien de message pour les mettre à jour\nAjout d'option pour configurer le port pour le serveur arrière redirigé pour OAuth avec connexion cloud (par défaut 3000)\nAjouter d'autres états manquants\nMises à jour et optimisations générales",
+        "it": "IMPORTANTE: Questo aggiornamento introduce un nuovo livello ID oggetto come Canale, così tutti gli Object-ID cambieranno!\nIMPORTANTE: La password locale SHC deve essere ri-entrata in Admin!\nAggiunto il supporto per le connessioni locali a SHC Classic/Generation 1\nAggiunto LowBattery e isReachable stati e supporto messaggio per aggiornarli\nAggiunta opzione per configurare la porta per il server di retro reindirizzamento per OAuth con connessione cloud (default 3000)\nAggiungi altri stati mancanti\nAggiornamenti e ottimizzazioni generali",
+        "es": "IMPORTANTE: Esta actualización introduce un nuevo nivel de identificación de objetos como Canal, por lo que todos los Object-IDs cambiarán!\nIMPORTANTE: ¡La contraseña local SHC necesita ser reiniciada en Admin!\nApoyo añadido a las conexiones locales con SHC Classic/Generation 1\nAñadido bajoBattery y esReachable estados y soporte de Mensaje para actualizarlos\nOpción agregada para configurar el puerto para el servidor de redirigir hacia atrás para OAuth con conexión en la nube (por defecto 3000)\nAñadir más estados perdidos\nActualizaciones y optimizaciones generales",
+        "pl": "IMPORTANT: Ta aktualizacja wprowadza nowy poziom ID jako kanał, więc wszystkie obiekty będą zmieniać!\nIMPORTANT: Miecz SHC musi być ponownie włączony do Admin!\nWsparcie dla lokalnych połączeń do SHC Classic/Generation 1\nDodany do niskobaterii i jest odpowiednim stanem i wsparciem Message'a do aktualizacji ich\nDodano możliwość konfigurowania portu dla serwera OAuth z połączenia chmur (default 3000)\nAddd\nGeneral aktualizacja i optymalizacja",
+        "uk": "ВАЖЛИВО: Це оновлення вводить новий рівень ідентифікатор об'єкта як канал, тому всі об'єкти зміняться!\nВАЖЛИВО: локальний пароль SHC повинен бути повторним!\nДодано підтримку локальних підключень до SHC Classic/Generation 1\nДодана низькаБаттерія і єдоступними державами і підтримкою повідомлень для оновлення їх\nДодано опцію для налаштування порту для переадресного сервера для OAuth з хмарним підключенням (default 3000)\nДодати більше відсутніх штатів\nЗагальні оновлення та оптимізація",
+        "zh-cn": "IMPORTANT:这一最新消息引入了作为海峡的新目标ID级,因此所有物体-开发公司都将改变!\nIMPORTANT:当地SHC护照密码需要重新进入Admin!\nB. 增加对初级保健/工资的当地联系的支助 1\n增加低巴特,是可偿还的州和梅斯支助,以更新它们。\n增加改装OAuth的转导服务器的港口(Deefault 3000)\n增加更多失踪国家\n一般性更新和优化"
+      },
+      "0.4.7": {
+        "en": "Changed OAuth local auth",
+        "de": "Lokale OAuth-Authentifizierung geändert",
+        "ru": "Изменена локальная аутентификация OAuth",
+        "pt": "Autenticação local OAuth alterada",
+        "nl": "Lokale OAuth-authenticatie gewijzigd",
+        "fr": "Authentification locale OAuth modifiée",
+        "it": "Autenticazione locale OAuth modificata",
+        "es": "Cambió la autenticación local de OAuth",
+        "pl": "Zmieniono lokalną autoryzację OAuth",
+        "uk": "Змінено локальну автентифікацію OAuth",
+        "zh-cn": "更改了 OAuth 本地身份验证"
+      },
+      "0.4.6": {
+        "en": "Added missing states",
+        "de": "Fehlende Zustände hinzugefügt",
+        "ru": "Добавлены недостающие состояния",
+        "pt": "Adicionados estados ausentes",
+        "nl": "Ontbrekende staten toegevoegd",
+        "fr": "Ajout d'états manquants",
+        "it": "Aggiunti stati mancanti",
+        "es": "Se agregaron estados faltantes",
+        "pl": "Dodano brakujące stany",
+        "uk": "Додано відсутні стани",
+        "zh-cn": "添加缺失状态"
+      },
+      "0.4.3": {
+        "en": "Added min, max for pointTemperature",
+        "de": "Min, Max für pointTemperature hinzugefügt",
+        "ru": "Добавлены min, max для pointTemperature",
+        "pt": "Adicionado min, max para pointTemperature",
+        "nl": "Min, max toegevoegd voor pointTemperature",
+        "fr": "Ajouté min, max pour pointTemperature",
+        "it": "Aggiunti min, max per pointTemperature",
+        "es": "Se agregaron min, max para pointTemperature",
+        "pl": "Dodano min, max dla temperatury punktu",
+        "uk": "Додано min, max для pointTemperature",
+        "zh-cn": "为 pointTemperature 添加了最小值、最大值"
+      },
+      "0.4.2": {
+        "en": "Fixed setState crashes, caused by invalid point temperatures + added debug info for more possible crashes",
+        "de": "SetState-Abstürze behoben, die durch ungültige Punkttemperaturen verursacht wurden + Debug-Informationen für mehr mögliche Abstürze hinzugefügt",
+        "ru": "Исправлены сбои setState, вызванные неверными температурами точек + добавлена ​​отладочная информация для большего количества возможных сбоев.",
+        "pt": "Corrigidas falhas de setState, causadas por temperaturas de pontos inválidos + informações de depuração adicionadas para mais falhas possíveis",
+        "nl": "Vaste setState-crashes, veroorzaakt door ongeldige punttemperaturen + foutopsporingsinformatie toegevoegd voor meer mogelijke crashes",
+        "fr": "Correction des plantages de setState, causés par des températures de point invalides + ajout d'informations de débogage pour plus de plantages possibles",
+        "it": "Risolti arresti anomali di setState, causati da temperature del punto non valide + aggiunte informazioni di debug per più possibili arresti anomali",
+        "es": "Se corrigieron los bloqueos de setState, causados ​​​​por temperaturas de puntos no válidas + información de depuración agregada para más bloqueos posibles",
+        "pl": "Naprawiono awarie setState spowodowane przez nieprawidłowe temperatury punktów + dodano informacje debugowania dla większej liczby możliwych awarii",
+        "uk": "Виправлено аварійне завершення роботи setState, спричинене неправильними температурами точки + додана інформація про налагодження для більш можливих збоїв",
+        "zh-cn": "修复了由无效点温度引起的 setState 崩溃 + 为更多可能的崩溃添加了调试信息"
+      },
+      "0.4.1": {
+        "en": "Fixed ioBroker Admin dark mode and some missing states",
+        "de": "ioBroker Admin Dunkelmodus und einige fehlende Status behoben",
+        "ru": "Исправлен темный режим администратора ioBroker и некоторые отсутствующие состояния.",
+        "pt": "Corrigido o modo escuro do ioBroker Admin e alguns estados ausentes",
+        "nl": "Oplossing voor de donkere modus van ioBroker Admin en enkele ontbrekende statussen",
+        "fr": "Correction du mode sombre d'ioBroker Admin et de certains états manquants",
+        "it": "Risolto il problema con la modalità oscura di ioBroker Admin e alcuni stati mancanti",
+        "es": "Se corrigió el modo oscuro de administración de ioBroker y algunos estados faltantes",
+        "pl": "Naprawiono tryb ciemny administratora ioBroker i niektóre brakujące stany",
+        "uk": "Виправлено темний режим ioBroker Admin і деякі відсутні стани",
+        "zh-cn": "修复了 ioBroker Admin 暗模式和一些缺失的状态"
+      },
+      "0.4.0": {
+        "en": "Added support for local API (currently in BETA)",
+        "de": "Unterstützung für lokale API hinzugefügt (derzeit in BETA)",
+        "ru": "Добавлена ​​поддержка локального API (в настоящее время в БЕТА-версии)",
+        "pt": "Adicionado suporte para API local (atualmente em BETA)",
+        "nl": "Ondersteuning toegevoegd voor lokale API (momenteel in BETA)",
+        "fr": "Ajout de la prise en charge de l'API locale (actuellement en BETA)",
+        "it": "Aggiunto il supporto per l'API locale (attualmente in BETA)",
+        "es": "Se agregó soporte para API local (actualmente en BETA)",
+        "pl": "Dodano obsługę lokalnego interfejsu API (obecnie w wersji BETA)",
+        "uk": "Додано підтримку локального API (наразі в бета-версії)",
+        "zh-cn": "添加了对本地 API 的支持（目前处于测试阶段）"
+      }
+    },
+    "platform": "Javascript/Node.js",
+    "mode": "daemon",
+    "messagebox": true,
+    "subscribe": "messagebox",
+    "icon": "innogy-smarthome.png",
+    "materialize": true,
+    "enabled": true,
+    "extIcon": "https://raw.githubusercontent.com/PArns/ioBroker.innogy-smarthome/master/admin/innogy-smarthome.png",
+    "keywords": [
+      "innogy-smarthome"
+    ],
+    "readme": "https://github.com/PArns/ioBroker.innogy-smarthome/blob/master/README.md",
+    "loglevel": "info",
+    "type": "iot-systems",
+    "authors": [
+      "Patrick Arns <iobroker@patrick-arns.de>"
+    ],
+    "tier": 2,
+    "connectionType": "cloud",
+    "dataSource": "push",
+    "dependencies": [
+      {
+        "js-controller": ">=2.0.0"
+      }
+    ],
+    "globalDependencies": [
+      {
+        "admin": ">=4.0.19"
+      }
+    ],
+    "messages": [
+      {
+        "condition": {
+          "operand": "and",
+          "rules": [
+            "oldVersion<1.0.0",
+            "newVersion>=1.0.0"
+          ]
         },
-        "license": "MIT",
-        "desc": {
-            "en": "ioBroker Innogy Smarthome",
-            "de": "ioBroker Innogy Smarthome",
-            "ru": "ioBroker Innogy Smarthome",
-            "pt": "ioBroker Innogy Smarthome",
-            "nl": "ioBroker Innogy Smarthome",
-            "fr": "ioBroker Innogy Smarthome",
-            "it": "ioBroker Innogy Smarthome",
-            "es": "ioBroker Innogy Hogar inteligente",
-            "pl": "Inteligentny dom ioBroker Innogy",
-            "uk": "ioBroker Innogy Smarthome",
-            "zh-cn": "ioBroker Innogy 智能家居"
+        "title": {
+          "en": "Changes in Object structure and local SHC password!",
+          "de": "Änderungen in Objektstruktur und lokales SHC-Passwort!",
+          "ru": "Изменения в структуре объектов и локальный пароль SHC!",
+          "pt": "Alterações na estrutura de objetos e senha local SHC!",
+          "nl": "Veranderingen in Object structuur en lokale SHC wachtwoord!",
+          "fr": "Changements dans la structure des objets et le mot de passe SHC local!",
+          "it": "Modifiche nella struttura degli oggetti e password SHC locale!",
+          "es": "Cambios en la estructura de objetos y contraseña local SHC!",
+          "pl": "Zmiany w strukturze obiektowej i miejscowym hasło SHC!",
+          "uk": "Зміна структури об'єкта та локального пароля SHC!",
+          "zh-cn": "目标结构的变化和当地的SHC密码!"
         },
-        "news": {
-            "0.4.7": {
-                "en": "Changed OAuth local auth",
-                "de": "Lokale OAuth-Authentifizierung geändert",
-                "ru": "Изменена локальная аутентификация OAuth",
-                "pt": "Autenticação local OAuth alterada",
-                "nl": "Lokale OAuth-authenticatie gewijzigd",
-                "fr": "Authentification locale OAuth modifiée",
-                "it": "Autenticazione locale OAuth modificata",
-                "es": "Cambió la autenticación local de OAuth",
-                "pl": "Zmieniono lokalną autoryzację OAuth",
-                "uk": "Змінено локальну автентифікацію OAuth",
-                "zh-cn": "更改了 OAuth 本地身份验证"
-            },
-            "0.4.6": {
-                "en": "Added missing states",
-                "de": "Fehlende Zustände hinzugefügt",
-                "ru": "Добавлены недостающие состояния",
-                "pt": "Adicionados estados ausentes",
-                "nl": "Ontbrekende staten toegevoegd",
-                "fr": "Ajout d'états manquants",
-                "it": "Aggiunti stati mancanti",
-                "es": "Se agregaron estados faltantes",
-                "pl": "Dodano brakujące stany",
-                "uk": "Додано відсутні стани",
-                "zh-cn": "添加缺失状态"
-            },
-            "0.4.3": {
-                "en": "Added min, max for pointTemperature",
-                "de": "Min, Max für pointTemperature hinzugefügt",
-                "ru": "Добавлены min, max для pointTemperature",
-                "pt": "Adicionado min, max para pointTemperature",
-                "nl": "Min, max toegevoegd voor pointTemperature",
-                "fr": "Ajouté min, max pour pointTemperature",
-                "it": "Aggiunti min, max per pointTemperature",
-                "es": "Se agregaron min, max para pointTemperature",
-                "pl": "Dodano min, max dla temperatury punktu",
-                "uk": "Додано min, max для pointTemperature",
-                "zh-cn": "为 pointTemperature 添加了最小值、最大值"
-            },
-            "0.4.2": {
-                "en": "Fixed setState crashes, caused by invalid point temperatures + added debug info for more possible crashes",
-                "de": "SetState-Abstürze behoben, die durch ungültige Punkttemperaturen verursacht wurden + Debug-Informationen für mehr mögliche Abstürze hinzugefügt",
-                "ru": "Исправлены сбои setState, вызванные неверными температурами точек + добавлена ​​отладочная информация для большего количества возможных сбоев.",
-                "pt": "Corrigidas falhas de setState, causadas por temperaturas de pontos inválidos + informações de depuração adicionadas para mais falhas possíveis",
-                "nl": "Vaste setState-crashes, veroorzaakt door ongeldige punttemperaturen + foutopsporingsinformatie toegevoegd voor meer mogelijke crashes",
-                "fr": "Correction des plantages de setState, causés par des températures de point invalides + ajout d'informations de débogage pour plus de plantages possibles",
-                "it": "Risolti arresti anomali di setState, causati da temperature del punto non valide + aggiunte informazioni di debug per più possibili arresti anomali",
-                "es": "Se corrigieron los bloqueos de setState, causados ​​​​por temperaturas de puntos no válidas + información de depuración agregada para más bloqueos posibles",
-                "pl": "Naprawiono awarie setState spowodowane przez nieprawidłowe temperatury punktów + dodano informacje debugowania dla większej liczby możliwych awarii",
-                "uk": "Виправлено аварійне завершення роботи setState, спричинене неправильними температурами точки + додана інформація про налагодження для більш можливих збоїв",
-                "zh-cn": "修复了由无效点温度引起的 setState 崩溃 + 为更多可能的崩溃添加了调试信息"
-            },
-            "0.4.1": {
-                "en": "Fixed ioBroker Admin dark mode and some missing states",
-                "de": "ioBroker Admin Dunkelmodus und einige fehlende Status behoben",
-                "ru": "Исправлен темный режим администратора ioBroker и некоторые отсутствующие состояния.",
-                "pt": "Corrigido o modo escuro do ioBroker Admin e alguns estados ausentes",
-                "nl": "Oplossing voor de donkere modus van ioBroker Admin en enkele ontbrekende statussen",
-                "fr": "Correction du mode sombre d'ioBroker Admin et de certains états manquants",
-                "it": "Risolto il problema con la modalità oscura di ioBroker Admin e alcuni stati mancanti",
-                "es": "Se corrigió el modo oscuro de administración de ioBroker y algunos estados faltantes",
-                "pl": "Naprawiono tryb ciemny administratora ioBroker i niektóre brakujące stany",
-                "uk": "Виправлено темний режим ioBroker Admin і деякі відсутні стани",
-                "zh-cn": "修复了 ioBroker Admin 暗模式和一些缺失的状态"
-            },
-            "0.4.0": {
-                "en": "Added support for local API (currently in BETA)",
-                "de": "Unterstützung für lokale API hinzugefügt (derzeit in BETA)",
-                "ru": "Добавлена ​​поддержка локального API (в настоящее время в БЕТА-версии)",
-                "pt": "Adicionado suporte para API local (atualmente em BETA)",
-                "nl": "Ondersteuning toegevoegd voor lokale API (momenteel in BETA)",
-                "fr": "Ajout de la prise en charge de l'API locale (actuellement en BETA)",
-                "it": "Aggiunto il supporto per l'API locale (attualmente in BETA)",
-                "es": "Se agregó soporte para API local (actualmente en BETA)",
-                "pl": "Dodano obsługę lokalnego interfejsu API (obecnie w wersji BETA)",
-                "uk": "Додано підтримку локального API (наразі в бета-версії)",
-                "zh-cn": "添加了对本地 API 的支持（目前处于测试阶段）"
-            },
-            "0.3.7": {
-                "en": "js-controller 3.3 warnings prevented",
-                "de": "js-controller 3.3 Warnungen verhindert",
-                "ru": "js-controller 3.3 предупреждения предотвращены",
-                "pt": "Avisos do js-controller 3.3 evitados",
-                "nl": "js-controller 3.3 waarschuwingen voorkomen",
-                "fr": "js-controller 3.3 avertissements empêchés",
-                "it": "js-controller 3.3 avvisi impediti",
-                "es": "advertencias de js-controller 3.3 prevenidas",
-                "pl": "Ostrzeżenia js-controller 3.3 są zablokowane",
-                "zh-cn": "js-controller 3.3 警告被阻止",
-                "uk": "попередження js-controller 3.3 запобігли"
-            },
-            "0.3.6": {
-                "en": "Fixed auth issues",
-                "de": "Authentifizierungsprobleme behoben",
-                "ru": "Исправлены проблемы с авторизацией",
-                "pt": "Problemas de autenticação corrigidos",
-                "nl": "Verificatieproblemen opgelost",
-                "fr": "Problèmes d'authentification résolus",
-                "it": "Risolti problemi di autenticazione",
-                "es": "Problemas de autenticación solucionados",
-                "pl": "Naprawiono problemy z autoryzacją",
-                "uk": "Виправлені проблеми авторизації",
-                "zh-cn": "修复了身份验证问题"
-            }
+        "text": {
+          "en": "This update adds a missing level in the object structure and because of this all Objects IDs will change! Please delete objects before the upgrade or you need to clean it up later. Additionally the local SHC password is now stored encrypted and needs to be re-set in Admin.",
+          "de": "Dieses Update fügt eine fehlende Ebene in der Objektstruktur hinzu und dadurch werden alle Objects IDs geändert! Bitte löschen Sie Objekte vor dem Upgrade oder Sie müssen es später reinigen. Zusätzlich wird das lokale SHC-Passwort jetzt verschlüsselt gespeichert und muss in Admin neu eingestellt werden.",
+          "ru": "Это обновление добавляет недостающий уровень в структуре объекта и из-за этого все ID объектов изменится! Пожалуйста, удалите объекты до обновления или вам нужно очистить его позже. Дополнительно местный пароль SHC теперь хранится зашифрован и должен быть переустановлен в Admin.",
+          "pt": "Esta atualização adiciona um nível ausente na estrutura do objeto e por causa disso todos os IDs de objetos vão mudar! Por favor, exclua objetos antes da atualização ou você precisa limpá-lo mais tarde. Além disso, a senha local do SHC agora é armazenada criptografada e precisa ser redefinida no Admin.",
+          "nl": "Deze update voegt een ontbrekend niveau in de objectstructuur en door deze Objects ID's zal alles veranderen! Verwijder objecten voor de upgrade of je moet het later opruimen. De lokale SHC wachtwoord wordt nu gecodeerd en moet opnieuw in Admin worden gezet.",
+          "fr": "Cette mise à jour ajoute un niveau manquant dans la structure de l'objet et à cause de cela tous les objets ID vont changer! Veuillez supprimer les objets avant la mise à niveau ou vous devez le nettoyer plus tard. En outre, le mot de passe SHC local est maintenant stocké crypté et doit être réinitialisé dans Admin.",
+          "it": "Questo aggiornamento aggiunge un livello mancante nella struttura dell'oggetto e a causa di questo tutti gli ID oggetti cambieranno! Si prega di eliminare gli oggetti prima dell'aggiornamento o è necessario pulire in seguito. Inoltre la password locale SHC viene ora memorizzata crittografata e deve essere riimpostata in Admin.",
+          "es": "Esta actualización añade un nivel perdido en la estructura del objeto y debido a esto todos los IDs de Objetos cambiarán! Por favor, eliminar objetos antes de la actualización o necesita limpiarlo más tarde. Además, la contraseña local SHC está ahora almacenada encriptada y necesita ser reiniciada en Admin.",
+          "pl": "Ta aktualizacja dodaje brakowy poziom w strukturze obiektu, a z tego wszystkie obiekty będą zmieniać. Wykorzystywanie obiektów przed ulepszaniem lub potrzebą czyścić go w późniejszym czasie. Miejscowe hasło SHC jest obecnie przechowywane zaszyfrowane i musi być ponownie w Admin.",
+          "uk": "Цей оновлення додає відсутній рівень у структурі об'єкта і через це всі ідентифікатори об'єктів зміняться! Будь ласка, видаліть об'єкти перед оновленням або потрібно очистити його пізніше. Додатково локальний пароль SHC тепер зберігається зашифровано і потрібно перезавантажити в Адміністратор.",
+          "zh-cn": "这一更新增加了目标结构中的缺失水平,因为所有物体的开发会改变! 请删除升级前的物体,或你需要立即予以清理。 此外,当地的SHC密码现在被加密,需要在阿德明重新开始。."
         },
-        "platform": "Javascript/Node.js",
-        "mode": "daemon",
-        "messagebox": true,
-        "subscribe": "messagebox",
-        "icon": "innogy-smarthome.png",
-        "materialize": true,
-        "enabled": true,
-        "extIcon": "https://raw.githubusercontent.com/PArns/ioBroker.innogy-smarthome/master/admin/innogy-smarthome.png",
-        "keywords": [
-            "innogy-smarthome"
-        ],
-        "readme": "https://github.com/PArns/ioBroker.innogy-smarthome/blob/master/README.md",
-        "loglevel": "info",
-        "type": "iot-systems",
-        "authors": [
-            "Patrick Arns <iobroker@patrick-arns.de>"
-        ],
-        "tier": 2,
-        "connectionType": "cloud",
-        "dataSource": "push",
-        "dependencies": [
-            {
-                "js-controller": ">=2.0.0"
-            }
-        ],
-        "globalDependencies": [
-            {
-                "admin": ">=4.0.19"
-            }
-        ],
-        "messages": [
-            {
-                "condition": {
-                    "operand": "and",
-                    "rules": [
-                        "oldVersion<1.0.0",
-                        "newVersion>=1.0.0"
-                    ]
-                },
-                "title": {
-                    "en": "Changes in Object structure and local SHC password!",
-                    "de": "Änderungen in Objektstruktur und lokales SHC-Passwort!",
-                    "ru": "Изменения в структуре объектов и локальный пароль SHC!",
-                    "pt": "Alterações na estrutura de objetos e senha local SHC!",
-                    "nl": "Veranderingen in Object structuur en lokale SHC wachtwoord!",
-                    "fr": "Changements dans la structure des objets et le mot de passe SHC local!",
-                    "it": "Modifiche nella struttura degli oggetti e password SHC locale!",
-                    "es": "Cambios en la estructura de objetos y contraseña local SHC!",
-                    "pl": "Zmiany w strukturze obiektowej i miejscowym hasło SHC!",
-                    "uk": "Зміна структури об'єкта та локального пароля SHC!",
-                    "zh-cn": "目标结构的变化和当地的SHC密码!"
-                },
-                "text": {
-                    "en": "This update adds a missing level in the object structure and because of this all Objects IDs will change! Please delete objects before the upgrade or you need to clean it up later. Additionally the local SHC password is now stored encrypted and needs to be re-set in Admin.",
-                    "de": "Dieses Update fügt eine fehlende Ebene in der Objektstruktur hinzu und dadurch werden alle Objects IDs geändert! Bitte löschen Sie Objekte vor dem Upgrade oder Sie müssen es später reinigen. Zusätzlich wird das lokale SHC-Passwort jetzt verschlüsselt gespeichert und muss in Admin neu eingestellt werden.",
-                    "ru": "Это обновление добавляет недостающий уровень в структуре объекта и из-за этого все ID объектов изменится! Пожалуйста, удалите объекты до обновления или вам нужно очистить его позже. Дополнительно местный пароль SHC теперь хранится зашифрован и должен быть переустановлен в Admin.",
-                    "pt": "Esta atualização adiciona um nível ausente na estrutura do objeto e por causa disso todos os IDs de objetos vão mudar! Por favor, exclua objetos antes da atualização ou você precisa limpá-lo mais tarde. Além disso, a senha local do SHC agora é armazenada criptografada e precisa ser redefinida no Admin.",
-                    "nl": "Deze update voegt een ontbrekend niveau in de objectstructuur en door deze Objects ID's zal alles veranderen! Verwijder objecten voor de upgrade of je moet het later opruimen. De lokale SHC wachtwoord wordt nu gecodeerd en moet opnieuw in Admin worden gezet.",
-                    "fr": "Cette mise à jour ajoute un niveau manquant dans la structure de l'objet et à cause de cela tous les objets ID vont changer! Veuillez supprimer les objets avant la mise à niveau ou vous devez le nettoyer plus tard. En outre, le mot de passe SHC local est maintenant stocké crypté et doit être réinitialisé dans Admin.",
-                    "it": "Questo aggiornamento aggiunge un livello mancante nella struttura dell'oggetto e a causa di questo tutti gli ID oggetti cambieranno! Si prega di eliminare gli oggetti prima dell'aggiornamento o è necessario pulire in seguito. Inoltre la password locale SHC viene ora memorizzata crittografata e deve essere riimpostata in Admin.",
-                    "es": "Esta actualización añade un nivel perdido en la estructura del objeto y debido a esto todos los IDs de Objetos cambiarán! Por favor, eliminar objetos antes de la actualización o necesita limpiarlo más tarde. Además, la contraseña local SHC está ahora almacenada encriptada y necesita ser reiniciada en Admin.",
-                    "pl": "Ta aktualizacja dodaje brakowy poziom w strukturze obiektu, a z tego wszystkie obiekty będą zmieniać. Wykorzystywanie obiektów przed ulepszaniem lub potrzebą czyścić go w późniejszym czasie. Miejscowe hasło SHC jest obecnie przechowywane zaszyfrowane i musi być ponownie w Admin.",
-                    "uk": "Цей оновлення додає відсутній рівень у структурі об'єкта і через це всі ідентифікатори об'єктів зміняться! Будь ласка, видаліть об'єкти перед оновленням або потрібно очистити його пізніше. Додатково локальний пароль SHC тепер зберігається зашифровано і потрібно перезавантажити в Адміністратор.",
-                    "zh-cn": "这一更新增加了目标结构中的缺失水平,因为所有物体的开发会改变! 请删除升级前的物体,或你需要立即予以清理。 此外,当地的SHC密码现在被加密,需要在阿德明重新开始。."
-                },
-                "link": "TODO",
-                "level": "warn",
-                "linkText": {
-                    "en": "More Details see ioBroker Forum (German)",
-                    "de": "Mehr Details siehe ioBroker Forum",
-                    "ru": "Подробнее см. форум ioBroker (Немецкий)",
-                    "pt": "Mais detalhes veja ioBroker Forum (Alemão)",
-                    "nl": "Meer Details zien ioBroker Forum (German)",
-                    "fr": "Plus de détails voir ioBroker Forum (allemand)",
-                    "it": "Maggiori dettagli vedi ioBroker Forum (Tedesco)",
-                    "es": "Más detalles ver ioBroker Forum (Alemania)",
-                    "pl": "Więcej informacji na temat ioBroker Forum (Niemcy)",
-                    "uk": "Детальніше див. ioBroker Forum (Німці)",
-                    "zh-cn": "详情见io Broker论坛(德国)"
-                },
-                "buttons": [
-                    "agree",
-                    "cancel"
-                ]
-            }
+        "link": "TODO",
+        "level": "warn",
+        "linkText": {
+          "en": "More Details see ioBroker Forum (German)",
+          "de": "Mehr Details siehe ioBroker Forum",
+          "ru": "Подробнее см. форум ioBroker (Немецкий)",
+          "pt": "Mais detalhes veja ioBroker Forum (Alemão)",
+          "nl": "Meer Details zien ioBroker Forum (German)",
+          "fr": "Plus de détails voir ioBroker Forum (allemand)",
+          "it": "Maggiori dettagli vedi ioBroker Forum (Tedesco)",
+          "es": "Más detalles ver ioBroker Forum (Alemania)",
+          "pl": "Więcej informacji na temat ioBroker Forum (Niemcy)",
+          "uk": "Детальніше див. ioBroker Forum (Німці)",
+          "zh-cn": "详情见io Broker论坛(德国)"
+        },
+        "buttons": [
+          "agree",
+          "cancel"
         ]
-    },
-    "encryptedNative": [
-        "localSHCPassword"
-    ],
-    "protectedNative": [
-        "localSHCPassword"
-    ],
-    "native": {
-        "useLocalSHC": true,
-        "localSHCIP": "",
-        "localSHCPassword": "",
-        "shcGeneration": "2",
-        "debug": false,
-        "redirectBackPort": 3000
-    },
-    "objects": []
+      }
+    ]
+  },
+  "encryptedNative": [
+    "localSHCPassword"
+  ],
+  "protectedNative": [
+    "localSHCPassword"
+  ],
+  "native": {
+    "useLocalSHC": true,
+    "localSHCIP": "",
+    "localSHCPassword": "",
+    "shcGeneration": "2",
+    "debug": false,
+    "redirectBackPort": 3000
+  },
+  "objects": []
 }

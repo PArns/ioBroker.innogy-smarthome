@@ -15,8 +15,7 @@ This version supports now also the new Livisi Local SmartHome functionality! Ple
 As this project is developed during my spare time, I*m actively looking for help to maintain and extend this lib! If you're willing to help, drop me a line!
 
 ## Changelog
-
-### __WORK IN PROGRESS__
+### 1.0.0 (2022-12-24)
 * IMPORTANT: This updates introduces a new object ID level as Channel, so all Object-IDs will change!
 * IMPORTANT: The local SHC Password needs to be re-entered in Admin!
 * (Apollon77) Added support for local connections to SHC Classic/Generation 1
