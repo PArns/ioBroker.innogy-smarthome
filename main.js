@@ -535,7 +535,9 @@ async function updateDevice(aDevice) {
 }
 
 function stateChanged(id, state) {
-    adapter.log.debug(`state ${id} changed: ${state.val} (ack = ${state.ack})`);
+    if (state) {
+        adapter.log.debug(`state ${id} changed: ${state.val} (ack = ${state.ack})`);
+    }
     if (state && !state.ack) {
         adapter.getForeignObject(id, async (err, obj) => {
             if (err) {
