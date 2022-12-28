@@ -19,6 +19,8 @@ const deviceStateList = [
     'lowBattery'
 ];
 let cloudAuthStarted = false;
+let Sentry;
+const sentryReportedStates = {};
 
 String.prototype.replaceAll = function (search, replacement) {
     const target = this;
@@ -94,6 +96,15 @@ async function onMessage(obj) {
 }
 
 async function initSmartHome() {
+    if (!Sentry) {
+        if (adapter.supportsFeature && adapter.supportsFeature('PLUGINS')) {
+            const sentryInstance = adapter.getPluginInstance('sentry');
+            if (sentryInstance) {
+                Sentry = sentryInstance.getSentryObject();
+            }
+        }
+    }
+
     await adapter.setObjectNotExistsAsync("info", {
         "type": "channel",
         "common": {
@@ -474,7 +485,7 @@ async function updateDevice(aDevice) {
 
                         await adapter.extendObjectAsync(statePath, {
                             type: "state",
-                            common: helpers.merge_options({name: helpers.capitalize(aState.name)}, getCommonForState(aState))
+                            common: helpers.merge_options({name: helpers.capitalize(aState.name)}, getCommonForState(aState, 'DeviceState'))
                         });
                         initializedObjects[statePath] = true;
 
@@ -506,7 +517,7 @@ async function updateDevice(aDevice) {
 
                         await adapter.extendObjectAsync(capabilityPath, {
                             type: "state",
-                            common: helpers.merge_options({name: helpers.capitalize(aState.name)}, getCommonForState(aState)),
+                            common: helpers.merge_options({name: helpers.capitalize(aState.name)}, getCommonForState(aState, aCapability.config ? aCapability.config.name : 'DeviceCapability')),
                             native: {
                                 id: aCapability.id,
                                 name: aState.name
@@ -537,9 +548,11 @@ function stateChanged(id, state) {
                         if (obj.common.write) {
                             adapter.log.debug(`Setting capability ${capability.id}/${obj.common.name} to ${state.val}`);
                             const capabilityStateName = obj.native.name || obj.common.name;
-                            capability.setState(state.val, capabilityStateName, (err) => {
-                                adapter.log.error(`STATE ${id} for ${capabilityStateName} ERR ${err.message}`);
-                            });
+                            try {
+                                await capability.setState(state.val, capabilityStateName);
+                            } catch (e) {
+                                adapter.log.error(`SET STATE ${id} for ${capabilityStateName} ERR ${err.message}`);
+                            }
                         } else {
                             await updateDevice(smartHome.resolveLink(capability.Device));
                         }
@@ -554,7 +567,7 @@ function stateChanged(id, state) {
 // ---------------------------------------------------------------------------------------------------------------------
 // ---------------------------------------------------------------------------------------------------------------------
 
-function getCommonForState(aState) {
+function getCommonForState(aState, context) {
     const res = {};
 
     switch (aState.name) {
@@ -666,6 +679,24 @@ function getCommonForState(aState) {
             res.role = "switch";
             res.read = true;
             res.write = true;
+            break;
+
+        // -- Wifi ---
+        case "ssid":
+            res.type = "string";
+            res.role = "text";
+            res.read = true;
+            res.write = false;
+            break;
+
+        case "signalStrength":
+            res.type = "number";
+            res.role = "value";
+            res.read = true;
+            res.write = false;
+            res.unit = "dBm";
+            res.min = -100;
+            res.max = 0;
             break;
 
         // -- BEWEGUNGSMELDER --
@@ -1149,9 +1180,32 @@ function getCommonForState(aState) {
             res.write = true;
             break;
 
+        case "lightState":
+            res.type = "boolean";
+            res.role = "indicator";
+            res.read = true;
+            res.write = true;
+            break;
+
+        case "doorState":
+            res.type = "string";
+            res.role = "state";
+            res.read = true;
+            res.write = false;
+            break;
+
         default:
-            if (adapter.config.debug)
-                adapter.log.warn(`Unknown state (please report to dev):${aState.name} ${JSON.stringify(aState)}`);
+
+            if (Sentry && !sentryReportedStates[`${context}/${aState.name}`]) {
+                Sentry.withScope(scope => {
+                    scope.setLevel('info');
+                    scope.setExtra("state", JSON.stringify(aState));
+                    Sentry.captureMessage(`State ${context}/${aState.name}`, 'info');
+                });
+                sentryReportedStates[`${context}/${aState.name}`] = true;
+            } else if (adapter.config.debug) {
+                adapter.log.warn(`Unknown state (please report to dev):${context}/${aState.name} ${JSON.stringify(aState)}`);
+            }
 
             res.type = typeof aState !== 'object' ? typeof aState !== 'object' : "mixed";
             res.role = "state";

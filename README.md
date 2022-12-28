@@ -3,6 +3,8 @@
 ![Number of Installations](http://iobroker.live/badges/innogy-smarthome-installed.svg) ![Number of Installations](http://iobroker.live/badges/innogy-smarthome-stable.svg) 
 [![Build](https://travis-ci.org/PArns/ioBroker.innogy-smarthome.svg?branch=master)](https://travis-ci.org/PArns/ioBroker.innogy-smarthome)
 
+**This adapter uses Sentry libraries to automatically report exceptions and code errors to the developers.** For more details and for information how to disable the error reporting see [Sentry-Plugin Documentation](https://github.com/ioBroker/plugin-sentry#plugin-sentry)! Sentry reporting is used starting with js-controller 3.0.
+
 This adapter is used to connect the Livisi SmartHome devices to ioBroker. You can read more about Livisi [here](https://www.livisi.com).
 
 ### Requires Node > 8.x
@@ -15,6 +17,12 @@ This version supports now also the new Livisi Local SmartHome functionality! Ple
 As this project is developed during my spare time, I*m actively looking for help to maintain and extend this lib! If you're willing to help, drop me a line!
 
 ## Changelog
+
+### __WORK IN PROGRESS__
+* (Apollon77) Prevented crash cases when setting values is not successful
+* (Apollon77) Added more missing states
+* (Apollon77) Added Sentry for Crash reporting and missing state reporting
+
 ### 1.0.0 (2022-12-24)
 * IMPORTANT: This updates introduces a new object ID level as Channel, so all Object-IDs will change!
 * IMPORTANT: The local SHC Password needs to be re-entered in Admin!

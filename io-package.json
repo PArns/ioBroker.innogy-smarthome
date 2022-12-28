@@ -153,6 +153,11 @@
         "admin": ">=4.0.19"
       }
     ],
+    "plugins": {
+      "sentry": {
+        "dsn": "https://ed66b18ff0ea4045bd2515b0b7e3b46a@sentry.iobroker.net/227"
+      }
+    },
     "messages": [
       {
         "condition": {
