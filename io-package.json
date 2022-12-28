@@ -1,7 +1,7 @@
 {
   "common": {
     "name": "innogy-smarthome",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "title": "Innogy Smarthome",
     "titleLang": {
       "en": "Innogy Smarthome",
@@ -31,6 +31,19 @@
       "zh-cn": "ioBroker Innogy 智能家居"
     },
     "news": {
+      "1.1.1": {
+        "en": "Added crash cases reported by Sentry\nAdded missing ISS2 states",
+        "de": "Hinzugefügt Crash Fälle berichtet von Sentry\nHinzugefügt fehlende ISS2 Zustände",
+        "ru": "Добавлены случаи сбоя, сообщаемые Sentry\nДобавлены недостающие состояния ISS2",
+        "pt": "Adicionado casos de acidente relatados por Sentry\nAdicionado desaparecido ISS2 estados",
+        "nl": "Vertaling:\nVertaling:",
+        "fr": "Ajout de cas de crash signalés par Sentry\nAjout des états ISS2 manquants",
+        "it": "Aggiunto casi di crash segnalati da Sentry\nAggiunto mancanti stati ISS2",
+        "es": "Casos de choque adicionales reportados por Sentry\nEstado de ISS2 desaparecido",
+        "pl": "Zamknięte przypadki katastrofy odnotowane przez Sentry'a\nZaginięcie ISS2",
+        "uk": "Додано випадки аварії, які повідомляються Sentry\nДодано відсутні стани ISS2",
+        "zh-cn": "Sentry所报告的更多事故\n增加失踪的IS2州"
+      },
       "1.1.0": {
         "en": "Prevented crash cases when setting values is not successful\nAdded more missing states\nAdded Sentry for Crash reporting and missing state reporting",
         "de": "Verhinderte Crashfälle, wenn Werte nicht erfolgreich eingestellt werden\nMehr fehlende Staaten\nSentry für Crash Reporting und fehlende Staatsberichterstattung hinzugefügt",
@@ -108,19 +121,6 @@
         "pl": "Naprawiono awarie setState spowodowane przez nieprawidłowe temperatury punktów + dodano informacje debugowania dla większej liczby możliwych awarii",
         "uk": "Виправлено аварійне завершення роботи setState, спричинене неправильними температурами точки + додана інформація про налагодження для більш можливих збоїв",
         "zh-cn": "修复了由无效点温度引起的 setState 崩溃 + 为更多可能的崩溃添加了调试信息"
-      },
-      "0.4.1": {
-        "en": "Fixed ioBroker Admin dark mode and some missing states",
-        "de": "ioBroker Admin Dunkelmodus und einige fehlende Status behoben",
-        "ru": "Исправлен темный режим администратора ioBroker и некоторые отсутствующие состояния.",
-        "pt": "Corrigido o modo escuro do ioBroker Admin e alguns estados ausentes",
-        "nl": "Oplossing voor de donkere modus van ioBroker Admin en enkele ontbrekende statussen",
-        "fr": "Correction du mode sombre d'ioBroker Admin et de certains états manquants",
-        "it": "Risolto il problema con la modalità oscura di ioBroker Admin e alcuni stati mancanti",
-        "es": "Se corrigió el modo oscuro de administración de ioBroker y algunos estados faltantes",
-        "pl": "Naprawiono tryb ciemny administratora ioBroker i niektóre brakujące stany",
-        "uk": "Виправлено темний режим ioBroker Admin і деякі відсутні стани",
-        "zh-cn": "修复了 ioBroker Admin 暗模式和一些缺失的状态"
       }
     },
     "platform": "Javascript/Node.js",
