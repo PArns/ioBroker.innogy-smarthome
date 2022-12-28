@@ -17,8 +17,7 @@ This version supports now also the new Livisi Local SmartHome functionality! Ple
 As this project is developed during my spare time, I*m actively looking for help to maintain and extend this lib! If you're willing to help, drop me a line!
 
 ## Changelog
-
-### __WORK IN PROGRESS__
+### 1.1.0 (2022-12-28)
 * (Apollon77) Prevented crash cases when setting values is not successful
 * (Apollon77) Added more missing states
 * (Apollon77) Added Sentry for Crash reporting and missing state reporting

@@ -1,7 +1,7 @@
 {
   "common": {
     "name": "innogy-smarthome",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "title": "Innogy Smarthome",
     "titleLang": {
       "en": "Innogy Smarthome",
@@ -31,6 +31,19 @@
       "zh-cn": "ioBroker Innogy 智能家居"
     },
     "news": {
+      "1.1.0": {
+        "en": "Prevented crash cases when setting values is not successful\nAdded more missing states\nAdded Sentry for Crash reporting and missing state reporting",
+        "de": "Verhinderte Crashfälle, wenn Werte nicht erfolgreich eingestellt werden\nMehr fehlende Staaten\nSentry für Crash Reporting und fehlende Staatsberichterstattung hinzugefügt",
+        "ru": "Предотвращаемые случаи сбоя при установлении ценностей не успешны\nДобавлено больше пропавших государств\nДобавлена служение для Crash отчетности и отсутствующей государственной отчетности",
+        "pt": "Casos de acidente impedidos ao definir valores não é bem-sucedido\nAdicionado mais estados desaparecidos\nAdicionado Sentry para relatórios Crash e relatórios de estado desaparecido",
+        "nl": "Voorbedachte crash gevallen als het plaatsen van waarden niet succesvol is\nVertaling:\nVertaling:",
+        "fr": "Cas d ' accident évités lorsqu ' il n ' y a pas de valeur\nAjout d'autres états manquants\nA ajouté Sentry for Crash reporting and missing state reporting",
+        "it": "Prevenire casi di crash quando l'impostazione dei valori non è riuscita\nAggiunto più Stati mancanti\nAggiunto Sentry for Crash reporting e mancante stato reporting",
+        "es": "Casos de choque evitados cuando el ajuste de valores no es exitoso\nAñadido más estados desaparecidos\nSentry añadido para reportaje de Crash y reportaje de estado desaparecido",
+        "pl": "Przygotowania do katastrofy, gdy ustawienie wartości nie jest skuteczne\nWprowadzone są także stany zaginionych\nDodał Sentry for Crash report and missing state report (ang.)",
+        "uk": "Запобігання випадкових випадків при встановленні значень не вдало\nДодано більше відсутніх штатів\nДодана птиця для звітування Crash та відсутності державної звітності",
+        "zh-cn": "在确定价值不成功时,预防性事故\n增加更多失踪国家\n增加事故报告和失踪国家报告的待命状态"
+      },
       "1.0.0": {
         "en": "IMPORTANT: This updates introduces a new object ID level as Channel, so all Object-IDs will change!\nIMPORTANT: The local SHC Password needs to be re-entered in Admin!\nAdded support for local connections to SHC Classic/Generation 1\nAdded lowBattery and isReachable states and Message support to update them\nAdded option to configure the port for the redirect back server for OAuth with cloud connection (default 3000)\nAdd more missing states\nGeneral updates and optimizations",
         "de": "WICHTIG: Diese Updates stellen eine neue Objekt-ID-Ebene als Channel vor, so dass sich alle Object-IDs ändern!\nWICHTIG: Das lokale SHC-Passwort muss in Admin neu eingelesen werden!\nUnterstützung für lokale Verbindungen zu SHC Classic/Generation 1\nHinzugefügt lowBattery und isReachable Zustände und Nachrichten-Unterstützung, um sie zu aktualisieren\nOption zur Konfiguration des Ports für den Redirect Back Server für OAuth mit Cloud-Verbindung (Standard 3000)\nWeitere fehlende Staaten hinzufügen\nAllgemeine Updates und Optimierungen",
@@ -108,19 +121,6 @@
         "pl": "Naprawiono tryb ciemny administratora ioBroker i niektóre brakujące stany",
         "uk": "Виправлено темний режим ioBroker Admin і деякі відсутні стани",
         "zh-cn": "修复了 ioBroker Admin 暗模式和一些缺失的状态"
-      },
-      "0.4.0": {
-        "en": "Added support for local API (currently in BETA)",
-        "de": "Unterstützung für lokale API hinzugefügt (derzeit in BETA)",
-        "ru": "Добавлена ​​поддержка локального API (в настоящее время в БЕТА-версии)",
-        "pt": "Adicionado suporte para API local (atualmente em BETA)",
-        "nl": "Ondersteuning toegevoegd voor lokale API (momenteel in BETA)",
-        "fr": "Ajout de la prise en charge de l'API locale (actuellement en BETA)",
-        "it": "Aggiunto il supporto per l'API locale (attualmente in BETA)",
-        "es": "Se agregó soporte para API local (actualmente en BETA)",
-        "pl": "Dodano obsługę lokalnego interfejsu API (obecnie w wersji BETA)",
-        "uk": "Додано підтримку локального API (наразі в бета-версії)",
-        "zh-cn": "添加了对本地 API 的支持（目前处于测试阶段）"
       }
     },
     "platform": "Javascript/Node.js",
