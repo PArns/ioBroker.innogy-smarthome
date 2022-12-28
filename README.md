@@ -20,6 +20,7 @@ As this project is developed during my spare time, I*m actively looking for help
 
 ### __WORK IN PROGRESS__
 * (Apollon77) Added crash cases reported by Sentry
+* (Apollon77) Added missing ISS2 states
 
 ### 1.1.0 (2022-12-28)
 * (Apollon77) Prevented crash cases when setting values is not successful

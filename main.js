@@ -302,7 +302,7 @@ async function initSmartHome() {
         }
     });
 
-    smartHome.on("close",  (e) => {
+    smartHome.on("close",  () => {
         adapter.log.debug("SOCKET CONNECTION TO THE INNOGY API WAS CLOSED");
         adapter.setState("info.connection", false, true);
     });
@@ -1190,6 +1190,28 @@ function getCommonForState(aState, context) {
             break;
 
         case "doorState":
+            res.type = "string";
+            res.role = "state";
+            res.read = true;
+            res.write = false;
+            break;
+
+        // ISS2
+        case "index":
+            res.type = "number";
+            res.role = "value";
+            res.read = true;
+            res.write = false;
+            break;
+
+        case "keyPressCounter":
+            res.type = "number";
+            res.role = "value";
+            res.read = true;
+            res.write = false;
+            break;
+
+        case "type":
             res.type = "string";
             res.role = "state";
             res.read = true;
