@@ -1,7 +1,7 @@
 {
   "common": {
     "name": "innogy-smarthome",
-    "version": "1.1.1",
+    "version": "1.1.2",
     "title": "Innogy Smarthome",
     "titleLang": {
       "en": "Innogy Smarthome",
@@ -31,6 +31,19 @@
       "zh-cn": "ioBroker Innogy 智能家居"
     },
     "news": {
+      "1.1.2": {
+        "en": "Added more missing states for several devices",
+        "de": "Weitere fehlende Zustände für mehrere Geräte hinzugefügt",
+        "ru": "Добавлено больше пропавших государств для нескольких устройств",
+        "pt": "Adicionado mais estados ausentes para vários dispositivos",
+        "nl": "Vertaling:",
+        "fr": "Ajout d'autres états manquants pour plusieurs appareils",
+        "it": "Aggiunto più stati mancanti per diversi dispositivi",
+        "es": "Añadido más estados faltantes para varios dispositivos",
+        "pl": "Poniższe stany dla kilku urządzeń",
+        "uk": "Додано більш відсутні стани для декількох пристроїв",
+        "zh-cn": "增加一些装置失踪的国家"
+      },
       "1.1.1": {
         "en": "Added crash cases reported by Sentry\nAdded missing ISS2 states",
         "de": "Hinzugefügt Crash Fälle berichtet von Sentry\nHinzugefügt fehlende ISS2 Zustände",
@@ -108,19 +121,6 @@
         "pl": "Dodano min, max dla temperatury punktu",
         "uk": "Додано min, max для pointTemperature",
         "zh-cn": "为 pointTemperature 添加了最小值、最大值"
-      },
-      "0.4.2": {
-        "en": "Fixed setState crashes, caused by invalid point temperatures + added debug info for more possible crashes",
-        "de": "SetState-Abstürze behoben, die durch ungültige Punkttemperaturen verursacht wurden + Debug-Informationen für mehr mögliche Abstürze hinzugefügt",
-        "ru": "Исправлены сбои setState, вызванные неверными температурами точек + добавлена ​​отладочная информация для большего количества возможных сбоев.",
-        "pt": "Corrigidas falhas de setState, causadas por temperaturas de pontos inválidos + informações de depuração adicionadas para mais falhas possíveis",
-        "nl": "Vaste setState-crashes, veroorzaakt door ongeldige punttemperaturen + foutopsporingsinformatie toegevoegd voor meer mogelijke crashes",
-        "fr": "Correction des plantages de setState, causés par des températures de point invalides + ajout d'informations de débogage pour plus de plantages possibles",
-        "it": "Risolti arresti anomali di setState, causati da temperature del punto non valide + aggiunte informazioni di debug per più possibili arresti anomali",
-        "es": "Se corrigieron los bloqueos de setState, causados ​​​​por temperaturas de puntos no válidas + información de depuración agregada para más bloqueos posibles",
-        "pl": "Naprawiono awarie setState spowodowane przez nieprawidłowe temperatury punktów + dodano informacje debugowania dla większej liczby możliwych awarii",
-        "uk": "Виправлено аварійне завершення роботи setState, спричинене неправильними температурами точки + додана інформація про налагодження для більш можливих збоїв",
-        "zh-cn": "修复了由无效点温度引起的 setState 崩溃 + 为更多可能的崩溃添加了调试信息"
       }
     },
     "platform": "Javascript/Node.js",
