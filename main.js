@@ -719,6 +719,22 @@ function getCommonForState(aState, context) {
             res.max = 100;
             break;
 
+        // -- Tamper Detection Sensor --
+        case "tamperDetected":
+            res.type = "boolean";
+            res.role = "sensor";
+            res.read = true;
+            res.write = false;
+            break;
+
+        // -- Smoke Detector --
+        case "smokeDetected":
+            res.type = "boolean";
+            res.role = "sensor.alarm.fire";
+            res.read = true;
+            res.write = false;
+            break;
+
         // -- WANDSENDER --
         case "lastKeyPressCounter":
             res.type = "number";
@@ -777,6 +793,34 @@ function getCommonForState(aState, context) {
             res.read = true;
             res.write = false;
             res.unit = "mb";
+            break;
+
+        case "windDirection":
+            res.type = "number";
+            res.role = "value";
+            res.read = true;
+            res.write = false;
+            break;
+
+        case "gustDirection":
+            res.type = "number";
+            res.role = "value";
+            res.read = true;
+            res.write = false;
+            break;
+
+        case "gustStrength":
+            res.type = "number";
+            res.role = "value";
+            res.read = true;
+            res.write = false;
+            break;
+
+        case "windStrength":
+            res.type = "number";
+            res.role = "value";
+            res.read = true;
+            res.write = false;
             break;
 
         // -- POWERCONTROL --
@@ -860,6 +904,7 @@ function getCommonForState(aState, context) {
             res.unit = "W";
             break;
 
+        case "energyConsumptionDayKwh":
         case "energyConsumptionDayKWh":
             res.type = "number";
             res.role = "value";
@@ -868,6 +913,7 @@ function getCommonForState(aState, context) {
             res.unit = "W";
             break;
 
+        case "energyConsumptionDayCurrency":
         case "energyConsumptionDayEuro":
             res.type = "number";
             res.role = "value";
@@ -876,7 +922,80 @@ function getCommonForState(aState, context) {
             res.unit = "Eur";
             break;
 
+        case "energyConsumptionMonthCurrency":
         case "energyConsumptionMonthEuro":
+            res.type = "number";
+            res.role = "value";
+            res.read = true;
+            res.write = false;
+            res.unit = "Eur";
+            break;
+
+        case "energyConsumptionTotalCurrency":
+        case "energyConsumptionTotalEuro":
+            res.type = "number";
+            res.role = "value";
+            res.read = true;
+            res.write = false;
+            res.unit = "Eur";
+            break;
+
+        case "energyConsumptionTotalKwh":
+        case "energyConsumptionTotalKWh":
+            res.type = "number";
+            res.role = "value";
+            res.read = true;
+            res.write = false;
+            res.unit = "kWh";
+            break;
+
+        case "predictedEnergyConsumptionDayKwh":
+        case "predictedEnergyConsumptionDayKWh":
+            res.type = "number";
+            res.role = "value";
+            res.read = true;
+            res.write = false;
+            res.unit = "kWh";
+            break;
+
+        case "predictedEnergyConsumptionMonthKwh":
+        case "predictedEnergyConsumptionMonthKWh":
+            res.type = "number";
+            res.role = "value";
+            res.read = true;
+            res.write = false;
+            res.unit = "kWh";
+            break;
+
+        case "predictedEnergyConsumptionYearKwh":
+        case "predictedEnergyConsumptionYearKWh":
+            res.type = "number";
+            res.role = "value";
+            res.read = true;
+            res.write = false;
+            res.unit = "kWh";
+            break;
+
+        case "predictedEnergyConsumptionDayCurrency":
+        case "predictedEnergyConsumptionDayEuro":
+            res.type = "number";
+            res.role = "value";
+            res.read = true;
+            res.write = false;
+            res.unit = "Eur";
+            break;
+
+        case "predictedEnergyConsumptionMonthCurrency":
+        case "predictedEnergyConsumptionMonthEuro":
+            res.type = "number";
+            res.role = "value";
+            res.read = true;
+            res.write = false;
+            res.unit = "Eur";
+            break;
+
+        case "predictedEnergyConsumptionYearCurrency":
+        case "predictedEnergyConsumptionYearEuro":
             res.type = "number";
             res.role = "value";
             res.read = true;
@@ -892,6 +1011,7 @@ function getCommonForState(aState, context) {
             res.unit = "kWh";
             break;
 
+        case "energyConsumptionMonthKwh":
         case "energyConsumptionMonthKWh":
             res.type = "number";
             res.role = "value";
@@ -1192,6 +1312,13 @@ function getCommonForState(aState, context) {
         case "doorState":
             res.type = "string";
             res.role = "state";
+            res.read = true;
+            res.write = false;
+            break;
+
+        case "lockState":
+            res.type = "boolean";
+            res.role = "sensor.lock ";
             res.read = true;
             res.write = false;
             break;
