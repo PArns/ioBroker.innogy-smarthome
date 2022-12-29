@@ -6,6 +6,8 @@ const utils = require('@iobroker/adapter-core'); // Get common adapter utils
 const adapter = utils.Adapter('innogy-smarthome');
 const helpers = require(`${__dirname}/lib/helpers`)(adapter);
 const SmartHome = require('innogy-smarthome-lib');
+const fs = require("fs");
+const path = require("path");
 
 let smartHome = null;
 let checkConnectionTimer = null;
@@ -174,6 +176,26 @@ async function initSmartHome() {
         }
     }
 
+    let dataDir = utils.getAbsoluteInstanceDataDir(adapter);
+    let authStorageFile;
+    try {
+        if (!fs.existsSync(dataDir)) {
+            fs.mkdirSync(dataDir);
+        }
+        authStorageFile = path.join(dataDir, 'authorization.json');
+    } catch (e) {
+        adapter.log.error(`Cannot create data directory: ${dataDir}`);
+    }
+    try {
+        const oldAuthFileLocation = require.resolve('innogy-smarthome-lib/data/auth/authorization.json');
+        if (!fs.existsSync(authStorageFile) && fs.existsSync(oldAuthFileLocation)) {
+            const tokens = fs.readFileSync(oldAuthFileLocation, 'utf8');
+            fs.writeFileSync(authStorageFile, tokens, 'utf8');
+        }
+    } catch (err) {
+        // ignore
+    }
+
     const config = {
         redirectHost: 'iobroker-connect.patrick-arns.de',
         redirectBackPort: parseInt(adapter.config.redirectBackPort, 10) || 3000,
@@ -185,6 +207,7 @@ async function initSmartHome() {
         localPassword: adapter.config.localSHCPassword,
         localConnection: adapter.config.useLocalSHC,
         shcGeneration: parseInt(adapter.config.shcGeneration, 10),
+        authStorageFile
     };
 
     if (adapter.config.useLocalSHC)
