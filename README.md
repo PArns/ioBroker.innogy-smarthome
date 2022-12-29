@@ -19,7 +19,7 @@ As this project is developed during my spare time, I*m actively looking for help
 ## Changelog
 
 ### __WORK IN PROGRESS__
-* (Apollon77) Changed storage of authentication tokens to allow multiple instances on one host
+* (Apollon77) Changed storage of authentication tokens to allow multiple instances on one host (for instance 0)
 
 ### 1.1.2 (2022-12-29)
 * (Apollon77) Added more missing states for several devices
