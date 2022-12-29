@@ -188,7 +188,7 @@ async function initSmartHome() {
     }
     try {
         const oldAuthFileLocation = require.resolve('innogy-smarthome-lib/data/auth/authorization.json');
-        if (!fs.existsSync(authStorageFile) && fs.existsSync(oldAuthFileLocation)) {
+        if (adapter.instance === 0 && !fs.existsSync(authStorageFile) && fs.existsSync(oldAuthFileLocation)) {
             const tokens = fs.readFileSync(oldAuthFileLocation, 'utf8');
             fs.writeFileSync(authStorageFile, tokens, 'utf8');
         }
