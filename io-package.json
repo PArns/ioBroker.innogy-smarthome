@@ -1,7 +1,7 @@
 {
   "common": {
     "name": "innogy-smarthome",
-    "version": "1.1.2",
+    "version": "1.2.0",
     "title": "Innogy Smarthome",
     "titleLang": {
       "en": "Innogy Smarthome",
@@ -31,6 +31,19 @@
       "zh-cn": "ioBroker Innogy 智能家居"
     },
     "news": {
+      "1.2.0": {
+        "en": "Changed storage of authentication tokens to allow multiple instances on one host (for instance 0)",
+        "de": "Geänderte Speicherung von Authentifizierungs-Token, um mehrere Instanzen auf einem Host zu ermöglichen (z.B. 0)",
+        "ru": "Изменено хранение токенов аутентификации, чтобы позволить несколько инстанций на одном хосте (например 0)",
+        "pt": "Armazenamento alterado de tokens de autenticação para permitir múltiplas instâncias em um host (por exemplo 0)",
+        "nl": "Veranderde opslag van authenticatietekens om meerdere instances toe te staan op één gastheer",
+        "fr": "Stockage modifié des jetons d'authentification pour permettre plusieurs instances sur un hôte (par exemple 0)",
+        "it": "Lo storage modificato dei token di autenticazione per consentire più istanze su un host (ad esempio 0)",
+        "es": "Cambio de almacenamiento de fichas de autenticación para permitir múltiples instancias en un host (por ejemplo 0)",
+        "pl": "Zmienił magazynowanie tokenów uwierzytelniania, aby umożliwić wielokrotne instancje na jednym gospodarzu (np. 0)",
+        "uk": "Змінене зберігання автентифікаційних жетонів, щоб дозволити кілька екземплярів на одному хості (наприклад 0)",
+        "zh-cn": "修改核证金的储存,允许在某一东道国发生多种情况(例如0.)。"
+      },
       "1.1.2": {
         "en": "Added more missing states for several devices",
         "de": "Weitere fehlende Zustände für mehrere Geräte hinzugefügt",
@@ -108,19 +121,6 @@
         "pl": "Dodano brakujące stany",
         "uk": "Додано відсутні стани",
         "zh-cn": "添加缺失状态"
-      },
-      "0.4.3": {
-        "en": "Added min, max for pointTemperature",
-        "de": "Min, Max für pointTemperature hinzugefügt",
-        "ru": "Добавлены min, max для pointTemperature",
-        "pt": "Adicionado min, max para pointTemperature",
-        "nl": "Min, max toegevoegd voor pointTemperature",
-        "fr": "Ajouté min, max pour pointTemperature",
-        "it": "Aggiunti min, max per pointTemperature",
-        "es": "Se agregaron min, max para pointTemperature",
-        "pl": "Dodano min, max dla temperatury punktu",
-        "uk": "Додано min, max для pointTemperature",
-        "zh-cn": "为 pointTemperature 添加了最小值、最大值"
       }
     },
     "platform": "Javascript/Node.js",
