@@ -1,7 +1,7 @@
 {
   "common": {
     "name": "innogy-smarthome",
-    "version": "1.2.0",
+    "version": "1.2.1",
     "title": "Innogy Smarthome",
     "titleLang": {
       "en": "Innogy Smarthome",
@@ -31,6 +31,19 @@
       "zh-cn": "ioBroker Innogy 智能家居"
     },
     "news": {
+      "1.2.1": {
+        "en": "Optimize Authentication server handling",
+        "de": "Authentication Server-Handling optimieren",
+        "ru": "Оптимизация обработки Authentication серверов",
+        "pt": "Otimizar o manuseio do servidor de autenticação",
+        "nl": "Vertaling:",
+        "fr": "Optimiser la manipulation du serveur Authentication",
+        "it": "Ottimizzare la gestione del server di autenticazione",
+        "es": "Optimize Authentication server handling",
+        "pl": "Optimize Authentic Server",
+        "uk": "Оптимізація обробки сервера аутентифікації",
+        "zh-cn": "利用治疗服务者"
+      },
       "1.2.0": {
         "en": "Changed storage of authentication tokens to allow multiple instances on one host (for instance 0)",
         "de": "Geänderte Speicherung von Authentifizierungs-Token, um mehrere Instanzen auf einem Host zu ermöglichen (z.B. 0)",
@@ -108,19 +121,6 @@
         "pl": "Zmieniono lokalną autoryzację OAuth",
         "uk": "Змінено локальну автентифікацію OAuth",
         "zh-cn": "更改了 OAuth 本地身份验证"
-      },
-      "0.4.6": {
-        "en": "Added missing states",
-        "de": "Fehlende Zustände hinzugefügt",
-        "ru": "Добавлены недостающие состояния",
-        "pt": "Adicionados estados ausentes",
-        "nl": "Ontbrekende staten toegevoegd",
-        "fr": "Ajout d'états manquants",
-        "it": "Aggiunti stati mancanti",
-        "es": "Se agregaron estados faltantes",
-        "pl": "Dodano brakujące stany",
-        "uk": "Додано відсутні стани",
-        "zh-cn": "添加缺失状态"
       }
     },
     "platform": "Javascript/Node.js",
