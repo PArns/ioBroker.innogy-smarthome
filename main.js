@@ -215,7 +215,7 @@ async function initSmartHome() {
 
     smartHome = new SmartHome(config);
 
-    smartHome.on("needsAuthorization",  (error) => {
+    smartHome.on("needsAuthorization",  (auth, error) => {
         adapter.log.warn('Adapter is not configured or needs reauthorization! Please go to the adapter settings and start the authorization');
         smartHome._finalize();
         adapter.log.warn(`DEBUG: ${JSON.stringify(error)}`);
@@ -576,7 +576,7 @@ function stateChanged(id, state) {
                             try {
                                 await capability.setState(state.val, capabilityStateName);
                             } catch (e) {
-                                adapter.log.error(`SET STATE ${id} for ${capabilityStateName} ERR ${err.message}`);
+                                adapter.log.error(`SET STATE ${id} for ${capabilityStateName} ERR ${e.message}`);
                             }
                         } else {
                             await updateDevice(smartHome.resolveLink(capability.Device));

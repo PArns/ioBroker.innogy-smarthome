@@ -17,6 +17,10 @@ This version supports now also the new Livisi Local SmartHome functionality! Ple
 As this project is developed during my spare time, I*m actively looking for help to maintain and extend this lib! If you're willing to help, drop me a line!
 
 ## Changelog
+
+### __WORK IN PROGRESS__
+* (Apollon77) Optimize Authentication server handling
+
 ### 1.2.0 (2022-12-30)
 * (Apollon77) Changed storage of authentication tokens to allow multiple instances on one host (for instance 0)
 
