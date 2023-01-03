@@ -1,7 +1,7 @@
 {
   "common": {
     "name": "innogy-smarthome",
-    "version": "1.2.1",
+    "version": "1.2.2",
     "title": "Innogy Smarthome",
     "titleLang": {
       "en": "Innogy Smarthome",
@@ -31,6 +31,19 @@
       "zh-cn": "ioBroker Innogy 智能家居"
     },
     "news": {
+      "1.2.2": {
+        "en": "Added missing state definitions (motionDetected, operatingTimeCurrentWeek, operatingTimeLastWeek)\nPrevented crash cases reported by Sentry",
+        "de": "Hinzugefügt fehlende Zustandsdefinitionen (motionDetected, OperatingTimeCurrentWeek, OperatingTimeLastWeek)\nVerhinderte Unfallfälle von Sentry gemeldet",
+        "ru": "Добавлены недостающие государственные определения (motionDetected, operatingTimeCurrentWeek, operatingTimeLastWeek)\nПрофилактические случаи аварии, сообщаемые Сентри",
+        "pt": "Adicionados definições de estado ausente (moçãoDetected, operandoTimeCurrentWeek, operandoTimeLastWeek)\nCasos de acidente impedidos relatados por Sentry",
+        "nl": "Vermiste staatsdefinities (motie gedetecteerd, opererend TimeCurrent Week, opererend TimeLastweek)\nVertaling:",
+        "fr": "Ajout de définitions d'état manquantes (motionDetected, operatingTimeCurrentWeek, operatingTimeLastWeek)\nCas de crash évités signalés par Sentry",
+        "it": "Aggiunto definizioni di stato mancante (motionDetected, operativoTimeCurrentWeek, operativoTimeLastWeek)\nPrevenire casi di crash segnalati da Sentry",
+        "es": "Añadido definiciones de estado desaparecidas (motionDetected, operatingTimeCurrentWeek, operatingTimeLastWeek)\nCasos de choque preventivos reportados por Sentry",
+        "pl": "Poniższa definicja państwowa (ukierunkowana, działająca na TimeCurrentWeek)\nPrzygotowanie wypadków spowodowanych przez Sentry",
+        "uk": "Додано відсутні визначення стану (motionDetected, OperationTimeCurrentWeek, OperationTimeLastWeek)\nЗапобігли випадки катастрофи, які повідомили Sentry",
+        "zh-cn": "添加了失踪的国家定义(拆除、操作的TimeCurrentWeek,操作Time Lastweek)。\nSentry所报告的预防性事故"
+      },
       "1.2.1": {
         "en": "Optimize Authentication server handling",
         "de": "Authentication Server-Handling optimieren",
@@ -108,19 +121,6 @@
         "pl": "IMPORTANT: Ta aktualizacja wprowadza nowy poziom ID jako kanał, więc wszystkie obiekty będą zmieniać!\nIMPORTANT: Miecz SHC musi być ponownie włączony do Admin!\nWsparcie dla lokalnych połączeń do SHC Classic/Generation 1\nDodany do niskobaterii i jest odpowiednim stanem i wsparciem Message'a do aktualizacji ich\nDodano możliwość konfigurowania portu dla serwera OAuth z połączenia chmur (default 3000)\nAddd\nGeneral aktualizacja i optymalizacja",
         "uk": "ВАЖЛИВО: Це оновлення вводить новий рівень ідентифікатор об'єкта як канал, тому всі об'єкти зміняться!\nВАЖЛИВО: локальний пароль SHC повинен бути повторним!\nДодано підтримку локальних підключень до SHC Classic/Generation 1\nДодана низькаБаттерія і єдоступними державами і підтримкою повідомлень для оновлення їх\nДодано опцію для налаштування порту для переадресного сервера для OAuth з хмарним підключенням (default 3000)\nДодати більше відсутніх штатів\nЗагальні оновлення та оптимізація",
         "zh-cn": "IMPORTANT:这一最新消息引入了作为海峡的新目标ID级,因此所有物体-开发公司都将改变!\nIMPORTANT:当地SHC护照密码需要重新进入Admin!\nB. 增加对初级保健/工资的当地联系的支助 1\n增加低巴特,是可偿还的州和梅斯支助,以更新它们。\n增加改装OAuth的转导服务器的港口(Deefault 3000)\n增加更多失踪国家\n一般性更新和优化"
-      },
-      "0.4.7": {
-        "en": "Changed OAuth local auth",
-        "de": "Lokale OAuth-Authentifizierung geändert",
-        "ru": "Изменена локальная аутентификация OAuth",
-        "pt": "Autenticação local OAuth alterada",
-        "nl": "Lokale OAuth-authenticatie gewijzigd",
-        "fr": "Authentification locale OAuth modifiée",
-        "it": "Autenticazione locale OAuth modificata",
-        "es": "Cambió la autenticación local de OAuth",
-        "pl": "Zmieniono lokalną autoryzację OAuth",
-        "uk": "Змінено локальну автентифікацію OAuth",
-        "zh-cn": "更改了 OAuth 本地身份验证"
       }
     },
     "platform": "Javascript/Node.js",
