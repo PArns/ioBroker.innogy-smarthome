@@ -17,6 +17,11 @@ This version supports now also the new Livisi Local SmartHome functionality! Ple
 As this project is developed during my spare time, I*m actively looking for help to maintain and extend this lib! If you're willing to help, drop me a line!
 
 ## Changelog
+
+### __WORK IN PROGRESS__
+* (Apollon77) Added missing state definitions (motionDetected, operatingTimeCurrentWeek, operatingTimeLastWeek)
+* (Apollon77) Prevented crash cases reported by Sentry
+
 ### 1.2.1 (2022-12-31)
 * (Apollon77) Optimize Authentication server handling
 
@@ -27,7 +32,7 @@ As this project is developed during my spare time, I*m actively looking for help
 * (Apollon77) Added more missing states for several devices
 
 ### 1.1.1 (2022-12-28)
-* (Apollon77) Added crash cases reported by Sentry
+* (Apollon77) Prevented crash cases reported by Sentry
 * (Apollon77) Added missing ISS2 states
 
 ### 1.1.0 (2022-12-28)

@@ -576,7 +576,7 @@ function stateChanged(id, state) {
                             try {
                                 await capability.setState(state.val, capabilityStateName);
                             } catch (e) {
-                                adapter.log.error(`SET STATE ${id} for ${capabilityStateName} ERR ${e.message}`);
+                                adapter.log.error(`SET STATE ${id} for ${capabilityStateName} ERR ${e ? e.error || e.message :  e}`);
                             }
                         } else {
                             await updateDevice(smartHome.resolveLink(capability.Device));
@@ -725,6 +725,13 @@ function getCommonForState(aState, context) {
             break;
 
         // -- BEWEGUNGSMELDER --
+        case "motionDetected":
+            res.type = "boolean";
+            res.role = "sensor.motion";
+            res.read = true;
+            res.write = false;
+            break;
+
         case "motionDetectedCount":
             res.type = "number";
             res.role = "value";
@@ -1249,6 +1256,20 @@ function getCommonForState(aState, context) {
             break;
 
         case "operatingTime":
+            res.type = "number";
+            res.role = "value";
+            res.read = true;
+            res.write = false;
+            break;
+
+        case "operatingTimeLastWeek":
+            res.type = "number";
+            res.role = "value";
+            res.read = true;
+            res.write = false;
+            break;
+
+        case "operatingTimeCurrentWeek":
             res.type = "number";
             res.role = "value";
             res.read = true;
