@@ -1141,7 +1141,7 @@ function getCommonForState(aState, context) {
             res.type = "string";
             res.role = "state";
             res.read = true;
-            res.write = false;
+            res.write = true;
             break;
 
         // HTTP

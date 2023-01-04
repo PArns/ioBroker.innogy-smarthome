@@ -17,6 +17,10 @@ This version supports now also the new Livisi Local SmartHome functionality! Ple
 As this project is developed during my spare time, I*m actively looking for help to maintain and extend this lib! If you're willing to help, drop me a line!
 
 ## Changelog
+
+### __WORK IN PROGRESS__
+* (Apollon77) Made activeChannel states writable to trigger Alarm
+
 ### 1.2.2 (2023-01-03)
 * (Apollon77) Added missing state definitions (motionDetected, operatingTimeCurrentWeek, operatingTimeLastWeek)
 * (Apollon77) Prevented crash cases reported by Sentry
