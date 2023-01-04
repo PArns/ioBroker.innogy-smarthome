@@ -1188,7 +1188,7 @@ function getCommonForState(aState, context) {
             res.role = "value";
             res.read = true;
             res.write = false;
-            res.unit = 'W';
+            res.unit = 'mA';
             break;
 
         case "chargingCycles":

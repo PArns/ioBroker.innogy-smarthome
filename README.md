@@ -20,6 +20,7 @@ As this project is developed during my spare time, I*m actively looking for help
 
 ### __WORK IN PROGRESS__
 * (Apollon77) Made activeChannel states writable to trigger Alarm
+* (Apollon77) Fixed unit for chargingCurrent
 
 ### 1.2.2 (2023-01-03)
 * (Apollon77) Added missing state definitions (motionDetected, operatingTimeCurrentWeek, operatingTimeLastWeek)
