@@ -1,7 +1,7 @@
 {
   "common": {
     "name": "innogy-smarthome",
-    "version": "1.2.2",
+    "version": "1.2.3",
     "title": "Innogy Smarthome",
     "titleLang": {
       "en": "Innogy Smarthome",
@@ -31,6 +31,19 @@
       "zh-cn": "ioBroker Innogy 智能家居"
     },
     "news": {
+      "1.2.3": {
+        "en": "Made activeChannel states writable to trigger Alarm\nFixed unit for chargingCurrent",
+        "de": "Aktiv gemacht Kanalzustände schreibbar Alarm auslösen\nFeste Einheit zum Aufladen Strom",
+        "ru": "Сделано активно Канал говорит, что сигнал тревоги\nФиксированный блок для зарядки Текущие",
+        "pt": "Feito ativo Canal estados writable para desencadear alarme\nUnidade fixa para carregamento Corrente",
+        "nl": "Ik ben actief. Kanaal staat geschreven om Alarm te activeren\nQuality over Quantity (QoQ) Releases Vertaling: Current",
+        "fr": "Fait actif Les états de la Manche peuvent déclencher Alarm\nUnité fixe pour la charge Current",
+        "it": "Fatto attivo Stati del canale scrivibile per attivare l'allarme\nUnità fissa per la ricarica Corrente",
+        "es": "Hecho activo Los estados del canal son receptibles para desencadenar Alarm\nUnidad fija para la carga Corriente",
+        "pl": "Czynny Channel decyduje się na użycie Alarma\nJednostka do ładowania ładunków obecny",
+        "uk": "Зроблено активний Каналні стани, які можуть викликати сигналізацію\nФіксований блок для зарядки Головна",
+        "zh-cn": "积极参与 海峡州令人感到担忧,可触发Alarm\n索赔单位 目前"
+      },
       "1.2.2": {
         "en": "Added missing state definitions (motionDetected, operatingTimeCurrentWeek, operatingTimeLastWeek)\nPrevented crash cases reported by Sentry",
         "de": "Hinzugefügt fehlende Zustandsdefinitionen (motionDetected, OperatingTimeCurrentWeek, OperatingTimeLastWeek)\nVerhinderte Unfallfälle von Sentry gemeldet",
@@ -108,19 +121,6 @@
         "pl": "Przygotowania do katastrofy, gdy ustawienie wartości nie jest skuteczne\nWprowadzone są także stany zaginionych\nDodał Sentry for Crash report and missing state report (ang.)",
         "uk": "Запобігання випадкових випадків при встановленні значень не вдало\nДодано більше відсутніх штатів\nДодана птиця для звітування Crash та відсутності державної звітності",
         "zh-cn": "在确定价值不成功时,预防性事故\n增加更多失踪国家\n增加事故报告和失踪国家报告的待命状态"
-      },
-      "1.0.0": {
-        "en": "IMPORTANT: This updates introduces a new object ID level as Channel, so all Object-IDs will change!\nIMPORTANT: The local SHC Password needs to be re-entered in Admin!\nAdded support for local connections to SHC Classic/Generation 1\nAdded lowBattery and isReachable states and Message support to update them\nAdded option to configure the port for the redirect back server for OAuth with cloud connection (default 3000)\nAdd more missing states\nGeneral updates and optimizations",
-        "de": "WICHTIG: Diese Updates stellen eine neue Objekt-ID-Ebene als Channel vor, so dass sich alle Object-IDs ändern!\nWICHTIG: Das lokale SHC-Passwort muss in Admin neu eingelesen werden!\nUnterstützung für lokale Verbindungen zu SHC Classic/Generation 1\nHinzugefügt lowBattery und isReachable Zustände und Nachrichten-Unterstützung, um sie zu aktualisieren\nOption zur Konfiguration des Ports für den Redirect Back Server für OAuth mit Cloud-Verbindung (Standard 3000)\nWeitere fehlende Staaten hinzufügen\nAllgemeine Updates und Optimierungen",
-        "ru": "ВАЖНО: Это обновление вводит новый уровень ID объекта в качестве канала, поэтому все ID объекта изменится!\nВАЖНО: Местный пароль SHC должен быть повторно введен в Admin!\nДобавлена поддержка местных подключений к SHC Classic/Generation 1\nДобавлены lowBattery и доступные государства и поддержка сообщений, чтобы обновить их\nДобавлена возможность настройки порта для перенаправления обратного сервера для OAuth с облачным подключением (по умолчанию 3000)\nДобавить больше пропавших государств\nОбщие обновления и оптимизация",
-        "pt": "IMPORTANTE: Esta atualização introduz um novo nível de ID de objeto como Canal, então todos os Object-IDs vão mudar!\nIMPORTANTE: A senha local do SHC precisa ser reinserida no Admin!\nAdicionado suporte para conexões locais para SHC Classic/Generation 1\nAdicionado lowBattery e isReachable estados e suporte de mensagem para atualizá-los\nOpção adicionada para configurar a porta para o servidor de redirecionamento para OAuth com conexão em nuvem (padrão 3000)\nAdicionar mais estados desaparecidos\nAtualizações e otimizações gerais",
-        "nl": "Deze updates introduceren een nieuw object ID-niveau als Channel, dus alle Object-IDs zullen veranderen!\nHet lokale SHC wachtwoord moet in Admin hergebruikt worden!\nOndersteuning voor lokale connecties met SHC Classic/Generatie 1\nGevoegd met lage boterie en onherstelbare staten en Message steun om ze te updaten\nToegevoegd optie om de haven te configureren voor de terugleidende server voor OAuth met wolkverbinding (default 3000)\nVoeg meer vermiste staten toe\nAlgemene updates en optimatie",
-        "fr": "IMPORTANT: Cette mise à jour introduit un nouveau niveau d'identification d'objet comme Channel, donc tous les objets-IDs changeront!\nIMPORTANT: Le mot de passe SHC local doit être réintégré dans Admin!\nAjout du support pour les connexions locales à SHC Classic/Generation 1\nAjouté basBattery et est états disponibles et soutien de message pour les mettre à jour\nAjout d'option pour configurer le port pour le serveur arrière redirigé pour OAuth avec connexion cloud (par défaut 3000)\nAjouter d'autres états manquants\nMises à jour et optimisations générales",
-        "it": "IMPORTANTE: Questo aggiornamento introduce un nuovo livello ID oggetto come Canale, così tutti gli Object-ID cambieranno!\nIMPORTANTE: La password locale SHC deve essere ri-entrata in Admin!\nAggiunto il supporto per le connessioni locali a SHC Classic/Generation 1\nAggiunto LowBattery e isReachable stati e supporto messaggio per aggiornarli\nAggiunta opzione per configurare la porta per il server di retro reindirizzamento per OAuth con connessione cloud (default 3000)\nAggiungi altri stati mancanti\nAggiornamenti e ottimizzazioni generali",
-        "es": "IMPORTANTE: Esta actualización introduce un nuevo nivel de identificación de objetos como Canal, por lo que todos los Object-IDs cambiarán!\nIMPORTANTE: ¡La contraseña local SHC necesita ser reiniciada en Admin!\nApoyo añadido a las conexiones locales con SHC Classic/Generation 1\nAñadido bajoBattery y esReachable estados y soporte de Mensaje para actualizarlos\nOpción agregada para configurar el puerto para el servidor de redirigir hacia atrás para OAuth con conexión en la nube (por defecto 3000)\nAñadir más estados perdidos\nActualizaciones y optimizaciones generales",
-        "pl": "IMPORTANT: Ta aktualizacja wprowadza nowy poziom ID jako kanał, więc wszystkie obiekty będą zmieniać!\nIMPORTANT: Miecz SHC musi być ponownie włączony do Admin!\nWsparcie dla lokalnych połączeń do SHC Classic/Generation 1\nDodany do niskobaterii i jest odpowiednim stanem i wsparciem Message'a do aktualizacji ich\nDodano możliwość konfigurowania portu dla serwera OAuth z połączenia chmur (default 3000)\nAddd\nGeneral aktualizacja i optymalizacja",
-        "uk": "ВАЖЛИВО: Це оновлення вводить новий рівень ідентифікатор об'єкта як канал, тому всі об'єкти зміняться!\nВАЖЛИВО: локальний пароль SHC повинен бути повторним!\nДодано підтримку локальних підключень до SHC Classic/Generation 1\nДодана низькаБаттерія і єдоступними державами і підтримкою повідомлень для оновлення їх\nДодано опцію для налаштування порту для переадресного сервера для OAuth з хмарним підключенням (default 3000)\nДодати більше відсутніх штатів\nЗагальні оновлення та оптимізація",
-        "zh-cn": "IMPORTANT:这一最新消息引入了作为海峡的新目标ID级,因此所有物体-开发公司都将改变!\nIMPORTANT:当地SHC护照密码需要重新进入Admin!\nB. 增加对初级保健/工资的当地联系的支助 1\n增加低巴特,是可偿还的州和梅斯支助,以更新它们。\n增加改装OAuth的转导服务器的港口(Deefault 3000)\n增加更多失踪国家\n一般性更新和优化"
       }
     },
     "platform": "Javascript/Node.js",
