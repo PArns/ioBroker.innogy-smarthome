@@ -1,7 +1,7 @@
 {
   "common": {
     "name": "innogy-smarthome",
-    "version": "1.2.3",
+    "version": "1.2.4",
     "title": "Innogy Smarthome",
     "titleLang": {
       "en": "Innogy Smarthome",
@@ -31,6 +31,19 @@
       "zh-cn": "ioBroker Innogy 智能家居"
     },
     "news": {
+      "1.2.4": {
+        "en": "Add shockDetected states\nHandle room enums better for an empty room",
+        "de": "Schock hinzufügenDetektierte Staaten\nGriff Zimmer enums besser für ein leeres Zimmer",
+        "ru": "Добавить shockDetected состояния\nРучка комнаты лучше для пустой комнаты",
+        "pt": "Adicionar estados chocaDetected\nHandle room enums melhor para um quarto vazio",
+        "nl": "Vertaling:\nHandelkamer is beter voor een lege kamer",
+        "fr": "Ajouter les états protégés\nChambre à main vaut mieux pour une chambre vide",
+        "it": "Aggiungi stati di shockDetetto\nManiglia stanza enums meglio per una stanza vuota",
+        "es": "Agregar shockDetected states\nLa habitación de la manija es mejor para una habitación vacía",
+        "pl": "Add shockDetected States (ang.)\nPomieszczenie ręczne jest lepsze dla pustego pomieszczenia",
+        "uk": "Додати шокДетековані стани\nРукоятки кімнати краще за порожній номер",
+        "zh-cn": "增加受保护国\n空洞的会议室光明"
+      },
       "1.2.3": {
         "en": "Made activeChannel states writable to trigger Alarm\nFixed unit for chargingCurrent",
         "de": "Aktiv gemacht Kanalzustände schreibbar Alarm auslösen\nFeste Einheit zum Aufladen Strom",
@@ -108,19 +121,6 @@
         "pl": "Zamknięte przypadki katastrofy odnotowane przez Sentry'a\nZaginięcie ISS2",
         "uk": "Додано випадки аварії, які повідомляються Sentry\nДодано відсутні стани ISS2",
         "zh-cn": "Sentry所报告的更多事故\n增加失踪的IS2州"
-      },
-      "1.1.0": {
-        "en": "Prevented crash cases when setting values is not successful\nAdded more missing states\nAdded Sentry for Crash reporting and missing state reporting",
-        "de": "Verhinderte Crashfälle, wenn Werte nicht erfolgreich eingestellt werden\nMehr fehlende Staaten\nSentry für Crash Reporting und fehlende Staatsberichterstattung hinzugefügt",
-        "ru": "Предотвращаемые случаи сбоя при установлении ценностей не успешны\nДобавлено больше пропавших государств\nДобавлена служение для Crash отчетности и отсутствующей государственной отчетности",
-        "pt": "Casos de acidente impedidos ao definir valores não é bem-sucedido\nAdicionado mais estados desaparecidos\nAdicionado Sentry para relatórios Crash e relatórios de estado desaparecido",
-        "nl": "Voorbedachte crash gevallen als het plaatsen van waarden niet succesvol is\nVertaling:\nVertaling:",
-        "fr": "Cas d ' accident évités lorsqu ' il n ' y a pas de valeur\nAjout d'autres états manquants\nA ajouté Sentry for Crash reporting and missing state reporting",
-        "it": "Prevenire casi di crash quando l'impostazione dei valori non è riuscita\nAggiunto più Stati mancanti\nAggiunto Sentry for Crash reporting e mancante stato reporting",
-        "es": "Casos de choque evitados cuando el ajuste de valores no es exitoso\nAñadido más estados desaparecidos\nSentry añadido para reportaje de Crash y reportaje de estado desaparecido",
-        "pl": "Przygotowania do katastrofy, gdy ustawienie wartości nie jest skuteczne\nWprowadzone są także stany zaginionych\nDodał Sentry for Crash report and missing state report (ang.)",
-        "uk": "Запобігання випадкових випадків при встановленні значень не вдало\nДодано більше відсутніх штатів\nДодана птиця для звітування Crash та відсутності державної звітності",
-        "zh-cn": "在确定价值不成功时,预防性事故\n增加更多失踪国家\n增加事故报告和失踪国家报告的待命状态"
       }
     },
     "platform": "Javascript/Node.js",
