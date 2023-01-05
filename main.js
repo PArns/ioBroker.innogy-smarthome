@@ -724,6 +724,14 @@ function getCommonForState(aState, context) {
             res.max = 0;
             break;
 
+        // -- ShockSensor --
+        case "shockDetected":
+            res.type = "boolean";
+            res.role = "sensor";
+            res.read = true;
+            res.write = false;
+            break;
+
         // -- BEWEGUNGSMELDER --
         case "motionDetected":
             res.type = "boolean";
