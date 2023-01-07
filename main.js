@@ -644,6 +644,23 @@ function getCommonForState(aState, context) {
             res.write = false;
             break;
 
+        // Target Temperature
+        case "clockSetpoint":
+            res.type = "number";
+            res.role = "level";
+            res.read = true;
+            res.write = true;
+            break;
+
+        // Inside Temperature Sensor
+        case "roomTemperature":
+            res.type = "number";
+            res.role = "value.temperature";
+            res.read = true;
+            res.write = false;
+            res.unit = "°C";
+            break;
+
         // -- Thermostat --
         case "pointTemperature":
         case "setpointTemperature":
@@ -860,6 +877,16 @@ function getCommonForState(aState, context) {
             res.read = true;
             res.write = false;
             break;
+
+        // System Power Sensor
+        case "power":
+            res.type = "number";
+            res.role = "value.power.consumption";
+            res.read = true;
+            res.write = false;
+            res.unit = "W";
+            break;
+
 
         // -- POWERCONTROL --
         case "maximumGenerationPower":
@@ -1181,6 +1208,24 @@ function getCommonForState(aState, context) {
             res.role = "state";
             res.read = true;
             res.write = false;
+            break;
+
+        // Charge
+        case "charge":
+            res.type = "number";
+            res.role = "value";
+            res.read = true;
+            res.write = false;
+            res.unit = 'mA';
+            break;
+
+        // Capacity
+        case "stateOfChargePercent":
+            res.type = "number";
+            res.role = "value";
+            res.read = true;
+            res.write = false;
+            res.unit = '%';
             break;
 
         // Mähroboter

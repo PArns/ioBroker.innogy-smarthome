@@ -17,9 +17,13 @@ This version supports now also the new Livisi Local SmartHome functionality! Ple
 As this project is developed during my spare time, I*m actively looking for help to maintain and extend this lib! If you're willing to help, drop me a line!
 
 ## Changelog
+
+### __WORK IN PROGRESS__
+* (Apollon77) Added more states
+
 ### 1.2.4 (2023-01-05)
-* (Apollon77) Add shockDetected states
-* (Apollon77) Handle room enums better for an empty room
+* (Apollon77) Added shockDetected states
+* (Apollon77) Handled room enums better for an empty room
 
 ### 1.2.3 (2023-01-04)
 * (Apollon77) Made activeChannel states writable to trigger Alarm
