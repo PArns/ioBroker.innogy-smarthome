@@ -1,7 +1,7 @@
 {
   "common": {
     "name": "innogy-smarthome",
-    "version": "1.2.4",
+    "version": "1.2.5",
     "title": "Innogy Smarthome",
     "titleLang": {
       "en": "Innogy Smarthome",
@@ -31,6 +31,19 @@
       "zh-cn": "ioBroker Innogy 智能家居"
     },
     "news": {
+      "1.2.5": {
+        "en": "Added more states",
+        "de": "Mehr Staaten",
+        "ru": "Добавлено больше штатов",
+        "pt": "Adicionado mais estados",
+        "nl": "Vermeldde meer staten",
+        "fr": "Ajout d ' autres États",
+        "it": "Aggiunto più stati",
+        "es": "Añadido más estados",
+        "pl": "Więcej niż więcej stanów",
+        "uk": "Додано більше штатів",
+        "zh-cn": "增加更多国家"
+      },
       "1.2.4": {
         "en": "Add shockDetected states\nHandle room enums better for an empty room",
         "de": "Schock hinzufügenDetektierte Staaten\nGriff Zimmer enums besser für ein leeres Zimmer",
@@ -108,19 +121,6 @@
         "pl": "Poniższe stany dla kilku urządzeń",
         "uk": "Додано більш відсутні стани для декількох пристроїв",
         "zh-cn": "增加一些装置失踪的国家"
-      },
-      "1.1.1": {
-        "en": "Added crash cases reported by Sentry\nAdded missing ISS2 states",
-        "de": "Hinzugefügt Crash Fälle berichtet von Sentry\nHinzugefügt fehlende ISS2 Zustände",
-        "ru": "Добавлены случаи сбоя, сообщаемые Sentry\nДобавлены недостающие состояния ISS2",
-        "pt": "Adicionado casos de acidente relatados por Sentry\nAdicionado desaparecido ISS2 estados",
-        "nl": "Vertaling:\nVertaling:",
-        "fr": "Ajout de cas de crash signalés par Sentry\nAjout des états ISS2 manquants",
-        "it": "Aggiunto casi di crash segnalati da Sentry\nAggiunto mancanti stati ISS2",
-        "es": "Casos de choque adicionales reportados por Sentry\nEstado de ISS2 desaparecido",
-        "pl": "Zamknięte przypadki katastrofy odnotowane przez Sentry'a\nZaginięcie ISS2",
-        "uk": "Додано випадки аварії, які повідомляються Sentry\nДодано відсутні стани ISS2",
-        "zh-cn": "Sentry所报告的更多事故\n增加失踪的IS2州"
       }
     },
     "platform": "Javascript/Node.js",
