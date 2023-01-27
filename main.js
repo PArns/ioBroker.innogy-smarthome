@@ -878,6 +878,14 @@ function getCommonForState(aState, context) {
             res.write = false;
             break;
 
+        case "currentBatteryPower":
+            res.type = "number";
+            res.role = "value.power";
+            res.read = true;
+            res.write = false;
+            res.unit = "W";
+            break;
+
         // System Power Sensor
         case "power":
             res.type = "number";
@@ -886,7 +894,6 @@ function getCommonForState(aState, context) {
             res.write = false;
             res.unit = "W";
             break;
-
 
         // -- POWERCONTROL --
         case "maximumGenerationPower":
@@ -897,12 +904,37 @@ function getCommonForState(aState, context) {
             res.unit = "W";
             break;
 
+        case "currentHouseholdPower":
         case "powerInWatt":
             res.type = "number";
             res.role = "value.power.consumption";
             res.read = true;
             res.write = false;
             res.unit = "W";
+            break;
+
+        case "currentPVPower":
+            res.type = "number";
+            res.role = "value.power.generation";
+            res.read = true;
+            res.write = false;
+            res.unit = "W";
+            break;
+
+        case "energyPerHourInkWh":
+            res.type = "number";
+            res.role = "value";
+            res.read = true;
+            res.write = false;
+            res.unit = "kWh";
+            break;
+
+        case "energyPerHourInEuro":
+            res.type = "number";
+            res.role = "value";
+            res.read = true;
+            res.write = false;
+            res.unit = "Eur";
             break;
 
         case "energyPerMonthInKWh":
@@ -1209,7 +1241,6 @@ function getCommonForState(aState, context) {
             res.read = true;
             res.write = false;
             break;
-
         // Charge
         case "charge":
             res.type = "number";
@@ -1220,12 +1251,21 @@ function getCommonForState(aState, context) {
             break;
 
         // Capacity
+        case "SOCperc":
         case "stateOfChargePercent":
             res.type = "number";
             res.role = "value";
             res.read = true;
             res.write = false;
             res.unit = '%';
+            break;
+
+        case "SOCkWh":
+            res.type = "number";
+            res.role = "value";
+            res.read = true;
+            res.write = false;
+            res.unit = 'kWh';
             break;
 
         // Mähroboter
@@ -1325,13 +1365,6 @@ function getCommonForState(aState, context) {
         case "operatingTimeCurrentWeek":
             res.type = "number";
             res.role = "value";
-            res.read = true;
-            res.write = false;
-            break;
-
-        case "subStatus":
-            res.type = "string";
-            res.role = "state";
             res.read = true;
             res.write = false;
             break;
@@ -1436,6 +1469,14 @@ function getCommonForState(aState, context) {
             break;
 
         case "type":
+            res.type = "string";
+            res.role = "state";
+            res.read = true;
+            res.write = false;
+            break;
+
+        // Classic Operating Mode Actuator
+        case "operatingMode":
             res.type = "string";
             res.role = "state";
             res.read = true;
