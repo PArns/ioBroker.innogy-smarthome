@@ -16,7 +16,10 @@
       "zh-cn": "英诺智能家居",
       "uk": "Innogy Smarthome"
     },
-    "license": "MIT",
+    "licenseInformation": {
+      "type": "free",
+      "license": "MIT"
+    },
     "desc": {
       "en": "ioBroker Innogy Smarthome",
       "de": "ioBroker Innogy Smarthome",
