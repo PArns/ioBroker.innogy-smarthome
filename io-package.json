@@ -2,7 +2,6 @@
   "common": {
     "name": "innogy-smarthome",
     "version": "1.2.6",
-    "title": "Innogy Smarthome",
     "titleLang": {
       "en": "Innogy Smarthome",
       "de": "Innogy Smarthome",
