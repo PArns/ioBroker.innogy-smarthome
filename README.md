@@ -266,7 +266,7 @@ As this project is developed during my spare time, I*m actively looking for help
 ## License
 The MIT License (MIT)
 
-Copyright (c) 2020-2023 Patrick Arns iobroker@patrick-arns.de
+Copyright (c) 2020-2026 Patrick Arns iobroker@patrick-arns.de
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
