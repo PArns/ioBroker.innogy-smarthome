@@ -6,8 +6,8 @@ const utils = require('@iobroker/adapter-core'); // Get common adapter utils
 const adapter = utils.Adapter('innogy-smarthome');
 const helpers = require(`${__dirname}/lib/helpers`)(adapter);
 const SmartHome = require('innogy-smarthome-lib');
-const fs = require("fs");
-const path = require("path");
+const fs = require("node:fs");
+const path = require("node:path");
 
 let smartHome = null;
 let checkConnectionTimer = null;
