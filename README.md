@@ -263,6 +263,8 @@ As this project is developed during my spare time, I*m actively looking for help
 ### 0.0.1
 * Initial commit
 
+[Older changelogs can be found there](CHANGELOG_OLD.md)
+
 ## License
 The MIT License (MIT)
 
