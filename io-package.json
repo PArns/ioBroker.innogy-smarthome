@@ -128,7 +128,6 @@
     "messagebox": true,
     "subscribe": "messagebox",
     "icon": "innogy-smarthome.png",
-    "materialize": true,
     "enabled": true,
     "extIcon": "https://raw.githubusercontent.com/PArns/ioBroker.innogy-smarthome/master/admin/innogy-smarthome.png",
     "keywords": [
@@ -145,7 +144,7 @@
     "dataSource": "push",
     "dependencies": [
       {
-        "js-controller": ">=2.0.0"
+        "js-controller": ">=6.0.11"
       }
     ],
     "globalDependencies": [
@@ -213,7 +212,10 @@
           "cancel"
         ]
       }
-    ]
+    ],
+    "adminUI": {
+      "config": "materialize"
+    }
   },
   "encryptedNative": [
     "localSHCPassword"

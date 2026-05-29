@@ -17,6 +17,10 @@ This version supports now also the new Livisi Local SmartHome functionality! Ple
 As this project is developed during my spare time, I*m actively looking for help to maintain and extend this lib! If you're willing to help, drop me a line!
 
 ## Changelog
+
+### **WORK IN PROGRESS**
+- (ioBroker-Bot) Adapter requires js-controller >= 6.0.11 now.
+
 ### 1.2.6 (2023-01-27)
 * (Apollon77) Added more states
 
